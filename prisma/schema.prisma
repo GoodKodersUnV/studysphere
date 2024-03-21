@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+  owner
+  disabled
+  deleted
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  username      String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?   @default("https://raw.githubusercontent.com/UdaySagar-Git/attendenceCalculator/main/public/images/placeholder.jpg")
+  password      String?
+  role          Role?     @default(user)
+  organisation  String?   @default("Personal")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  quizes Quiz[]
+
+  account Account[]
+}
+
+model Quiz {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String? @default("Quiz")
+  questions Json?
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    String? @db.ObjectId
+}
+
+model DeletedUsers {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String?
+  name          String?
+  username      String?
+  email         String?
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          Role?
+  organisation  String?
+  createdAt     DateTime?
+  updatedAt     DateTime?
+  account       Account[]
+  deletedAt     DateTime  @default(now())
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  token_type        String?
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  id_token          String? @db.String
+  scope             String?
+  session_state     String?
+  expires_at        Int?
+
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  DeletedUsers   DeletedUsers? @relation(fields: [deletedUsersId], references: [id])
+  deletedUsersId String?       @db.ObjectId
+
+  @@unique([provider, providerAccountId])
+}
