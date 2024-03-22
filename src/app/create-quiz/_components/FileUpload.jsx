@@ -78,9 +78,9 @@ const FileUpload = () => {
   return (
     <div>
       {!selectedFile ? (
-        <div className="flex h-[92vh] justify-center items-center cursor-pointer w-screen  bg-gradient-to-r from-rose-100 to-teal-100 border">
+        <div className="flex justify-center items-center  cursor-pointer w-auto border">
           <div
-            className="bg-slate-200 shadow-md p-5 rounded-lg h-[200px] w-[300px] flex flex-col items-center justify-center hover:bg-gray-300  border-gray-700"
+            className="bg-slate-200 mt-24 mb-32  shadow-md p-5 rounded-lg h-[200px] w-[300px] flex flex-col items-center justify-center hover:bg-gray-300  border-gray-700"
             onDrop={handleFileChange}
             onClick={() => fileInputRef.current?.click()}
           >
