@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  const access = currentUser.role === "admin" || currentUser.role === "owner";
+  const access = currentUser.role === "admin" || currentUser.role === "owner" || currentUser.id == body.id
 
   if (!access) {
     return NextResponse.redirect(new URL("/", req.url));

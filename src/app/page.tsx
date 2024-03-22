@@ -8,7 +8,6 @@ import UnauthorizedPage from "../components/UnauthorizedPage";
 export default async function Home() {
   const currentUser = await getCurrentUser();
 
-
   if (!currentUser) {
     redirect('/signin')
   }
