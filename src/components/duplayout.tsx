@@ -5,6 +5,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 import { TbArrowsJoin2 } from "react-icons/tb";
 import { MdOutlineManageAccounts } from "react-icons/md";
+import { LiaUserFriendsSolid } from "react-icons/lia";
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -28,6 +29,11 @@ const links = [
     name: "Manage",
     icon: <MdOutlineManageAccounts />,
     path: "/manage-quiz"
+  },
+  {
+    name: "Friends",
+    icon: <LiaUserFriendsSolid />,
+    path: "/friends"
   }
 ]
 
