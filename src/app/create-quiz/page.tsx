@@ -18,22 +18,24 @@ const page = () => {
   }
 
   return (
-    <div className='border'>
-      <div className="flex gap-20 p-5 justify-center items-center cursor-pointer">
-        <div onClick={() => setCurrentIndex(1)}>
-          <FaFileExport/>
-          Generate from a file
-        </div>
-        <div onClick={() => setCurrentIndex(2)}>
-          <GiArtificialHive/>
-          Generate using Ai
-        </div>
-        <div onClick={() => setCurrentIndex(3)}>
-          
-          Create Quiz Manually
+    <div>
+      <div className='border'>
+        <div className="flex gap-20 p-5 justify-center items-center cursor-pointer">
+          <div onClick={() => setCurrentIndex(1)}>
+            <FaFileExport/>
+            Generate from a file
+          </div>
+          <div onClick={() => setCurrentIndex(2)}>
+            <GiArtificialHive/>
+            Generate using Ai
+          </div>
+          <div onClick={() => setCurrentIndex(3)}>
+            
+            Create Quiz Manually
+          </div>
         </div>
       </div>
-      {page[currentIndex]}
+    {page[currentIndex]}
     </div>
   )
 }
