@@ -16,8 +16,12 @@ export async function POST(req: Request) {
       userId,
     },
     include: {
-      Quiz: true,
-    },
+      Quiz: {
+        select:{
+          name:true
+        }
+      },
+    }
   })
   return NextResponse.json(
     user
