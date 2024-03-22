@@ -36,5 +36,55 @@
 
 * {
   font-family: "Roboto Condensed", sans-serif;
-
 }
+
+.flex-center {
+  @apply flex justify-center items-center;
+}
+
+.flex-start {
+  @apply flex justify-start items-start;
+}
+
+.flex-end {
+  @apply flex justify-end items-center;
+}
+
+.flex-between {
+  @apply flex justify-between items-center;
+}
+
+/* Footer */
+  .box:hover .luminance {
+    background: 50% 100% / 50% 50% no-repeat radial-gradient(ellipse at bottom, #fff, transparent, transparent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 5vw;
+    font-family: "Source Sans Pro", sans-serif;
+    animation: reveal 2000ms ease-in-out forwards 300ms,
+      glow 2500ms linear infinite 2000ms;
+  }
+
+    .loader {
+      width: 50px;
+      padding: 8px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #25b09b;
+      --_m:
+        conic-gradient(#0000 10%, #000),
+        linear-gradient(#000 0 0) content-box;
+      -webkit-mask: var(--_m);
+      mask: var(--_m);
+      -webkit-mask-composite: source-out;
+      mask-composite: subtract;
+      animation: l3 1s infinite linear;
+    }
+  
+    @keyframes l3 {
+      to {
+        transform: rotate(1turn)
+      }
+    }
+
