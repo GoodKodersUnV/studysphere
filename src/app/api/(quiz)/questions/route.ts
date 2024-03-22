@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { db } from "@/libs/db";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 
 const openai = new OpenAI({
@@ -8,10 +9,12 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: Request, res: Response) {
-  try {
+
+  const currentUser = await getCurrentUser();
+
+ try {
     const body = await req.json();
-    const { amount, topic, type, currentUser } = body;
-    console.log(body);
+    const { amount, topic, type } = body;
 
     const promt = `You are a helpful assistant designed to output JSON.You are to generate a random hard mcq ${amount} question about ${topic} and output format of each object is  {
       question: "question",
@@ -34,23 +37,18 @@ export async function POST(req: Request, res: Response) {
       response_format: { type: "json_object" },
     });
 
-    await db?.user.update({
-      where: {
-        id: currentUser.id,
-      },
-      data: {
-        quizes :{
-          create :{
-            name : topic,
-            questions : completion.choices[0].message.content
-          }
-        }
-      },
-    });
+    const quiz = await db.quiz.create({
+      data : {
+        name : topic,
+        questions : completion.choices[0].message.content,
+        userId : currentUser.id
+      }
+    })
 
     return NextResponse.json(
       {
         completionions: JSON.parse(completion.choices[0].message.content),
+        quizId : quiz.id
       },
       {
         status: 200,

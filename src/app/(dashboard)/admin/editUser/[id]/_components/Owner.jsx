@@ -40,11 +40,9 @@ const Page = ({ params }) => {
           },
           body: JSON.stringify({ id: params.id }),
         });
-      // const userData = await response.json();
       toast.success("User deleted successfully");
       router.push('/admin');
     } catch (error) {
-      // console.log(error)
       toast.error(error.message);
     }
   }
@@ -59,11 +57,9 @@ const Page = ({ params }) => {
           },
           body: JSON.stringify(user),
         });
-      // const userData = await response.json();
       toast.success("User updated successfully");
 
     } catch (error) {
-      // console.log(error)
       toast.error(error.message);
     }
   }

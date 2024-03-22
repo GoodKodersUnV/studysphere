@@ -4,13 +4,12 @@ import getCurrentUser from "@/actions/getCurrentUser";
 
 export async function POST(req: Request) {
   const { quizId } = await req.json();
-  // console.log(body);
 
-  // const currentUser = await getCurrentUser();
+  const currentUser = await getCurrentUser();
 
-  // if (!currentUser) {
-  //   return NextResponse.redirect(new URL("/signin", req.url));
-  // }
+  if (!currentUser) {
+    return NextResponse.redirect(new URL("/signin", req.url));
+  }
 
   const user = await db.quiz.findUnique({
     where: {

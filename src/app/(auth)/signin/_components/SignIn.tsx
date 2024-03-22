@@ -15,22 +15,17 @@ const SignIn = () => {
         email: data.email.toLowerCase(),
         password: data.password,
         redirect: false,
-        // callbackUrl: '/'
       });
 
       if (response?.ok) {
         toast.success("Signin successful");
-        // router.refresh()
-        // router.push('/');
         window.location.href = '/';
       }
 
       if (response?.error) {
         toast.error("Signin failed");
       }
-      // console.log(response);
     } catch (error: any) {
-      // Handle error
       toast.error(error.message);
     }
   }

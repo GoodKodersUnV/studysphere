@@ -24,7 +24,6 @@ export async function POST(req: Request, res: Response) {
       model: "gpt-3.5-turbo-0125",
       response_format: { type: "json_object" },
     });
-    console.log(completion.choices[0].message.content);
     return NextResponse.json(
       {
         completionions: JSON.stringify(completion.choices[0].message.content),

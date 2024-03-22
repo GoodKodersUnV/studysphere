@@ -10,7 +10,6 @@ export default async function Home() {
 
 
   if (!currentUser) {
-    // setTimeout(() => redirect('/signin'), 200)
     redirect('/signin')
   }
   
