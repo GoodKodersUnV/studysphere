@@ -20,9 +20,9 @@ const SigninWithGoogle = () => {
 
   return (
     <div>
-      <h2 className="text-center my-2">Or</h2>
+      <h2 className="text-center my-2 font-bold">Or</h2>
 
-      <button onClick={(e) => { e.preventDefault(); loginWithGoogle() }} className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 rounded-lg w-full  '>
+      <button onClick={(e) => { e.preventDefault(); loginWithGoogle() }} className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold p-2.5  rounded-lg w-full  '>
         <div className='flex justify-center items-center gap-5 relative'>
 
           <div
