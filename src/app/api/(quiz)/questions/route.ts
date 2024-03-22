@@ -41,7 +41,7 @@ export async function POST(req: Request, res: Response) {
       data : {
         name : topic,
         questions : completion.choices[0].message.content,
-        userId : currentUser.id
+        createdByID : currentUser.id
       }
     })
 

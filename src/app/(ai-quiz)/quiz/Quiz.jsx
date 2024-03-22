@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { Clock10 } from "lucide-react";
+import axios from "axios";
 
 
 
 
-const Quiz = ({questions}) => {
+const Quiz = ({questions,quizId}) => {
   const [index, setIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(questions[index]);
   const [score, setScore] = useState(0);
@@ -54,6 +55,10 @@ const Quiz = ({questions}) => {
     setSelectedOption(null);
     setTimer(10);
   };
+
+  const handleQuizSubmit = async () =>{
+    const res = await axios.post("/api/submit-quiz",{quizId ,points: +((score/questions.length)*100)})
+  }
 
   return (
     <div className="bg-gradient-to-r from-rose-100 to-teal-100 border h-full flex justify-center items-center">
@@ -112,6 +117,12 @@ const Quiz = ({questions}) => {
               onClick={handleTryAgain}
             >
               Try Again
+            </button>
+            <button
+              className="border-indigo-700 hover:bg-indigo-500 text-indigo-900 font-bold py-3 px-6 rounded-md mt-8 shadow-md cursor-pointer transition duration-300 ease-in-out"
+              onClick={handleQuizSubmit}
+            >
+              Submit
             </button>
           </div>
         )}

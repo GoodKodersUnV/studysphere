@@ -33,16 +33,29 @@ model User {
   updatedAt DateTime @updatedAt
 
   quizes Quiz[]
+  points Points[]
 
   account Account[]
 }
 
 model Quiz {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  name      String? @default("Quiz")
-  questions Json?
-  User      User?   @relation(fields: [userId], references: [id])
-  userId    String? @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String? @default("Quiz")
+  questions   Json?
+  createdBy   User?   @relation(fields: [createdByID], references: [id])
+  createdByID String? @db.ObjectId
+
+  usersPoints Points[]
+}
+
+model Points {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  points Int    @default(0)
+  Quiz   Quiz   @relation(fields: [quizId], references: [id])
+  quizId String @db.ObjectId
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
 }
 
 model DeletedUsers {
