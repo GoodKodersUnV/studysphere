@@ -19,8 +19,12 @@ export default async function getCurrentUser() {
         email: session.user.email as string,
       },
       include: {
-        friends: true,
-        friendsof: true,
+        friends:{
+          include:{
+            friendUser:true
+          }
+        },
+        friendsof :true,
       },
     });
 
