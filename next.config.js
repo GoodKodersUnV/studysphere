@@ -31,7 +31,8 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "mediopinions.com",
       "www.mediopinions.com",
-      "raw.githubusercontent.com"
+      "raw.githubusercontent.com",
+      "images.pexels.com"
     ],
   },
   typescript : {

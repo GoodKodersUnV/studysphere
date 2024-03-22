@@ -12,11 +12,13 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  if (currentUser.role !== "owner") {
+  const access = currentUser.role == "owner" || currentUser.id == id
+
+  if (!access) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  if (currentUser.role === "owner") {
+  if (access) {
     const user = await db.user.update({
       where: {
         id: body.id,

@@ -5,8 +5,10 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 import { TbArrowsJoin2 } from "react-icons/tb";
 import { MdOutlineManageAccounts } from "react-icons/md";
+import { LiaUserFriendsSolid } from "react-icons/lia";
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion'
+import { LiaUserEditSolid } from "react-icons/lia";
 
 const links = [
   {
@@ -28,6 +30,16 @@ const links = [
     name: "Manage",
     icon: <MdOutlineManageAccounts />,
     path: "/manage-quiz"
+  },
+  {
+    name: "Edit profile",
+    icon: <LiaUserEditSolid/> ,
+    path: "/update-profile"
+  },
+  {
+    name: "Friends",
+    icon: <LiaUserFriendsSolid />,
+    path: "/friends"
   }
 ]
 
@@ -53,7 +65,7 @@ export default function ({ children, currentUser }) {
           }
         </div>
         <AnimatePresence key={pathname}>
-          <motion.div className='w-full'
+          <motion.div className={`w-full`}
             initial={{ y: "-100vw", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
