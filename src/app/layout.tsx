@@ -1,11 +1,14 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
-import Header from '../components/Header'
 import getCurrentUser from '@/actions/getCurrentUser'
 import ToasterProvider from '@/components/ToasterProvider'
 import AuthProvider from '@/providers/AuthProvider'
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Duplayout from '@/components/duplayout'
+
+
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -25,6 +28,7 @@ export default async function RootLayout({
 }) {
   const currentUser = await getCurrentUser();
 
+  // const checkOpen = localStorage.getItem("checkOpen");
 
   return (
     <AuthProvider>
@@ -33,8 +37,7 @@ export default async function RootLayout({
           <div className='max-h-[30px]'>
             <ToasterProvider />
           </div>
-          {currentUser && <Header currentUser={currentUser} />}
-          {children}
+          <Duplayout children={children} currentUser={currentUser}/>
           <SpeedInsights />
         </body>
       </html>
