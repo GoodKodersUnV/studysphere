@@ -5,6 +5,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 import { TbArrowsJoin2 } from "react-icons/tb";
 import { MdOutlineManageAccounts } from "react-icons/md";
+import { LiaUserFriendsSolid } from "react-icons/lia";
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion'
 import { LiaUserEditSolid } from "react-icons/lia";
@@ -34,6 +35,11 @@ const links = [
     name: "Edit profile",
     icon: <LiaUserEditSolid/> ,
     path: "/update-profile"
+  },
+  {
+    name: "Friends",
+    icon: <LiaUserFriendsSolid />,
+    path: "/friends"
   }
 ]
 

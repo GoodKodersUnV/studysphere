@@ -5,11 +5,16 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
-  return <div className='flex h-screen w-full justify-center items-center '>
-    <div className='p-7 m-2 md:p-10 sm:w-[400px] bg-slate-200 rounded-lg shadow-lg'>
-      {children}
+  return <div className="flex">
+    <div className="w-[50vw]">
+      <img className="w-full h-screen" src="https://i.postimg.cc/XqypKSM9/Black-White-Modern-Quiz-Time-Instagram-Post.png" alt=""/>
     </div>
-  </div>;
+    <div className='flex h-screen w-[50vw] justify-center items-center'>
+      <div className='p-7 m-2 md:p-10 sm:w-[400px] rounded-2xl shadow-lg'>
+        {children}
+      </div>
+    </div>
+  </div> ;
 };
 
 export default AuthLayout;
