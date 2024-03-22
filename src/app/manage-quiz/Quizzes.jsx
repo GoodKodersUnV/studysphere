@@ -3,10 +3,11 @@ import React from 'react'
 import axios from "axios"
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
+import WhatsappButton from "@/components/share"
 
 const Quizzes = ({ currentUser }) => {
     const [quizzes, setQuizzes] = useState([]);
-
+    const msg="Hey, want to test your knowledge? Check out this quiz link and see how you fare, Let's see who gets the highest score!"
     useEffect(() => {
         const getQuizzes = async () => {
             const res = await axios.post("/api/get-quizzes-created", {
@@ -33,7 +34,7 @@ const Quizzes = ({ currentUser }) => {
                             <tr onClick={()=>router.push(`/manage-quiz/${quiz.id}`)} className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
                                 <td className='p-2 border-b'>{quiz.id}</td>
                                 <td className='p-2 border-b'>{quiz.name}</td>
-                                <td className='p-2 border-b'>SHARE</td>
+                                <td className='p-2 border-b'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg}/></td>
                             </tr>
                         )
                     })
