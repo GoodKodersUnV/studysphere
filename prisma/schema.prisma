@@ -36,6 +36,23 @@ model User {
   points Points[]
 
   account Account[]
+
+  friends        Friend[]    @relation(name: "friends")
+  friendsof      Friend[]    @relation(name: "friendsof")
+}
+
+model Friend {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String      @db.ObjectId
+  friendUserId   String      @db.ObjectId
+  user           User        @relation(name: "friends", fields: [userId], references: [id])
+  friendUser     User        @relation(name: "friendsof", fields: [friendUserId], references: [id])
+  status         Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@unique([userId, friendUserId])
+  @@unique([friendUserId, userId])
 }
 
 model Quiz {
@@ -45,6 +62,11 @@ model Quiz {
   createdBy   User?   @relation(fields: [createdByID], references: [id])
   createdByID String? @db.ObjectId
 
+  createdAt DateTime @default(now())
+
+  startTime DateTime? @default(now())
+  endTime   DateTime?
+
   usersPoints Points[]
 }
 
@@ -53,6 +75,9 @@ model Points {
   points Int    @default(0)
   Quiz   Quiz   @relation(fields: [quizId], references: [id])
   quizId String @db.ObjectId
+
+  stratedAt DateTime?
+  endedAt   DateTime? @default(now())
 
   User   User   @relation(fields: [userId], references: [id])
   userId String @db.ObjectId
