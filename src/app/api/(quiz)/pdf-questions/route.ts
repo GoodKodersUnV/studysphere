@@ -75,7 +75,7 @@ export async function POST(req: Request, res: Response) {
     const quiz = await db.quiz.create({
       data: {
         questions: completion.choices[0].message.content,
-        userId: currentUser.id,
+        createdByID: currentUser.id,
       },
     });
 

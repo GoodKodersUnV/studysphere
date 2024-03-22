@@ -37,7 +37,7 @@ const Page = ({ params }) => {
   return (
     <div className="h-screen">
       {
-        isLoading ? "loading .. " : <Quiz questions={data} />
+        isLoading ? "loading .. " : <Quiz questions={data} quizId={params.id} />
       }
     </div>
   );
