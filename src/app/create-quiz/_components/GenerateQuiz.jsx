@@ -1,25 +1,23 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const GenerateQuiz = ({currentUser}) => {
+const GenerateQuiz = () => {
   const [amount, setSelectedOption] = useState("");
   const [topic, setTopicInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [data ,setData] = useState()
 
   const router = useRouter();
 
   const handleGenerateQuiz = () => {
     setIsLoading(true);
 
-    // Make a POST request to /api/questions with the amount and topic
-    fetch("/api/questions", {
+     fetch("/api/questions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount, topic ,currentUser}),
+      body: JSON.stringify({ amount, topic }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -28,30 +26,15 @@ const GenerateQuiz = ({currentUser}) => {
         return response.json();
       })
       .then((data) => {
-        // Handle the response if needed
-        console.log(data);
-        localStorage.setItem(
-          "data",
-          JSON.stringify(data.completionions.questions)
-        );
-        router.push("/quiz");
+        window.location.href(`/quiz/${data.quizId}`)
       })
       .catch((error) => {
-        // Handle errors
         console.error("Error generating quiz:", error.message);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
-
-  useEffect(() => {
-    if (isLoading) {
-      // Show loading screen or spinner
-      // You can customize this part to make it beautiful
-      console.log("Loading...");
-    }
-  }, [isLoading]);
 
   const isFormValid = () => {
     return amount.trim() !== "" && topic.trim() !== "" && /^\d+$/.test(amount);

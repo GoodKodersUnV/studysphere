@@ -28,7 +28,6 @@ const userSchema = z
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    // console.log(body);
     const { newPassword, confirmPassword, oldPassword, email } =
       userSchema.parse(body);
 
@@ -39,7 +38,6 @@ export async function POST(req: Request) {
       );
     }
 
-    //checking if old password matches
     const userExists = await db.user.findUnique({
       where: {
         email: email,
@@ -72,7 +70,6 @@ export async function POST(req: Request) {
 
     const password = await hash(newPassword, 10);
 
-    //updating the password with new password
     const updatedUser = await db.user.update({
       where: {
         email: email,
@@ -87,7 +84,6 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (error : any) {
-    // console.log("Error in creating user", error);
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }

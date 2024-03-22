@@ -1,5 +1,4 @@
 "use client";
-// import FileUpload from '../FileUpload'
 
 function HomePage({ currentUser }) {
   
@@ -10,7 +9,6 @@ function HomePage({ currentUser }) {
       {
         JSON.stringify(currentUser)
       }
-      {/* <FileUpload /> */}
     </div>
   );
 }

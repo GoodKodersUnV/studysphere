@@ -4,8 +4,6 @@ import getCurrentUser from "@/actions/getCurrentUser";
 
 export async function POST(req: Request) {
   const body = await req.json();
-  // console.log(body);
-
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {

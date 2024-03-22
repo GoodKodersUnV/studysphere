@@ -18,7 +18,6 @@ export async function POST(req: Request) {
 
     const { name, email, password } = userSchema.parse(body);
 
-    //checking if the username or email already exists
     const isEmailExists = await db.user.findUnique({
       where: { email: email },
     });
@@ -30,10 +29,8 @@ export async function POST(req: Request) {
       );
     }
 
-    //hashing the password
     const hashedPassword = await hash(password, 10);
 
-    //creating the user
     const user = await db.user.create({
       data: {
         name: name,
@@ -43,14 +40,11 @@ export async function POST(req: Request) {
       },
     });
 
-    //returning the user without the password
-
     return NextResponse.json(
       { message: "User created successfully" },
       { status: 201 }
     );
   } catch (error) {
-    // console.log("Error in creating user", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }

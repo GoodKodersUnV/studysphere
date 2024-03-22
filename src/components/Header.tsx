@@ -19,11 +19,6 @@ const Header: React.FC<Props> = ({ currentUser }) => {
     <div className='shadow-md px-2 bg-white z-10 sticky top-0'>
       <div className='flex items-center justify-between p-2'>
 
-        {/* <Link href='/' className='text-2xl sm:hidden'> */}
-        {/* <LuMenu /> */}
-        {/* <IoHome /> */}
-        {/* </Link> */}
-
         <Link href='/'>
           <div className='text-2xl font-bold '>
             StudySphere

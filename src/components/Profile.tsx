@@ -1,6 +1,5 @@
 "use client"
 
-// Import statements
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -38,7 +37,6 @@ const Profile = ({ currentUser } :any) => {
         return;
       }
       if (!response.ok) {
-        // Handle server-side errors
         const errorData = await response.json();
         toast.error(errorData.message);
         return;
