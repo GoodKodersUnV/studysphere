@@ -1,5 +1,11 @@
-export default function() {
+
+import getCurrentUser from "@/actions/getCurrentUser"
+
+import Quizzes from './Quizzes'
+
+export default async function () {
+    const currentUser = await getCurrentUser()
     return (
-        <div>manage</div>
+        <Quizzes currentUser={currentUser} />
     )
 }
