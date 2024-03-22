@@ -42,7 +42,7 @@ const UserProfile = ({ currentUser, access }) => {
           <motion.div
               animate={isOpen?{ rotate: 180 }:{rotate:0}}
               transition={{duration:0.3}}
-            ><IoMdArrowDropdown /></motion.div>
+            ><IoMdArrowDropdown className="text-xl" /></motion.div>
           {isOpen && (
             <div className="absolute rounded-xl shadow-md min-w-max bg-white overflow-hidden right-0 top-12 text-sm flex flex-col cursor-pointer">
               <>

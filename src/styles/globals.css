@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,4 +32,9 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgb(156 163 175); /* Set the color of the scrollbar thumb on hover */
+}
+
+* {
+  font-family: "Roboto Condensed", sans-serif;
+
 }
