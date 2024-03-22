@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 const Page = ({ params }) => {
 
   const [user, setUser] = useState("...fetching user");
-  // const session = useSession();
   const router = useRouter();
   useEffect(() => {
     const getUser = async () => {
@@ -45,7 +44,6 @@ const Page = ({ params }) => {
       toast.success("User updated successfully");
       router.push('/admin');
     } catch (error) {
-      // console.log(error)
       toast.error(error.message);
     }
   }

@@ -9,7 +9,6 @@ import { redirect } from "next/navigation";
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  // redirect('/signin')
   const onSubmit = async (data) => {
 
     if (data.password !== data.confirmPassword) {
@@ -37,7 +36,6 @@ const SignUp = () => {
       });
 
       if (signinResponse?.ok) {
-        // router.push('/');
         window.location.href = '/';
       }
     } else {

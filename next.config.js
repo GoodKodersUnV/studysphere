@@ -13,6 +13,13 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (
+    config,
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+  ) => {
+    config.externals.push({ canvas: 'commonjs canvas' })
+    return config
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

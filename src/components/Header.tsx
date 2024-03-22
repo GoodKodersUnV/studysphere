@@ -16,9 +16,7 @@ export default function ({ currentUser,open,setOpen }) {
 
     <div className='shadow-md px-2 bg-white z-10 sticky top-0'>
       <div className='flex items-center justify-between p-2'>
-
         <div className='text-2xl font-bold flex gap-3 items-center'>
-          {/* menu button */}
           <motion.button onClick={() => setOpen(!open)} className="z-50 flex flex-col w-[20px] h-[16px] justify-between">
             <motion.div animate={open ? { rotate: 45 } : { rotate: 0 }} className="w-full border border-black rounded origin-left"></motion.div>
             <motion.div animate={open ? { opacity: 0 } : { opacity: 1 }} className="w-full border border-black rounded"></motion.div>

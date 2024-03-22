@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import MenuItem from "./MenuItem";
 import Image from "next/image";
@@ -10,11 +10,9 @@ import useProfileModel from "@/hooks/useProfileModel";
 
 const UserProfile = ({ currentUser, access }) => {
   const router = useRouter();
-  // const [isOpen, setIsOpen] = useState(false)
   const profileModel = useProfileModel();
   const { isOpen } = profileModel;
   const onToggle = useCallback(() => {
-    // setIsOpen(prev => !prev);
     if (isOpen) {
       profileModel.onClose();
     } else {
@@ -62,25 +60,10 @@ const UserProfile = ({ currentUser, access }) => {
                     }`}
                   />
                 )}
-                {currentUser?.role === "owner" && (
-                  <MenuItem
-                    onClick={() => {
-                      router.push("/admin/updateHolidays");
-                    }}
-                    label="Holidays"
-                  />
-                )}
                 <hr />
                 <MenuItem
                   onClick={() => signOut({ callbackUrl: "/signin" })}
                   label="SignOut"
-                />
-                <MenuItem
-                  onClick={() => {
-                    localStorage.clear();
-                    window.location.reload();
-                  }}
-                  label="Clear Form"
                 />
               </>
             </div>

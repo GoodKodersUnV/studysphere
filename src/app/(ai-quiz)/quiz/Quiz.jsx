@@ -12,7 +12,7 @@ const Quiz = ({questions}) => {
   const [score, setScore] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [timer, setTimer] = useState(10); // Timer in seconds
+  const [timer, setTimer] = useState(10); 
 
   useEffect(() => {
     const interval = setInterval(() => {
