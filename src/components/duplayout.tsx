@@ -38,7 +38,7 @@ export default function ({ children, currentUser }) {
   return (
     <div>
       {currentUser && <Header currentUser={currentUser} open={open} setOpen={setOpen} />}
-      {currentUser ? <div className='border flex min-h-[90vh]'>
+      {currentUser ? <div className='border flex min-h-[90vh] bg-gradient-to-bl from-bg-blue-100 to-bg-rose-100'>
         {/* side bar */}
         <div className={`${open ? "w-[15vw]" : ""} border flex flex-col`}>
           {
