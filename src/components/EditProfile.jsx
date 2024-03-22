@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const Page = ({userId }) => {
+const Page = ({currentUser }) => {
 
   const [user, setUser] = useState("...fetching user");
 
@@ -18,7 +18,7 @@ const Page = ({userId }) => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ id: userId }),
+            body: JSON.stringify({ id: currentUser.id }),
           });
         const userData = await response.json();
         setUser(userData);

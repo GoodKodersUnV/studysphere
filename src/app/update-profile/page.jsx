@@ -6,7 +6,7 @@ export default async function() {
     const currentUser = await getCurrentUser();
     return (
         <div>
-            <EditProfile userId={currentUser.id} />
+            <EditProfile currentUser={currentUser} />
         </div>
     )
 }
