@@ -16,5 +16,5 @@ export async function POST(req: Request) {
       id: quizId,
     },
   });
-  return NextResponse.json(JSON.parse(user?.questions));
+  return NextResponse.json(JSON.parse(String(user?.questions) || "[]"));
 }
