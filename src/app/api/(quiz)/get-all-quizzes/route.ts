@@ -9,6 +9,10 @@ export async function GET(req: Request) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  const quizzes = await db.quiz.findMany({});
+  const quizzes = await db.quiz.findMany({
+    orderBy:{
+      createdAt:"desc"
+    }
+  });
   return NextResponse.json(quizzes);
 }
