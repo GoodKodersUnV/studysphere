@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 
 export default function ({ params }) {
+    const router=useRouter();
     const [profile, setProfile] = useState([]);
     const [user, setUser] = useState([]);
     useEffect(() => {
