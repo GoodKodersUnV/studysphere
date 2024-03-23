@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 export default function TextToSpeech({text}) {
-    const [textToSpeak, setTextToSpeak] = useState(text || ''); // Set initial state with the text prop value
+    const [textToSpeak, setTextToSpeak] = useState(text || '');
     const [voices, setVoices] = useState([]);
     const [selectedVoice, setSelectedVoice] = useState(null);
     const [speaking, setSpeaking] = useState(false);
@@ -63,7 +63,7 @@ export default function TextToSpeech({text}) {
   return (
     <div className="container mx-auto mt-10 p-4 bg-orange-100 rounded shadow-lg">
       <textarea className="w-full h-40 mb-4 p-2 border border-gray-300 rounded resize-y outline-none"
-        placeholder="Enter text to convert" value={textToSpeak} onChange={() => setTextToSpeak({text})}
+        placeholder="Enter text to convert" value={textToSpeak} onChange={() => setTextToSpeak(text)}
       />
       <div className="flex justify-between">
         <button className="w-1/4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2"
