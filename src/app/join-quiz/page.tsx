@@ -21,9 +21,9 @@ export default function () {
                 <input onChange={(e) => setId(e.target.value)} type="text" className="w-[400px] block  m-auto border border-slate-300  bg-slate-100 outline-none p-3 rounded-full" />
                 <button onClick={() => router.push(`/quiz/${id}`)} className="block m-auto border rounded p-2">Join Quiz</button>
             </div>
-            {
+            {/* {
                 (quizzes)
-            }
+            } */}
         </div>
     )
 }
