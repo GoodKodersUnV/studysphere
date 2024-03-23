@@ -2,9 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { GiArrowScope } from "react-icons/gi";
 import { PiMedalDuotone } from "react-icons/pi";
-import badge1 from './assets/badge1.svg'
-import badge2 from './assets/badge2.svg'
-import badge3 from './assets/badge3.svg'
 import Image from 'next/image';
 import axios from 'axios';
 
