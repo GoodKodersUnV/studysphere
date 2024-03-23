@@ -88,11 +88,11 @@ const StudentTable = () => {
   const badgeMap = new Map();
   sortedStudents.forEach((student, index) => {
     switch (rankMap.get(student.id)) {
-      case 1: badgeMap.set(student.id, <Image src={badge1} alt="badge1" width={30} height={30} />);
+      case 1: badgeMap.set(student.id, <Image src={"https://raw.githubusercontent.com/UdaySagar-Git/studysphere/db945eb3abd0eb850ddec2a63dde78307b09823f/src/app/manage-quiz/assets/badge1.svg"} alt="badge1" width={30} height={30} />);
         break;
-      case 2: badgeMap.set(student.id, <Image src={badge2} alt="badge2" width={30} height={30} />);
+      case 2: badgeMap.set(student.id, <Image src={"https://raw.githubusercontent.com/UdaySagar-Git/studysphere/db945eb3abd0eb850ddec2a63dde78307b09823f/src/app/manage-quiz/assets/badge2.svg"} alt="badge2" width={30} height={30} />);
         break;
-      case 3: badgeMap.set(student.id, <Image src={badge3} alt="badge3" width={30} height={30} />);
+      case 3: badgeMap.set(student.id, <Image src={"https://raw.githubusercontent.com/UdaySagar-Git/studysphere/db945eb3abd0eb850ddec2a63dde78307b09823f/src/app/manage-quiz/assets/badge3.svg"} alt="badge3" width={30} height={30} />);
         break;
       default: badgeMap.set(student.id, <PiMedalDuotone className='h-7 w-7 text-zinc-700' />);
     }
