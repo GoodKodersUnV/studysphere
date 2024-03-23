@@ -11,8 +11,8 @@ const Friends = ({ currentUser }) => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const res = await axios.get("/api/all-users");
-      setUsers(res.data);
+      const res = await axios.post("/api/all-users" ,{profileId : currentUser.id});
+      setUsers(res.data.users);
     };
     getUsers();
   }, []);
