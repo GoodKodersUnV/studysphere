@@ -64,7 +64,7 @@ const Friends = ({ currentUser }) => {
                       handleFriend(user.id);
                     }}
                   >
-                    <IoMdPersonAdd />
+                    <IoMdPersonAdd className="text-xl" />
                   </span>
                 )}
               </td>

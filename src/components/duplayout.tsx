@@ -44,7 +44,7 @@ const links = [
 ]
 
 export default function ({ children, currentUser }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
   return (
@@ -56,8 +56,8 @@ export default function ({ children, currentUser }) {
           {
             links.map((link) => {
               return (
-                <div onClick={() => router.push(link.path)} className='w-full cursor-pointer border p-2 flex h-[40px] hover:bg-white items-center gap-3' key={link.name}>
-                  <h1 className='text-xl px-2'>{link.icon}</h1>
+                <div onClick={() => router.push(link.path)} className='w-full cursor-pointer border px-2 flex h-[50px] hover:bg-white items-center gap-3' key={link.name}>
+                  <h1 className='text-xl px-3'>{link.icon}</h1>
                   <h1 className={`${open === false && "hidden"}`}>{link.name}</h1>
                 </div>
               )
