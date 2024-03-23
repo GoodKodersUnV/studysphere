@@ -24,7 +24,15 @@ const Friends = ({ currentUser }) => {
         userId: currentUser.id,
         friendUserId: friendUserId,
       })
-
+      if (res.status === 200) {
+        const newUsers = users.map((user) => {
+          if (user.id === friendUserId) {
+            return { ...user, isFriend: true };
+          }
+          return user;
+        });
+        setUsers(newUsers);
+      }
 
     } catch (err) {
       console.log(err);
@@ -42,8 +50,7 @@ const Friends = ({ currentUser }) => {
       </thead>
       <tbody>
         {users.map((user) => {
-          const isFriend = currentUser.friends.some((friend) => friend.friendUserId === user.id);
-          return (
+           return (
             <tr
               onClick={() => router.push(`/profile/${user.id}`)}
               className="hover:bg-gray-100 "
@@ -52,7 +59,7 @@ const Friends = ({ currentUser }) => {
               <td className="p-2 border-b">{user.id}</td>
               <td className="p-2 border-b">{user.name}</td>
               <td className="p-2 border-b">
-                {isFriend ? (
+                {user.isFriend ? (
                   <span className="text-cyan-500 flex items-center gap-2 cursor-pointer">
                     <FaCheckCircle />
                   </span>
