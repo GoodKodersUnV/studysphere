@@ -35,7 +35,7 @@ const Page = () => {
                 </thead>
                 <tbody>
                     {
-                        quizzes.map((quiz) => {
+                        quizzes.splice(0,5).map((quiz) => {
                             return (
                                 <tr onClick={() => router.push(`/quiz/${quiz.id}`)} className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
                                     <td className='p-2 border-b'>{quiz.id}</td>
