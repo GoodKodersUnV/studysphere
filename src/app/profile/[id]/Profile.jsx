@@ -1,20 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
 
-function HomePage({ currentUser }) {
+export default function Profile({ params, currentUser }) {
   const [profile, setProfile] = useState([]);
   const [user, setUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   useEffect(() => {
     const getProfile = async () => {
       const res = await axios.post("/api/get-quizzes-taken", {
-        userId: currentUser.id,
+        userId: params.id,
       });
       setProfile(res.data);
     };
@@ -22,7 +21,7 @@ function HomePage({ currentUser }) {
     const getUser = async () => {
       try {
         const res = await axios.post("/api/all-users", {
-          profileId: currentUser.id,
+          profileId: params.id,
         });
         setUser(res.data.profileUser);
         setAllUsers(res.data.users);
@@ -32,14 +31,34 @@ function HomePage({ currentUser }) {
     };
     getUser();
   }, []);
-  const router = useRouter();
+
+  const handleFriend = async (friendUserId) => {
+    try {
+      const res = await axios.post("/api/friend-request", {
+        userId: currentUser.id,
+        friendUserId: friendUserId,
+      });
+      if (res.status === 200) {
+        const newUsers = allUsers.map((user) => {
+          if (user.id === friendUserId) {
+            return { ...user, isFriend: true };
+          }
+          return user;
+        });
+        setAllUsers(newUsers);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="m-5 border flex h-full">
       <div className="w-[75%] p-5">
         <div className="flex gap-4">
           <div>
             <Image
-              src={currentUser.image}
+              src={user.image}
               width={100}
               height={100}
               className="rounded"
@@ -47,10 +66,10 @@ function HomePage({ currentUser }) {
             />
           </div>
           <div className="flex flex-col justify-between">
-            <h1>{currentUser.email}</h1>
-            <h1>{currentUser.id}</h1>
-            <h1>{currentUser.name}</h1>
-            <h1>{currentUser.createdAt.toString()}</h1>
+            <h1>{user.email}</h1>
+            <h1>{user.id}</h1>
+            <h1>{user.name}</h1>
+            <h1>{user.createdAt}</h1>
           </div>
         </div>
         <table className="w-1/2 m-auto mt-12">
@@ -122,4 +141,6 @@ function HomePage({ currentUser }) {
   );
 }
 
-export default HomePage;
+/**
+ *
+ */

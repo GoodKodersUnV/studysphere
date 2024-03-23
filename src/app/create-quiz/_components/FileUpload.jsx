@@ -5,6 +5,7 @@ import { pdfjs } from "react-pdf";
 import { Inbox } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import TextToSpeech from "@/components/TextToSpeech"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -141,6 +142,7 @@ const FileUpload = () => {
               <h1 className="font-bold text-2xl ">Extracted Text</h1>
               <p className="shadow-md rounded-lg max-h-[500px] overflow-y-auto">
                 {pdfText}
+                <TextToSpeech text={pdfText}/>
               </p>
             </div>
           </div>
