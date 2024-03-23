@@ -73,40 +73,38 @@ export default function Layout({ children, currentUser }) {
             <div>
               {links.map((link) => {
                 return (
-                  <div onClick={() => router.push(link.path)} className="w-full cursor-pointer border px-2 flex h-[50px] hover:bg-white items-center gap-3" key={link.name}>
+                  <div onClick={() => router.push(link.path)} className="w-full cursor-pointer border hover:bg-neutral-100 px-2 flex h-[50px] items-center gap-3" key={link.name}>
                     <h1 className="text-xl px-3">{link.icon}</h1>
                     <h1 className={`${open === false && 'hidden'}`}>{link.name}</h1>
                   </div>
                 );
               })}
-            </div>
-            <div>
-              <p onClick={handleOpen}>
-                <AiOutlineFontSize className="h-6 w-6 ml-14" />
-              </p>
-              {fontopen ? (
-                <div className="relative">
-                  <div className="absolute font-semibold bottom-1 bg-neutral-400 text-blue-950 cursor-pointer" style={{ borderRadius: 5 }}>
-                    <p className="p-2" onClick={() => SetSize(10)}>
-                      10px
-                    </p>
-                    <p className="p-2 bg-neutral-200" onClick={() => SetSize(16)}>
-                      16px
-                    </p>
-                    <p className="p-2" onClick={() => SetSize(20)}>
-                      20px
-                    </p>
-                    <p className="p-2" onClick={() => SetSize(24)}>
-                      24px
-                    </p>
-                    <p className="p-2" onClick={() => SetSize(28)}>
-                      28px
-                    </p>
-                  </div>
+              <div className={`${open ? 'w-[15vw]' : ''} flex relative cursor-pointer relative justify-center text-xl items-center border px-2 h-[50px] hover:bg-white text-center`} onClick={handleOpen}>
+                <AiOutlineFontSize />
+                <div>
+                  {fontopen ? (
+                      <div className="absolute font-semibold w-full top-12 text-sm left-0 text-blue-950 cursor-pointer" style={{ borderRadius: 5 }}>
+                        <p className="p-2 w-full hover:bg-neutral-100" onClick={() => SetSize(10)}>
+                          10px
+                        </p>
+                        <p className="p-2 w-full hover:bg-neutral-100" onClick={() => SetSize(16)}>
+                          16px
+                        </p>
+                        <p className="p-2 w-full hover:bg-neutral-100" onClick={() => SetSize(20)}>
+                          20px
+                        </p>
+                        <p className="p-2 w-full hover:bg-neutral-100" onClick={() => SetSize(24)}>
+                          24px
+                        </p>
+                        <p className="p-2 w-full hover:bg-neutral-100" onClick={() => SetSize(28)}>
+                          28px
+                        </p>
+                      </div>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
-              ) : (
-                <div></div>
-              )}
+              </div>
             </div>
           </div>
           <AnimatePresence key={pathname}>
