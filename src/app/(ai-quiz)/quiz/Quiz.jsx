@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Clock10 } from "lucide-react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 
 
@@ -13,7 +14,7 @@ const Quiz = ({questions,quizId}) => {
   const [score, setScore] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [timer, setTimer] = useState(10); 
+  const [timer, setTimer] = useState(10);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,9 +56,10 @@ const Quiz = ({questions,quizId}) => {
     setSelectedOption(null);
     setTimer(10);
   };
-
+  const router = useRouter();
   const handleQuizSubmit = async () =>{
     const res = await axios.post("/api/submit-quiz",{quizId ,points: +((score/questions.length)*100)})
+    router.push(`/manage-quiz/${quizId}`);
   }
 
   return (
