@@ -21,9 +21,13 @@ const Page = () => {
           },3000);
         }
       };
+<<<<<<< HEAD
+      
+=======
 
     const msg="Hey, want to test your knowledge? Check out this quiz link and see how you fare, Let's see who gets the highest score!"
 
+>>>>>>> 96a106be7ab072e955f37987261223c7aa67cb71
     useEffect(() => {
         const getQuizzes = async () => {
             const res = await axios.get("/api/get-all-quizzes");
