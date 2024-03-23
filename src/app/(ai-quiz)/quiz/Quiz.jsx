@@ -28,6 +28,21 @@ const Quiz = ({questions,quizId}) => {
     return () => clearInterval(interval);
   }, [timer]);
 
+
+  const [videoAllowed, setVideoAllowed] = useState(false);
+  const handleVideoPermission = async () => {
+    try {
+      await navigator.mediaDevices.getUserMedia({ video: true });
+      setVideoAllowed(true);
+    } catch (error) {
+      router.push("/");
+      console.error('User denied access to video');
+      setVideoAllowed(false);
+    }
+  };
+  useEffect(()=>{
+  handleVideoPermission();
+  },[])
   const handleNextQuestion = () => {
     if (index < questions.length - 1) {
       setIndex(index + 1);
@@ -60,6 +75,7 @@ const Quiz = ({questions,quizId}) => {
   const handleQuizSubmit = async () =>{
     const res = await axios.post("/api/submit-quiz",{quizId ,points: +((score/questions.length)*100)})
     router.push(`/manage-quiz/${quizId}`);
+    setVideoAllowed(false);
   }
 
   return (
