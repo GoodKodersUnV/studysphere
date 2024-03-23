@@ -2,8 +2,10 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import axios from "axios";
+import WhatsappButton from "@/components/share";
 
-export default function () {
+
+const Page = () => {
     const [id, setId] = useState("");
     const router = useRouter();
     const [quizzes, setQuizzes] = useState([]);
@@ -19,10 +21,13 @@ export default function () {
           },3000);
         }
       };
+
+    const msg="Hey, want to test your knowledge? Check out this quiz link and see how you fare, Let's see who gets the highest score!"
+
     useEffect(() => {
         const getQuizzes = async () => {
             const res = await axios.get("/api/get-all-quizzes");
-            setQuizzes(JSON.stringify(res.data));
+            setQuizzes(res.data);
         }
         getQuizzes();
     }, [])
@@ -37,9 +42,30 @@ export default function () {
                 </div>
             </div>
 
-            {/* {
-                (quizzes)
-            } */}
+            <table className='w-1/2 m-auto mt-12'>
+                <thead>
+                    <tr>
+                        <th className='p-2 border-b'>id</th>
+                        <th className='p-2 border-b'>Name</th>
+                        <th className='p-2 border-b'></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        quizzes.splice(0,5).map((quiz) => {
+                            return (
+                                <tr onClick={() => router.push(`/quiz/${quiz.id}`)} className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
+                                    <td className='p-2 border-b'>{quiz.id}</td>
+                                    <td className='p-2 border-b'>{quiz.name}</td>
+                                    <td className='p-2 border-b'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
         </div>
     )
 }
+
+export default Page
