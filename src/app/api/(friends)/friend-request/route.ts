@@ -17,16 +17,6 @@ export async function POST(req: Request) {
       friendUserId: friendUserId,
     },
   });
-
-  const users = await db.user.findMany({
-    include: {
-      friends: true,
-      friendsof: true,
-    },
-  });
   
-  return NextResponse.json({
-    friend,
-    users,
-  });
+  return NextResponse.json(friend);
 }

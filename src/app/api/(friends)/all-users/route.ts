@@ -15,5 +15,17 @@ export async function GET(req: Request) {
       friendsof: true,
     },
   });
+
+  users.forEach((user) => {
+    user.isFriend = currentUser.friends.some(
+      (friend) => friend.friendUserId === user.id
+    )
+    if(user.id === currentUser.id) {
+      user.isFriend = true
+    }
+  });
+
+  
+
   return NextResponse.json(users);
 }
