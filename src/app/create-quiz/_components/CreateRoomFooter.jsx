@@ -1,8 +1,13 @@
+import React from "react"
+import pdftotext from '/public/pdf-to-text.png'
+import Image from 'next/image';
+
+
 export default function() {
     return (
-            <div className="grid grid-cols-3 gap-10 m-10 mt-32">
+            <div className="grid grid-cols-3 gap-10 m-10 mt-24">
                 <div className="col-span-1 text-center">
-                    <img src="https://static-00.iconduck.com/assets.00/folder-icon-512x410-jvths5l6.png" alt="" className="block m-auto w-40 h-32"/>
+                    <Image src={pdftotext} alt="" className="block m-auto w-40 h-32"/>
                     <p className="mt-4 font-bold text-blue-950 text-xl">Generate from a file</p>
                     <p className="font-semibold text-neutral-500 text-sm mt-2">Effortlessly transform your data with just a file upload.</p>
                 </div>
