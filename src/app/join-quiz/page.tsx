@@ -19,6 +19,7 @@ export default function () {
           },3000);
         }
       };
+      
     useEffect(() => {
         const getQuizzes = async () => {
             const res = await axios.get("/api/get-all-quizzes");
