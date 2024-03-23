@@ -9,7 +9,7 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
     <div className="w-[50vw]">
       <img className="w-full h-screen" src="https://i.postimg.cc/XqypKSM9/Black-White-Modern-Quiz-Time-Instagram-Post.png" alt=""/>
     </div>
-    <div className='flex h-screen w-[50vw] justify-center items-center'>
+    <div className='flex h-screen w-[50vw] justify-center items-center bg-neutral-500'>
       <div className='p-7 m-2 md:p-10 sm:w-[400px] rounded-2xl shadow-lg'>
         {children}
       </div>
