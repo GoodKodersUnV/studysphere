@@ -122,19 +122,6 @@ const Page = ({currentUser }) => {
             />
           </label>
           <label className="block mb-2 text-sm">
-            Role:
-            <select
-              value={user?.role}
-              onChange={(event) => setUser({ ...user, role: event.target.value })}
-              className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-            >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-              <option value="owner">Owner</option>
-              <option value="disabled">Disable</option>
-            </select>
-          </label>
-          <label className="block mb-2 text-sm">
             Organisation:
             <input
               type="text"
