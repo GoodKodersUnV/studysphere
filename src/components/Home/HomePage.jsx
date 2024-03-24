@@ -87,6 +87,7 @@ function HomePage({ currentUser }) {
               <div
                 className="flex items-center gap-2 cursor-pointer p-2 border border-b rounded-md justify-between hover:bg-gray-100"
                 key={user.id}
+                onClick={()=>router.push(`/message/${user.id}`)}
               >
                 <div className="flex gap-2 items-center">
                   <Image
