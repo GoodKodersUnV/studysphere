@@ -20,7 +20,9 @@ const Page = () => {
                 });
             }, 3000);
         }
-    };
+      };
+      
+
 
 
     const msg = "Hey, want to test your knowledge? Check out this quiz link and see how you fare, Let's see who gets the highest score!"
