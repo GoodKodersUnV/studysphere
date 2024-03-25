@@ -11,7 +11,7 @@ const Friends = ({ currentUser }) => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const res = await axios.post("/api/all-users" ,{profileId : currentUser.id});
+      const res = await axios.post("/api/all-users", { profileId: currentUser.id });
       setUsers(res.data.users);
     };
     getUsers();
@@ -23,7 +23,7 @@ const Friends = ({ currentUser }) => {
       const res = await axios.post("/api/friend-request", {
         userId: currentUser.id,
         friendUserId: friendUserId,
-      })
+      });
       if (res.status === 200) {
         const newUsers = users.map((user) => {
           if (user.id === friendUserId) {
@@ -33,7 +33,6 @@ const Friends = ({ currentUser }) => {
         });
         setUsers(newUsers);
       }
-
     } catch (err) {
       console.log(err);
     }
@@ -50,13 +49,15 @@ const Friends = ({ currentUser }) => {
       </thead>
       <tbody>
         {users.map((user) => {
-            return (
+          return (
             <tr
               onClick={() => router.push(`/profile/${user.id}`)}
-              className="hover:bg-gray-100 "
+              className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 cursor-pointer"
               key={user.id}
             >
-              <td className="p-2 border-b">{user.id}</td>
+              <td className="p-2 border-b">
+                <img src={user.image} width={50} className="rounded-full ms-3" height={50} alt={user.name} />
+              </td>
               <td className="p-2 border-b">{user.name}</td>
               <td className="p-2 border-b">
                 {user.isFriend ? (
