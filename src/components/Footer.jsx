@@ -12,7 +12,7 @@
                     All rights reserved
                     </span>
                     <span className=" opacity-80  hover:opacity-100 ">
-                        <Link className='opacity-80  hover:underline px-4 hover:opacity-100'  href="https://github.com/UdaySagar-Git/studysphere"><FaGithub className="inline mb-1"/> Github</Link>
+                        <Link className='opacity-80  hover:underline px-4 hover:opacity-100'  href="https://github.com/WebWizards-Git/studysphere"><FaGithub className="inline mb-1"/> Github</Link>
                     </span>
                 </div>
             </div>
