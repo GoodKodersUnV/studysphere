@@ -25,7 +25,7 @@ const Page = () => {
 
 
 
-    const msg = "Hey, want to test your knowledge? Check out this quiz link and see how you fare, Let's see who gets the highest score!"
+    const msg = "Hey, want to test your knowledge? Check out this quiz link and see how you perform , Let's see who gets the highest score!"
 
     useEffect(() => {
         const getQuizzes = async () => {
@@ -48,9 +48,9 @@ const Page = () => {
             <table className='w-1/2 m-auto mt-12'>
                 <thead>
                     <tr>
-                        <th className='p-2 border-b'>id</th>
-                        <th className='p-2 border-b'>Name</th>
-                        <th className='p-2 border-b'></th>
+                        <th className='p-2 border-b text-center'>id</th>
+                        <th className='p-2 border-b text-center'>Name</th>
+                        <th className='p-2 border-b text-center'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,9 +58,9 @@ const Page = () => {
                         quizzes.splice(0, 5).map((quiz) => {
                             return (
                                 <tr onClick={() => router.push(`/quiz/${quiz.id}`)} className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
-                                    <td className='p-2 border-b'>{quiz.id}</td>
-                                    <td className='p-2 border-b'>{quiz.name}</td>
-                                    <td className='p-2 border-b'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
+                                    <td className='p-2 border-b text-center '>{quiz.id}</td>
+                                    <td className='p-2 border-b text-center '>{quiz.name}</td>
+                                    <td className='p-2 border-b text-center '><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
                                 </tr>
                             )
                         })
