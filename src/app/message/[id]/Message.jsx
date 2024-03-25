@@ -19,12 +19,11 @@ const Message = ({ messageData }) => {
   };
   return (
     <div>
-      <div>{JSON.stringify(messageData?.messages) || ""}</div>
-
-      <div>
-        <input value={message} onChange={(e)=>setMessage(e.target.value)} />
-        <button className="bg-blue-500 text-white rounded p-2" onClick={handleSubmit}>
-          Send
+      {/* <div>1st Message Data Received :  {JSON.stringify(messageData[0]?.message) || "null"}</div> */}
+      <div className="w-full mt-4 grid grid-cols-12 gap-5">
+        <input value={message} className=" bg-slate-200 px-2 col-span-11" onChange={(e)=>setMessage(e.target.value)} />
+        <button className="bg-blue-500 hover:bg-blue-400 text-white rounded p-2 col-span-1" onClick={handleSubmit}>
+            Send
         </button>
       </div>
     </div>
