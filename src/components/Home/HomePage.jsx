@@ -39,10 +39,7 @@ function HomePage({ currentUser }) {
         <div className="flex gap-4">
           <div>
             <Image
-              src={currentUser.image}
-              width={100}
-              height={100}
-              className="rounded"
+              src={currentUser.image} width={100} height={100} className="rounded-full"
               alt="profile"
             />
           </div>
