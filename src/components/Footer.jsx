@@ -14,7 +14,7 @@
     const Footer = () => {
 
     return (
-        <footer  className='relative bg-blue-100 w-full bottom-0 left-0 before:absolute before:top-0 before:left-0' >
+        <footer  className='relative bg-blue-100 w-full bottom-0  left-0 before:absolute before:top-0 before:left-0' >
         <div className="content " style={{
             margin: 'auto',
             padding: '10px 40px 40px 40px',
