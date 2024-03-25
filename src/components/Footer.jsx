@@ -4,8 +4,8 @@
     const Footer = () => {
 
     return (
-        <footer  className='relative bg-blue-100 w-full bottom-0 left-0 before:absolute before:top-0 before:left-0 mt-10' >
-            <div className="bottom-details w-full py-2 px-4 bg-orange-100">
+        <footer  className='relative w-full' >
+            <div className="bottom-details w-full py-2 px-4 bg-blue-100">
                 <div className="bottom_text m-auto flex-between text-neutral-700">
                     <span className="copyright_text opacity-80  hover:opacity-100 ">Copyright © 2024 by WebWizards
                     <a className='opacity-90  hover:underline px-4 hover:opacity-100'  href="/">StudySphere</a>
