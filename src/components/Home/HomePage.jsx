@@ -39,10 +39,7 @@ function HomePage({ currentUser }) {
         <div className="flex gap-4">
           <div>
             <Image
-              src={currentUser.image}
-              width={100}
-              height={100}
-              className="rounded"
+              src={currentUser.image} width={100} height={100} className="rounded-full"
               alt="profile"
             />
           </div>
@@ -56,9 +53,9 @@ function HomePage({ currentUser }) {
         <table className="w-1/2 m-auto mt-12">
           <thead>
             <tr>
-              <th className="p-2 border-b">id</th>
-              <th className="p-2 border-b">Name</th>
-              <th className="p-2 border-b">Points</th>
+              <th className="p-2 border-b text-center">id</th>
+              <th className="p-2 border-b text-center">Name</th>
+              <th className="p-2 border-b text-center">Points</th>
             </tr>
           </thead>
           <tbody>
@@ -69,9 +66,9 @@ function HomePage({ currentUser }) {
                   className="hover:bg-gray-100 cursor-pointer"
                   key={quiz.id}
                 >
-                  <td className="p-2 border-b">{quiz.id}</td>
-                  <td className="p-2 border-b">{quiz.Quiz.name}</td>
-                  <td className="p-2 border-b">{quiz.points}</td>
+                  <td className="p-2 border-b text-center">{quiz.id}</td>
+                  <td className="p-2 border-b text-center">{quiz.Quiz.name}</td>
+                  <td className="p-2 border-b text-center">{quiz.points}</td>
                 </tr>
               );
             })}
