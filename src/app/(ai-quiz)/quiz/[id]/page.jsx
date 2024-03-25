@@ -11,7 +11,7 @@ const Page = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-           const response = await fetch("/api/get-questions", {
+          const response = await fetch("/api/get-questions", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

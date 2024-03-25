@@ -8,6 +8,10 @@ import badge3 from '/public/assets/badge3.svg'
 import Image from 'next/image';
 import axios from 'axios';
 import {  useRouter } from 'next/navigation';
+import Loader from '../loading'
+import { AiOutlineRise } from "react-icons/ai";
+import { FaExternalLinkAlt } from "react-icons/fa";
+
 
 
 const Row = ({id, rank, img, name, username, points, badge }) => {
@@ -22,7 +26,7 @@ const Row = ({id, rank, img, name, username, points, badge }) => {
             rankColorClass = 'hover:bg-slate-400 ';
             break;
         case 3:
-            rankColorClass = 'hover:bg-yellow-700 ';
+            rankColorClass = 'hover:bg-amber-700 ';
             break;
         default:
             rankColorClass = '';
@@ -31,20 +35,20 @@ const Row = ({id, rank, img, name, username, points, badge }) => {
     let BadgeColorClass = '';
     switch (rank) {
         case 1:
-            BadgeColorClass = 'bg-yellow-500 outline outline-yellow-400  bg-gradient-to-r from-rgb(239,242,18) via-rgb(229,232,64) to-rgb(225,202,2)'
+            BadgeColorClass = 'bg-yellow-600 outline outline-yellow-400  bg-gradient-to-r from-rgb(239,242,18) via-rgb(229,232,64) to-rgb(225,202,2)'
             break;
         case 2:
             BadgeColorClass = 'bg-slate-400  outline outline-gray-300';
             break;
         case 3:
-            BadgeColorClass = ' bg-yellow-700 outline outline-yellow-600';
+            BadgeColorClass = ' bg-yellow-700 outline outline-amber-500';
             break;
         default:
             BadgeColorClass = 'outline outline-emerald-500  ';
     }
 
     return (
-        <tr onClick={() => router.push(`/profile/${id}`)} className={`flex flex-col md:flex-row items-center border border-slate-900 ${!rankColorClass && 'hover:bg-sky-200'}  ${rankColorClass} hover:transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-300 ease-in-out`}>
+        <tr onClick={() => router.push(`/profile/${id}`)} className={`flex flex-col md:flex-row items-center border border-slate-900 ${!rankColorClass && 'hover:bg-sky-200'} cursor-pointer  ${rankColorClass} hover:transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-300 ease-in-out`}>
             <td className="p-2 text-center ms-2 me-5 ">{badge}</td>
             <td className="text-md p-0 text-center me-5 ">
                 <div className={`p-2 w-full h-full me-5 flex items-center justify-center font-semibold bg-gray-500 border border-gray-50 border-spacing-4 outline-offset-2 text-gray-50  rounded-full ${BadgeColorClass}`} >
@@ -72,8 +76,10 @@ const Row = ({id, rank, img, name, username, points, badge }) => {
 const StudentTable = ({ params }) => {
     const [sortedStudents, setStudents] = useState([]);
     const router = useRouter();
-    
+    const [loading, setLoading] = useState(true);
 
+    
+    
     useEffect(() => {
         const getUsers = async () => {
             const res = await axios.post("/api/get-leaderboard", {
@@ -83,6 +89,9 @@ const StudentTable = ({ params }) => {
             console.log("students", res.data)
         }
         getUsers()
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }, [])
 
     const rankMap = new Map();
@@ -110,13 +119,25 @@ const StudentTable = ({ params }) => {
                 {
                     sortedStudents.length===0? (
                         <div className='w-full h-screen text-center m-auto'>
-                            <h1 className="text-center text-2xl text-gray-600">
-                                Be the first to participate in the quiz leaderboard and achieve the top rank!
-                            </h1>
-                            <button onClick={()=>router.push(`/quiz/${params.id}`)}  className="block m-auto text-center mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Take the Quiz</button>
+                                {
+                                loading ? (
+                                        <Loader />
+                                    ) : (
+                                    <div>
+                                        <h1 className="text-center text-2xl text-gray-600">
+                                            Be the first to participate in the quiz leaderboard and achieve the top rank!
+                                        </h1>
+                                        <button onClick={() => router.push(`/quiz/${params.id}`)} className="flex items-center justify-center m-auto text-center mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md ">Take the Quiz &nbsp; <FaExternalLinkAlt className='' /></button>
+                                    </div>
+                                )
+                                }
                         </div>
-                    ):(
-                        sortedStudents.map((student) => (
+                    ):
+
+                    (
+                    <>
+                        <h1 className=' text-3xl font-bold mb-4 text-center flex items-center justify-center'>Leaderboard&nbsp; <AiOutlineRise className='w-9 h-9 text-emerald-700' /></h1>
+                        {sortedStudents.map((student) => (
                             <Row
                                 key={student.id}
                                 id={student.userId}
@@ -126,8 +147,9 @@ const StudentTable = ({ params }) => {
                                 username={student.User.username}
                                 points={student.points}
                                 badge={badgeMap.get(student.id)}
-                            />
-                        ))
+                                />
+                        ))}
+                    </>
                     )
                 }
             </tbody>

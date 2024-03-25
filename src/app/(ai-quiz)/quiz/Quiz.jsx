@@ -79,7 +79,7 @@ const Quiz = ({questions,quizId}) => {
   }
 
   return (
-    <div className="bg-gradient-to-r from-rose-100 to-teal-100 border h-full flex justify-center items-center">
+    <div className="border h-full flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-xl w-[500px] ">
         {!showSummary ? (
           <>
