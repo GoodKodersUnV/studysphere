@@ -40,7 +40,7 @@ const Friends = ({ currentUser }) => {
   };
 
   return (
-    <table className="w-1/2 m-auto mt-12">
+    <table className="w-1/2 m-auto mt-10 mb-20">
       <thead>
         <tr>
           <th className="p-2 border-b">id</th>
@@ -50,7 +50,7 @@ const Friends = ({ currentUser }) => {
       </thead>
       <tbody>
         {users.map((user) => {
-           return (
+            return (
             <tr
               onClick={() => router.push(`/profile/${user.id}`)}
               className="hover:bg-gray-100 "
