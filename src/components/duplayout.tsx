@@ -91,7 +91,7 @@ export default function Layout({ children, currentUser }) {
               {links.map((link) => {
                 return (
 
-                  <div onClick={() => router.push(link.path)} className={( link.active ? "w-full h-[50px] flex items-center gap-3 border px-2 bg-blue-400": "bg-gray-50 w-full h-[50px] cursor-pointer flex items-center gap-3 border hover:bg-slate-200 px-2 "  )} key={link.name}>
+                  <div onClick={() => router.push(link.path)} className={( link.active ? "w-full h-[50px] flex items-center gap-3 px-2 bg-blue-400": "bg-gray-50 w-full h-[50px] cursor-pointer flex items-center gap-3 hover:bg-slate-200 px-2 "  )} key={link.name}>
                     <h1 className="text-xl px-3">{link.icon}</h1>
                     <h1 className={`${open === false && 'hidden'}`}>{link.name}</h1>
                   </div>
