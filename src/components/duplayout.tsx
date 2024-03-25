@@ -90,24 +90,25 @@ export default function Layout({ children, currentUser }) {
                   </div>
                 );
               })}
-              <div className={`${open ? 'w-[15vw]' : ''} flex  cursor-pointer relative justify-center text-xl items-center border px-2 h-[50px] hover:bg-white text-center`} onClick={handleOpen}>
-                <AiOutlineFontSize />
+              <div className={`${open ? 'w-[15vw]' : ''} flex items-center gap-3 border px-2  cursor-pointer relative h-[50px] hover:bg-white`} onClick={handleOpen}>
+                <h1 className="text-xl px-3"><AiOutlineFontSize /></h1>
+                <h1 className={`${open === false && 'hidden'}`}>Text Resize </h1>
                 <div>
                   {fontopen ? (
                       <div className="absolute font-semibold w-full top-12 text-sm left-0 text-blue-950 cursor-pointer" style={{ borderRadius: 5 }}>
-                        <p className="p-2 w-full hover:bg-slate-200" onClick={() => SetSize(10)}>
+                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==10 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(10)}>
                           10px
                         </p>
-                        <p className="p-2 w-full hover:bg-slate-200" onClick={() => SetSize(16)}>
+                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==16 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(16)}>
                           16px
                         </p>
-                        <p className="p-2 w-full hover:bg-slate-200" onClick={() => SetSize(20)}>
+                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==20 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(20)}>
                           20px
                         </p>
-                        <p className="p-2 w-full hover:bg-slate-200" onClick={() => SetSize(24)}>
+                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==24 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(24)}>
                           24px
                         </p>
-                        <p className="p-2 w-full hover:bg-slate-200" onClick={() => SetSize(28)}>
+                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==28 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(28)}>
                           28px
                         </p>
                       </div>
