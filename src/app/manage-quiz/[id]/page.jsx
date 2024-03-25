@@ -7,7 +7,7 @@ import badge2 from '/public/assets/badge2.svg'
 import badge3 from '/public/assets/badge3.svg'
 import Image from 'next/image';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import {  useRouter } from 'next/navigation';
 
 
 const Row = ({id, rank, img, name, username, points, badge }) => {
@@ -71,6 +71,9 @@ const Row = ({id, rank, img, name, username, points, badge }) => {
 
 const StudentTable = ({ params }) => {
     const [sortedStudents, setStudents] = useState([]);
+    const router = useRouter();
+    
+
     useEffect(() => {
         const getUsers = async () => {
             const res = await axios.post("/api/get-leaderboard", {
@@ -102,20 +105,31 @@ const StudentTable = ({ params }) => {
 
 
     return (
-        <table className="w-3/4 m-auto">
+        <table className="w-3/4 mx-auto mt-12">
             <tbody>
-                {sortedStudents.map((student) => (
-                    <Row
-                        key={student.id}
-                        id={student.userId}
-                        rank={rankMap.get(student.id)}
-                        img={student.User.image}
-                        name={student.User.name}
-                        username={student.User.username}
-                        points={student.points}
-                        badge={badgeMap.get(student.id)}
-                    />
-                ))}
+                {
+                    sortedStudents.length===0? (
+                        <div className='w-full h-screen text-center m-auto'>
+                            <h1 className="text-center text-2xl text-gray-600">
+                                Be the first to participate in the quiz leaderboard and achieve the top rank!
+                            </h1>
+                            <button onClick={()=>router.push(`/quiz/${params.id}`)}  className="block m-auto text-center mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Take the Quiz</button>
+                        </div>
+                    ):(
+                        sortedStudents.map((student) => (
+                            <Row
+                                key={student.id}
+                                id={student.userId}
+                                rank={rankMap.get(student.id)}
+                                img={student.User.image}
+                                name={student.User.name}
+                                username={student.User.username}
+                                points={student.points}
+                                badge={badgeMap.get(student.id)}
+                            />
+                        ))
+                    )
+                }
             </tbody>
         </table>
     );
