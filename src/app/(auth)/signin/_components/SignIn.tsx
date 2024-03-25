@@ -31,10 +31,8 @@ const SignIn = () => {
   }
 
   return (
-    <div>
-        <div>
-        </div>
-        <div className="w-full">
+    <div className="  z-99  ">
+        <div className="w-full ">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-3">
               <input
