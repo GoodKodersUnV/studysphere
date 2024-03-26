@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import axios from "axios";
 import WhatsappButton from "@/components/share";
-
+import { MdOutlineLeaderboard } from "react-icons/md";
 
 const Page = () => {
     const [id, setId] = useState("");
@@ -37,7 +37,7 @@ const Page = () => {
 
     return (
         <div>
-            <div className="w-3/4 m-auto mt-[100px] flex flex-col gap-12 items-center">
+            <div className="w-3/4 m-auto mt-[50px] flex flex-col gap-12 items-center">
                 <input onChange={(e) => setId(e.target.value)} type="text" className="w-[400px] block  m-auto border border-slate-300  bg-slate-100 outline-none p-3 pl-6  rounded-full" />
                 <div className="flex flex-center w-[30vw]">
                     <button onClick={() => router.push(`/quiz/${id}`)} className="block m-auto border rounded p-2 bg-blue-500 hover:bg-blue-600 text-white">Join Quiz</button>
@@ -45,22 +45,26 @@ const Page = () => {
                 </div>
             </div>
 
-            <table className='w-1/2 m-auto mt-12'>
+            <table className='w-2/3 m-auto mt-12 mb-10'>
                 <thead className="border">
                     <tr>
                         <th className='p-2 border text-center'>Id</th>
                         <th className='p-2 border text-center'>Name</th>
-                        <th className='p-2 border text-center'></th>
+                        <th className='p-2 border text-center'>Share</th>
+                        <th className='p-2 border text-center'>Participate</th>
+                        <th className='p-2 border text-center'>Stangings</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         quizzes.splice(0, 5).map((quiz) => {
                             return (
-                                <tr onClick={() => router.push(`/quiz/${quiz.id}`)} className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
+                                <tr className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
                                     <td className='p-2 border text-center '>{quiz.id}</td>
                                     <td className='p-2 border text-center '>{quiz.name}</td>
                                     <td className='p-2 border text-center text-green-700'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
+                                    <td className='p-2 border text-center text-blue-500 hover:font-semibold'><p onClick={() => router.push(`/quiz/${quiz.id}`)}>Enter</p></td>
+                                    <td className='p-2 border text-center text-green-600'><p onClick={() => router.push(`/manage-quiz/${quiz.id}`)}><MdOutlineLeaderboard className="h-5 w-5 m-auto"/></p></td>
                                 </tr>
                             )
                         })
