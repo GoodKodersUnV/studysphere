@@ -39,6 +39,9 @@ model User {
 
   friends        Friend[]    @relation(name: "friends")
   friendsof      Friend[]    @relation(name: "friendsof")
+
+  sentMessages   Message[]  @relation(name: "SentMessages")
+  receivedMessages Message[] @relation(name: "ReceivedMessages")
 }
 
 model Friend {
@@ -48,8 +51,6 @@ model Friend {
   user           User        @relation(name: "friends", fields: [userId], references: [id])
   friendUser     User        @relation(name: "friendsof", fields: [friendUserId], references: [id])
   status         Boolean     @default(true)
-
-  messages       Message[]   
 
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
@@ -62,8 +63,11 @@ model Message {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   message      String
 
-  friend       Friend    @relation(fields: [friendId], references: [id])
-  friendId     String    @db.ObjectId
+  sender         User      @relation(name: "SentMessages", fields: [senderId], references: [id])
+  senderId       String    @db.ObjectId
+
+  receiver       User      @relation(name: "ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId     String    @db.ObjectId
   
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
