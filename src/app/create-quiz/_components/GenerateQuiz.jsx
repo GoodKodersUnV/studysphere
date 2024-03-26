@@ -81,9 +81,9 @@ const GenerateQuiz = () => {
                 value="tf"
                 checked={type === "tf"}
                 onChange={(e) => setType(e.target.value)}
-                className="  accent-violet-500 w-8 h-8 "
+                className="  accent-violet-500 w-4 h-4 "
                 />
-              <label htmlFor="trueFalse" className=""> True/False</label>
+              <label htmlFor="trueFalse" className="ml-2"> True/False</label>
             </div>
             <div className="flex items-center justify-center col-span-2">
               <input

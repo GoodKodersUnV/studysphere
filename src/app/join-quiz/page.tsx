@@ -20,10 +20,12 @@ const Page = () => {
                 });
             }, 3000);
         }
-    };
+      };
+      
 
 
-    const msg = "Hey, want to test your knowledge? Check out this quiz link and see how you fare, Let's see who gets the highest score!"
+
+    const msg = "Hey, want to test your knowledge? Check out this quiz link and see how you perform , Let's see who gets the highest score!"
 
     useEffect(() => {
         const getQuizzes = async () => {
@@ -36,19 +38,19 @@ const Page = () => {
     return (
         <div>
             <div className="w-3/4 m-auto mt-[100px] flex flex-col gap-12 items-center">
-                <input onChange={(e) => setId(e.target.value)} type="text" className="w-[400px] block  m-auto border border-slate-300  bg-slate-100 outline-none p-3 rounded-full" />
+                <input onChange={(e) => setId(e.target.value)} type="text" className="w-[400px] block  m-auto border border-slate-300  bg-slate-100 outline-none p-3 pl-6  rounded-full" />
                 <div className="flex flex-center w-[30vw]">
-                    <button onClick={() => router.push(`/quiz/${id}`)} className="block m-auto border rounded p-2 bg-blue-500 text-white">Join Quiz</button>
-                    <button onClick={() => handleClick()} className="block m-auto border rounded p-2 bg-blue-500 text-white">Notify me</button>
+                    <button onClick={() => router.push(`/quiz/${id}`)} className="block m-auto border rounded p-2 bg-blue-500 hover:bg-blue-600 text-white">Join Quiz</button>
+                    <button onClick={() => handleClick()} className="block m-auto border rounded p-2 bg-green-500 hover:bg-green-600 text-white">Notify me</button>
                 </div>
             </div>
 
             <table className='w-1/2 m-auto mt-12'>
-                <thead>
+                <thead className="border">
                     <tr>
-                        <th className='p-2 border-b'>id</th>
-                        <th className='p-2 border-b'>Name</th>
-                        <th className='p-2 border-b'></th>
+                        <th className='p-2 border text-center'>Id</th>
+                        <th className='p-2 border text-center'>Name</th>
+                        <th className='p-2 border text-center'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,9 +58,9 @@ const Page = () => {
                         quizzes.splice(0, 5).map((quiz) => {
                             return (
                                 <tr onClick={() => router.push(`/quiz/${quiz.id}`)} className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
-                                    <td className='p-2 border-b'>{quiz.id}</td>
-                                    <td className='p-2 border-b'>{quiz.name}</td>
-                                    <td className='p-2 border-b'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
+                                    <td className='p-2 border text-center '>{quiz.id}</td>
+                                    <td className='p-2 border text-center '>{quiz.name}</td>
+                                    <td className='p-2 border text-center text-green-500'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
                                 </tr>
                             )
                         })

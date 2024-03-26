@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   title: 'Study Sphere',
   description: 'study sphere',
+  icons: {
+    icon: "/logo.png",
+  },
 }
 
 export const viewport: Viewport = {

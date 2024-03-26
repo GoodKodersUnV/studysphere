@@ -32,7 +32,8 @@ const nextConfig = {
       "mediopinions.com",
       "www.mediopinions.com",
       "raw.githubusercontent.com",
-      "images.pexels.com"
+      "images.pexels.com",
+      "www.images.pexels.com"
     ],
   },
   typescript : {

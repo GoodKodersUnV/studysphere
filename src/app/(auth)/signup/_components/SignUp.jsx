@@ -43,7 +43,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full signup">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-3">
           <input
