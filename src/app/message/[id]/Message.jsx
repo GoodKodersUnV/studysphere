@@ -9,12 +9,14 @@ const Message = ({ messageData }) => {
   const handleSubmit = async () => {
 
     const res = await axios.post("/api/send-message",{
-      convId : messageData.id,
+      convId :  messageData.id,
       message : message,
     })
 
+    console.log(res);
     setMessage("")
   };
+
   return (
     <div>
       {/* <div>1st Message Data Received :  {JSON.stringify(messageData[0]?.message) || "null"}</div> */}
