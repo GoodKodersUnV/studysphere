@@ -9,13 +9,14 @@ import Image from 'next/image';
 import axios from 'axios';
 import {  useRouter } from 'next/navigation';
 import Loader from '../loading'
-import { AiOutlineRise } from "react-icons/ai";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { IoMdSearch } from "react-icons/io";
 
 
 
 const Row = ({id, rank, img, name, username, points, badge }) => {
     const router = useRouter();
+ 
 
     let rankColorClass = '';
     switch (rank) {
@@ -72,10 +73,15 @@ return (
 };
 
 const StudentTable = ({ params }) => {
-    const [sortedStudents, setStudents] = useState([]);
+    const [sortedStudents, setSortedStudents] = useState([]);
     const router = useRouter();
     const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState("");
 
+
+    const handleSearchInputChange = (e) => {
+        setSearchQuery(e.target.value);
+    };   
     
     
     useEffect(() => {
@@ -83,16 +89,19 @@ const StudentTable = ({ params }) => {
             const res = await axios.post("/api/get-leaderboard", {
                 quizId: params.id
             })
-            setStudents(res.data)
-            console.log("students", res.data)
-        }
-        getUsers()
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-    }, [])
 
+            setSortedStudents(res.data)
+            setLoading(false);
+        }
+        
+        getUsers()
+    }, [])
+    
     const rankMap = new Map();
+    const filteredStudents = sortedStudents.filter((sortedStudent) =>
+        sortedStudent.User.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     sortedStudents.forEach((student, index) => {
         rankMap.set(student.id, index + 1);
     });
@@ -134,8 +143,19 @@ const StudentTable = ({ params }) => {
 
                     (
                     <>
-                        <h1 className=' text-3xl font-bold mb-4 text-center flex items-center justify-center'>Leaderboard&nbsp; <AiOutlineRise className='w-9 h-9 text-emerald-700' /></h1>
-                        {sortedStudents.map((student) => (
+                        <div className='flex items-center justify-between   '>
+                            <h1 className=' text-3xl font-bold mb-4 '>
+                                Leaderboard :
+                            </h1>
+                            <div className=" flex justify-end items-center">
+                                <input type="text" id='search' placeholder="Search by name" value={searchQuery} onChange={handleSearchInputChange}
+                                    className="p-1 ps-3 border rounded-md " />
+                                <label htmlFor="search">  
+                                    <IoMdSearch className=" w-7 h-7 text-gray-600" />
+                                </label>
+                            </div>
+                        </div>
+                        {filteredStudents.map((student) => (
                             <Row
                                 key={student.id}
                                 id={student.userId}
