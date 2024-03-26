@@ -95,7 +95,7 @@ const MessagingPage = ({ messages, user, friend }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-4 max-h-[450px] p-5 overflow-y-auto">
+    <div className="flex flex-col space-y-4 h-[450px] p-5 overflow-y-auto">
       {messages?.map((message, id) => (
         <Message user={user} friend={friend} key={id} message={message} />
       ))}
