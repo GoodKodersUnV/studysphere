@@ -69,7 +69,7 @@ const Friends = ({ currentUser }) => {
           <input type="text" id='nfsearch' placeholder="Search by name" value={nfsearchQuery} onChange={handleNFSearchInputChange}
             className="p-1 ps-2 border rounded-md " />
           <label htmlFor="nfsearch">  
-            <IoMdSearch className=" w-7 h-7 text-gray-600" />
+            <IoMdSearch className=" w-7 h-7 ms-1 cursor-pointer text-gray-600" />
           </label>
         </div>
       </div>
@@ -111,7 +111,7 @@ const Friends = ({ currentUser }) => {
           <input type="text" id='ofsearch' placeholder="Search by name" value={ofsearchQuery} onChange={handleOFSearchInputChange}
             className="p-1 ps-2 border rounded-md " />
           <label htmlFor="ofsearch">  
-            <IoMdSearch className=" w-7 h-7 text-gray-600" />
+            <IoMdSearch className=" w-7 h-7 ms-1 cursor-pointer text-gray-600" />
           </label>
         </div>
       </div>

@@ -54,9 +54,9 @@ function HomePage({ currentUser }) {
         <table className="w-[80%] m-auto border mt-12">
           <thead>
             <tr className="text-cyan-600">  
-              <th className="p-3 border text-start">Id</th>
-              <th className="p-3 border text-start">Name</th>
-              <th className="p-3 text-start flex items-center">Points <GiTargetArrows className="ml-3 h-5 w-5"/></th>
+              <th className="p-3 border text-center">Id</th>
+              <th className="p-3 border text-center">Name</th>
+              <th className="p-3 text-center flex justify-center items-center">Points <GiTargetArrows className="ml-3 h-5 w-5"/></th>
             </tr>
           </thead>
           <tbody>
@@ -67,9 +67,9 @@ function HomePage({ currentUser }) {
                   className="hover:bg-gray-100 cursor-pointer text-gray-600"
                   key={quiz.id}
                 >
-                  <td className="p-3 border text-start">{quiz.id}</td>
-                  <td className="p-3 border text-start">{quiz.Quiz.name}</td>
-                  <td className="p-3 border text-start">{quiz.points}</td>
+                  <td className="p-3 border text-center">{quiz.id}</td>
+                  <td className="p-3 border text-center">{quiz.Quiz.name}</td>
+                  <td className="p-3 border text-center">{quiz.points}</td>
                 </tr>
               );
             })}
