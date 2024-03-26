@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
+import { GiTargetArrows } from "react-icons/gi";
 
 function HomePage({ currentUser }) {
   const [profile, setProfile] = useState([]);
@@ -34,8 +35,8 @@ function HomePage({ currentUser }) {
   }, []);
   const router = useRouter();
   return (
-    <div className="m-5 border flex h-full">
-      <div className="w-[75%] p-5">
+    <div className="flex h-full">
+      <div className="w-[70%] p-5">
         <div className="flex gap-4">
           <div>
             <Image
@@ -44,18 +45,18 @@ function HomePage({ currentUser }) {
             />
           </div>
           <div className="flex flex-col justify-between">
-            <h1>{currentUser.email}</h1>
-            <h1>{currentUser.id}</h1>
-            <h1>{currentUser.name}</h1>
-            <h1>{currentUser.createdAt.toString()}</h1>
+            <h1><span className="font-semibold">Name :</span> <span className="text-gray-500 ml-2">{currentUser.name}</span></h1>
+            <h1><span className="font-semibold">Email :</span> <span className="text-gray-500 ml-2">{currentUser.email}</span></h1>
+            <h1><span className="font-semibold">Id :</span> <span className="text-gray-500 ml-2">{currentUser.id}</span></h1>
+            <h1><span className="font-semibold">CreatedAt :</span> <span className="text-gray-500 ml-2">{currentUser.createdAt.toString()}</span></h1>
           </div>
         </div>
-        <table className="w-1/2 m-auto mt-12">
+        <table className="w-[80%] m-auto border mt-12">
           <thead>
-            <tr>
-              <th className="p-2 border-b text-center">id</th>
-              <th className="p-2 border-b text-center">Name</th>
-              <th className="p-2 border-b text-center">Points</th>
+            <tr className="text-blue-500">
+              <th className="p-3 border text-start">Id</th>
+              <th className="p-3 border text-start">Name</th>
+              <th className="p-3 text-start flex items-center">Points <GiTargetArrows className="ml-3 h-5 w-5"/></th>
             </tr>
           </thead>
           <tbody>
@@ -63,30 +64,30 @@ function HomePage({ currentUser }) {
               return (
                 <tr
                   onClick={() => router.push(`/manage-quiz/${quiz.id}`)}
-                  className="hover:bg-gray-100 cursor-pointer"
+                  className="hover:bg-gray-100 cursor-pointer text-gray-600"
                   key={quiz.id}
                 >
-                  <td className="p-2 border-b text-center">{quiz.id}</td>
-                  <td className="p-2 border-b text-center">{quiz.Quiz.name}</td>
-                  <td className="p-2 border-b text-center">{quiz.points}</td>
+                  <td className="p-3 border text-start">{quiz.id}</td>
+                  <td className="p-3 border text-start">{quiz.Quiz.name}</td>
+                  <td className="p-3 border text-start">{quiz.points}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
-      <div className="border p-5 w-[25%]">
-        Friends
+      <div className="border-l p-5 w-[30%]">
+        <span className="font-semibold">Friends</span>
         {allUsers
           .filter((user) => user.isFriend && user.id !== currentUser.id)
           .map((user) => {
             return (
               <div
-                className="flex items-center gap-2 cursor-pointer p-2 border border-b rounded-md justify-between hover:bg-gray-100"
+                className="flex items-center gap-2 mt-3 cursor-pointer p-2 border border-cyan-300 rounded-md justify-between hover:bg-gray-100"
                 key={user.id}
                 onClick={()=>router.push(`/message/${user.id}`)}
               >
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-5 items-center">
                   <Image
                     src={user.image}
                     width={40}

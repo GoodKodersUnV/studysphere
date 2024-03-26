@@ -59,34 +59,34 @@ const Page = ({currentUser }) => {
               className=" w-96 px-4 py-2 rounded border border-blue-200 focus:outline-none focus:border-blue-500"
             />
         <div className="flex justify-center gap-10">
-          <div className="w-[40%] mt-2">
+          <div className="w-[40%] mt-2 text-gray-600">
               <label className="text-sm text-gray-600">ID:</label>
               <input
                 type="text"
                 value={user?.id}
                 disabled
-                className="w-full px-4 py-2 rounded bg-gray-100 border border-blue-200 focus:outline-none"
+                className="w-full px-4 text-sm py-2 rounded bg-gray-100 border border-blue-200 focus:outline-none"
               />
               <label className="text-sm text-gray-600">Username:</label>
               <input
                 type="text"
                 value={user?.username}
                 onChange={(event) => setUser({ ...user, username: event.target.value })}
-                className="w-full px-4 py-2 rounded border border-blue-200 focus:outline-none focus:border-blue-500"
+                className="w-full px-4 py-2 text-sm rounded border border-blue-200 focus:outline-none focus:border-blue-500"
               />
               <label className="text-sm text-gray-600">Created At:</label>
               <input
                 type="text"
                 value={user?.createdAt}
                 disabled
-                className="w-full px-4 py-2 rounded bg-gray-100 border border-blue-200 focus:outline-none"
+                className="w-full px-4 py-2 text-sm rounded bg-gray-100 border border-blue-200 focus:outline-none"
               />
               <label className="text-sm text-gray-600">Updated At:</label>
               <input
                 type="text"
                 value={user?.updatedAt}
                 disabled
-                className="w-full px-4 py-2 rounded bg-gray-100 border border-blue-200 focus:outline-none"
+                className="w-full px-4 py-2 text-sm rounded bg-gray-100 border border-blue-200 focus:outline-none"
               />
           </div>
           <div className="w-[40%] mt-3 text-gray-600">
@@ -106,7 +106,7 @@ const Page = ({currentUser }) => {
                   type="email"
                   value={user?.email}
                   onChange={(event) => setUser({ ...user, email: event.target.value })}
-                  className="w-full px-4 py-2.5 rounded border border-blue-200 focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 text-sm rounded border border-blue-200 focus:outline-none focus:border-blue-500"
                 />
               </label>
               <label className="block mb-2 text-sm">
