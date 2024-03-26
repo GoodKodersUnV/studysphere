@@ -19,9 +19,7 @@ export default function Layout({ children, currentUser }) {
   
     const [open, setOpen] = useState(true);
     const router = useRouter();
-    const [layoutFontSize, setLayoutFontSize] = useState(16);
     const pathname = usePathname();
-    const [fontopen, setFontopen] = useState(false);
   
 
   const links = [
@@ -64,18 +62,6 @@ export default function Layout({ children, currentUser }) {
 ];
 
 
-  useEffect(() => {
-    document.documentElement.style.fontSize = `${layoutFontSize}px`;
-  }, [layoutFontSize]);
-
-  const SetSize = (data) => {
-    setLayoutFontSize(data);
-  };
-
-  const handleOpen = () => {
-    setFontopen((prev) => !prev);
-  };
-
   const status=()=>{
     setOpen(prev=>!prev);
   }
@@ -86,7 +72,7 @@ export default function Layout({ children, currentUser }) {
       {currentUser ? (
         <div className="flex min-h-[90vh]">
           {/* side bar */}  
-          <div className={`${open ? 'w-[15vw]' : ''} flex bg-orange-50 flex-col justify-between `}>
+          <div className={`${open ? 'w-[18vw]' : ''} flex bg-orange-50 flex-col justify-between `}>
             <div>
               {links.map((link) => {
                 return (
@@ -96,35 +82,6 @@ export default function Layout({ children, currentUser }) {
                   </div>
                 );
               })}
-              <div className={`${open ? 'w-[15vw]' : ''} flex relative cursor-pointer relative items-center h-[50px] hover:bg-orange-100 text-center`} onClick={handleOpen}>
-                    <h1 className="text-lg pl-5 pr-7"><AiOutlineFontSize /></h1>
-                    <h1 className={`${open === false && 'hidden'} `}>Font size</h1>
-                
-                <div>
-                  {fontopen ? (
-                      <div className="absolute font-semibold w-full top-12 text-sm left-0 text-blue-950 bg-white cursor-pointer" style={{ borderRadius: 5 }}>
-                        <p className="p-2 w-full hover:bg-neutral-100" onClick={() => SetSize(10)}>
-
-                          10px
-                        </p>
-                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==16 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(16)}>
-                          16px
-                        </p>
-                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==20 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(20)}>
-                          20px
-                        </p>
-                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==24 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(24)}>
-                          24px
-                        </p>
-                        <p className={`p-2 w-full hover:bg-slate-200 ${layoutFontSize==28 && 'bg-blue-400 hover:bg-blue-400 cursor-default'}`} onClick={() => SetSize(28)}>
-                          28px
-                        </p>
-                      </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-              </div>
               <div onClick={status}>
                 {
                   open?<FaAngleDoubleLeft className="h-6 w-6 mt-3 ml-[80%] text-orange-300"/>:
