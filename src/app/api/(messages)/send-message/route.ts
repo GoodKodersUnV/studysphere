@@ -10,15 +10,16 @@ export async function POST(req: Request) {
   }
 
   const { convId, message } = await req.json();
-
+  
   try {
-    const newMessage = db.message.create({
+    const newMessage = await db.message.create({
       data: {
         friendId: convId,
         message: message,
       },
     });
 
+    
     const conversation = db.friend.findUnique({
       where: {
         id: convId,
@@ -52,7 +53,7 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(conversation);
+    return NextResponse.json({"conv":conversation,"status ":"Converstaion recevided","newMessage ":newMessage});
   } catch (e) {
     return NextResponse.json(e.message);
   }

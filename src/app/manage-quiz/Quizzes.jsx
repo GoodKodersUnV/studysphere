@@ -26,7 +26,6 @@ const Quizzes = ({ currentUser }) => {
                     <th className='p-2 border text-center'>id</th>
                     <th className='p-2 border text-center'>Name</th>
                     <th className='p-2 border text-center'>Share</th>
-                    <th className='p-2 border text-center'>Participate</th>
                     <th className='p-2 border text-center'>Standings</th>
                 </tr>
             </thead>
@@ -34,12 +33,11 @@ const Quizzes = ({ currentUser }) => {
                 {
                     quizzes.map((quiz) => {
                         return (
-                            <tr className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
+                            <tr className='hover:bg-gray-100 ' key={quiz.id}>
                                 <td className='p-2 border text-center'>{quiz.id}</td>
                                 <td className='p-2 border text-center'>{quiz.name}</td>
-                                <td className='p-2 border text-center text-green-600'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg}/></td>
-                                <td className='p-2 border text-center text-blue-500 hover:font-semibold'><p onClick={() => router.push(`/quiz/${quiz.id}`)}>Enter</p></td>
-                                <td className='p-2 border text-center text-red-600'><p onClick={() => router.push(`/manage-quiz/${quiz.id}`)}><MdOutlineLeaderboard className="h-5 w-5 m-auto"/></p></td>
+                                <td className='p-2 border text-center cursor-pointer text-green-600'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg}/></td>
+                                <td className='p-2 border text-center cursor-pointer text-red-600'><p onClick={() => router.push(`/manage-quiz/${quiz.id}`)}><MdOutlineLeaderboard className="h-5 w-5 m-auto"/></p></td>
                             </tr>
                         )
                     })
