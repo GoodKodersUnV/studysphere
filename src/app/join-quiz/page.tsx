@@ -60,7 +60,7 @@ const Page = () => {
                                 <tr onClick={() => router.push(`/quiz/${quiz.id}`)} className='hover:bg-gray-100 cursor-pointer' key={quiz.id}>
                                     <td className='p-2 border text-center '>{quiz.id}</td>
                                     <td className='p-2 border text-center '>{quiz.name}</td>
-                                    <td className='p-2 border text-center text-green-500'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
+                                    <td className='p-2 border text-center text-green-700'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
                                 </tr>
                             )
                         })
