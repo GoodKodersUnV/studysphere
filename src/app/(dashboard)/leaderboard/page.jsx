@@ -66,6 +66,8 @@ const Row = ({ rank, img, name, username, points, badge }) => {
 
 const StudentTable = () => {
   const [students, setStudents] = useState([]);
+
+  
   useEffect(() => {
     const getUsers = async () => {
       const res = await axios.post("/api/get-leaderboard", {

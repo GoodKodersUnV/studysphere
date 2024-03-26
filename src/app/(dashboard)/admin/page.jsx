@@ -10,7 +10,6 @@ const page = async () => {
   const access = currentUser?.role == 'admin' || currentUser?.role == 'owner'
   if (!access) {
     redirect('/');
-    return <div>Unauthorized</div>
   }
   if (access) {
     return <UserDetails role={currentUser.role} />
