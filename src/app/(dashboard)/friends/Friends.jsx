@@ -12,21 +12,21 @@ const Friends = ({ currentUser }) => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const res = await axios.post("/api/all-users", { profileId: currentUser.id });
+      const res = await axios.post("/api/all-users", { profileId: currentUser?.id });
       setUsers(res.data.users);
     };
     getUsers();
-  }, [currentUser.id]);
+  }, [currentUser?.id]);
 
   const handleFriend = async (friendUserId) => {
     try {
       const res = await axios.post("/api/friend-request", {
-        userId: currentUser.id,
+        userId: currentUser?.id,
         friendUserId: friendUserId,
       });
       if (res.status === 200) {
         const newUsers = users.map((user) => {
-          if (user.id === friendUserId) {
+          if (user?.id === friendUserId) {
             return { ...user, isFriend: true };
           }
           return user;
@@ -38,8 +38,8 @@ const Friends = ({ currentUser }) => {
     }
   };
 
-  const newFriends = users.filter((user) => !user.isFriend && user.id !== currentUser.id);
-  const existingFriends = users.filter((user) => user.isFriend && user.id !== currentUser.id);
+  const newFriends = users.filter((user) => !user.isFriend && user?.id !== currentUser?.id);
+  const existingFriends = users.filter((user) => user.isFriend && user?.id !== currentUser?.id);
 
   return (
     <div className="flex justify-center mt-10 mx-6">
@@ -49,20 +49,20 @@ const Friends = ({ currentUser }) => {
           <tbody>
             {newFriends.map((user) => (
               <tr
-                key={user.id}
+                key={user?.id}
                 className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 cursor-pointer"
-                onClick={() => router.push(`/profile/${user.id}`)}
+                onClick={() => router.push(`/profile/${user?.id}`)}
               >
                 <td className="p-2 border-b">
-                  <img src={user.image} width={50} height={50} className="rounded-full" alt={user.name} />
+                  <img src={user?.image} width={50} height={50} className="rounded-full" alt={user?.name} />
                 </td>
-                <td className="p-2 border-b">{user.name}</td>
+                <td className="p-2 border-b">{user?.name}</td>
                 <td className="p-2 border-b">
                   <span
                     className="text-cyan-500 flex items-center gap-2 cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleFriend(user.id);
+                      handleFriend(user?.id);
                     }}
                   >
                     <IoMdPersonAdd className="text-xl" />
@@ -79,14 +79,14 @@ const Friends = ({ currentUser }) => {
           <tbody>
             {existingFriends.map((user) => (
               <tr
-                key={user.id}
+                key={user?.id}
                 className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 cursor-pointer"
-                onClick={() => router.push(`/profile/${user.id}`)}
+                onClick={() => router.push(`/profile/${user?.id}`)}
               >
                 <td className="p-2 border-b">
-                  <img src={user.image} width={50} height={50} className="rounded-full" alt={user.name} />
+                  <img src={user?.image} width={50} height={50} className="rounded-full" alt={user?.name} />
                 </td>
-                <td className="p-2 border-b">{user.name}</td>
+                <td className="p-2 border-b">{user?.name}</td>
                 <td className="p-2 border-b">
                   <FaCheckCircle className="text-cyan-500 text-xl" />
                 </td>
