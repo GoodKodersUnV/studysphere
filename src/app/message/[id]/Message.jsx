@@ -2,30 +2,52 @@
 
 import axios from "axios";
 import React, { useState } from "react";
+import { IoSend } from "react-icons/io5";
+import { LuRefreshCcw } from "react-icons/lu";
 
-const Message = ({ convId }) => {
+const Message = ({ convId, setConversation }) => {
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async () => {
-
-    const res = await axios.post("/api/send-message",{
-      convId :  convId,
-      message : message,
-    })
-
-    console.log(res);
-    setMessage("")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await axios.post("/api/send-message", {
+        convId: convId,
+        message: message,
+      });
+      setConversation(res.data);
+      setMessage("");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
-      {/* <div>1st Message Data Received :  {JSON.stringify(messageData[0]?.message) || "null"}</div> */}
-      <div className="w-full mt-4 grid grid-cols-12 gap-5">
-        <input value={message} className=" bg-slate-200 px-2 col-span-11" onChange={(e)=>setMessage(e.target.value)} />
-        <button className="bg-blue-500 hover:bg-blue-400 text-white rounded p-2 col-span-1" onClick={handleSubmit}>
-            Send
+      <form className="w-full flex mt-4 gap-5 px-5">
+        <input
+          value={message}
+          className=" bg-slate-200 px-2 w-[90%]"
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button
+          className="flex justify-around items-center bg-blue-500 hover:bg-blue-400 text-white rounded p-2 w-[10%]"
+          onClick={handleSubmit}
+        >
+          {loading ? (
+            <div className={`${loading ? "animate-spin" : ""}`}>
+              <LuRefreshCcw />
+            </div>
+          ) : (
+            <IoSend />
+          )}
+          Send
         </button>
-      </div>
+      </form>
     </div>
   );
 };
