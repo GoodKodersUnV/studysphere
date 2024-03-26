@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nova+Square&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,7 +34,7 @@
 }
 
 * {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Wix Madefor Text";
 }
 
 .flex-center {
