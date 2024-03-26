@@ -18,7 +18,7 @@ const Page = () => {
                         icon: 'https://i.postimg.cc/SQfrbS65/webathon-logo-removebg-preview.png',
                     });
                 });
-            }, 3000);
+            }, 1000);
         }
       };
       
