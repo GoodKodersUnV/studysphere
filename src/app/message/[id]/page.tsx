@@ -1,45 +1,36 @@
-import getCurrentUser from '@/actions/getCurrentUser';
-import { db } from '@/libs/db';
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 import Message from './Message'
 import Messages from './Messages'
+import axios from 'axios';
 
 
-const page = async ({ params }) => {
+const page = ({ params }) => {
 
-  const currentUser = await getCurrentUser();
+  const [conversation, setConversation] = useState(null)
 
-  const messageData = await db.friend.findFirst({
-    where: {
-      friendUserId: params.id,
-      userId: currentUser.id,
-    },
-    include: {
-      user: true,
-      friendUser: true,
-      messages: {
-        include:{
-          friend: {
-            select  : {
-              userId: true,
-              friendUserId: true,
-          },
-        }
-      },
+  useEffect(() => {
+    const fetchConversation = async () => {
+      const { data } = await axios.post('/api/get-messages', {
+        convId: params.id
+      })
+      setConversation(data)
     }
-  }});
 
-  // console.log(JSON.stringify(messageData));
+    fetchConversation()
+  }
+  , [])
 
 
   return (
     <div className=' overflow-x-hidden max-w-screen'>
       <h1>Message</h1>
       <p>Message ID: {params.id}</p>
-      <p className='mb-24'>Message Data: {JSON.stringify(messageData, null, 5)}</p> 
+      <p className='mb-24'>Message Data: {JSON.stringify(conversation, null, 5)}</p> 
       <div className=' outline min-h-[450px] px-3 flex flex-col justify-between outline-gray-400 outline-1 bg-zinc-50 pb-5'>
-        <Messages user={messageData?.user} friend={messageData?.friendUser} messages={messageData?.messages}/>
-        <Message messageData={messageData} />
+        {/* <Messages user={conversation?.user} friend={conversation?.friendUser} messages={conversation?.messages}/> */}
+        <Message convId={params.id} setConversation={setConversation} />
       </div>
     </div>
   )

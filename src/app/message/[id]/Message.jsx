@@ -3,13 +3,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const Message = ({ messageData }) => {
+const Message = ({ convId }) => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async () => {
 
     const res = await axios.post("/api/send-message",{
-      convId :  messageData.id,
+      convId :  convId,
       message : message,
     })
 
