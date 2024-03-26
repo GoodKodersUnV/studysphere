@@ -7,7 +7,6 @@ const Message = ({ messageData }) => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async () => {
-    console.log("ajsdh");
 
     const res = await axios.post("/api/send-message",{
       convId : messageData.id,
