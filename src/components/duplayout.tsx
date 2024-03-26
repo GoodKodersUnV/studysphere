@@ -85,19 +85,18 @@ export default function Layout({ children, currentUser }) {
       {currentUser && <Header currentUser={currentUser}/>}
       {currentUser ? (
         <div className="flex min-h-[90vh]">
-          {/* side bar */}
-          <div className={`${open ? 'w-[15vw]' : ''} flex bg-neutral-100 flex-col justify-between `}>
+          {/* side bar */}  
+          <div className={`${open ? 'w-[15vw]' : ''} flex bg-orange-50 flex-col justify-between `}>
             <div>
               {links.map((link) => {
                 return (
-
-                  <div onClick={() => router.push(link.path)} className={( link.active ? "w-full h-[50px] flex items-center gap-3 px-2 bg-blue-400": "bg-gray-50 w-full h-[50px] cursor-pointer flex items-center gap-3 hover:bg-slate-200 px-2 "  )} key={link.name}>
+                  <div onClick={() => router.push(link.path)} className={( link.active ? "w-full h-[50px] flex items-center gap-3 px-2 bg-orange-200": "bg-orange-50 w-full h-[50px] cursor-pointer flex items-center gap-3 hover:bg-orange-100 px-2 "  )} key={link.name}>
                     <h1 className="text-xl px-3">{link.icon}</h1>
                     <h1 className={`${open === false && 'hidden'}`}>{link.name}</h1>
                   </div>
                 );
               })}
-              <div className={`${open ? 'w-[15vw]' : ''} flex relative cursor-pointer relative items-center h-[50px] hover:bg-neutral-300 text-center`} onClick={handleOpen}>
+              <div className={`${open ? 'w-[15vw]' : ''} flex relative cursor-pointer relative items-center h-[50px] hover:bg-orange-100 text-center`} onClick={handleOpen}>
                     <h1 className="text-lg pl-5 pr-7"><AiOutlineFontSize /></h1>
                     <h1 className={`${open === false && 'hidden'} `}>Font size</h1>
                 
@@ -128,8 +127,8 @@ export default function Layout({ children, currentUser }) {
               </div>
               <div onClick={status}>
                 {
-                  open?<FaAngleDoubleLeft className="h-6 w-6 mt-3 ml-[80%] text-red-600"/>:
-                  <FaAngleDoubleRight className="h-6 w-6 m-auto mt-3 text-green-600"/>
+                  open?<FaAngleDoubleLeft className="h-6 w-6 mt-3 ml-[80%] text-orange-300"/>:
+                  <FaAngleDoubleRight className="h-6 w-6 m-auto mt-3 text-orange-300"/>
                 } 
               </div>
             </div>
