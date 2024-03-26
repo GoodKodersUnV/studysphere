@@ -49,13 +49,24 @@ model Friend {
   friendUser     User        @relation(name: "friendsof", fields: [friendUserId], references: [id])
   status         Boolean     @default(true)
 
-  messages       Json[]      @default([])
+  messages       Message[]   
 
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
 
   @@unique([userId, friendUserId])
   @@unique([friendUserId, userId])
+}
+
+model Message {  
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  message      String
+
+  friend       Friend    @relation(fields: [friendId], references: [id])
+  friendId     String    @db.ObjectId
+  
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }
 
 model Quiz {
