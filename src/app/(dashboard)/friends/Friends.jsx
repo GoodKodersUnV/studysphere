@@ -5,10 +5,15 @@ import axios from "axios";
 import { IoMdPersonAdd } from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { IoMdSearch } from "react-icons/io";
+
+
 
 const Friends = ({ currentUser }) => {
   const [users, setUsers] = useState([]);
   const router = useRouter();
+  const [nfsearchQuery, setNFSearchQuery] = useState("");
+  const [ofsearchQuery, setOFSearchQuery] = useState("");
 
   useEffect(() => {
     const getUsers = async () => {
@@ -38,21 +43,45 @@ const Friends = ({ currentUser }) => {
     }
   };
 
+  const handleNFSearchInputChange = (e) => {
+    setNFSearchQuery(e.target.value);
+  };
+  const handleOFSearchInputChange = (e) => {
+    setOFSearchQuery(e.target.value);
+  };
+
   const newFriends = users.filter((user) => !user.isFriend && user?.id !== currentUser?.id);
+  const filteredNewFriends = newFriends.filter((user) =>
+  user.name.toLowerCase().includes(nfsearchQuery.toLowerCase())
+  ) ;
+  
   const existingFriends = users.filter((user) => user.isFriend && user?.id !== currentUser?.id);
+  const filteredOldFriends = existingFriends.filter((user) =>
+    user.name.toLowerCase().includes(ofsearchQuery.toLowerCase())
+  ) ;
 
   return (
-    <div className="flex justify-center mt-10 mx-6">
-      <div className="w-1/2 me-4">
+    <div className=" grid grid-cols-2 mt-10 ">
+      <div className="w-full mb-3">
+      <div className=" flex items-center justify-between me-4 px-6">
         <h2 className="text-lg font-semibold mb-4">New Friends</h2>
+        <div className=" flex justify-end items-center">
+          <input type="text" id='nfsearch' placeholder="Search by name" value={nfsearchQuery} onChange={handleNFSearchInputChange}
+            className="p-1 ps-2 border rounded-md " />
+          <label htmlFor="nfsearch">  
+            <IoMdSearch className=" w-7 h-7 text-gray-600" />
+          </label>
+        </div>
+      </div>
+      <div className=" mx-4 px-4 max-h-screen overflow-y-auto overflow-x-hidden ">
         <table className="w-full">
           <tbody>
-            {newFriends.map((user) => (
+            {filteredNewFriends.map((user) => (
               <tr
-                key={user?.id}
+              key={user?.id}
                 className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 cursor-pointer"
                 onClick={() => router.push(`/profile/${user?.id}`)}
-              >
+                >
                 <td className="p-2 border-b">
                   <img src={user?.image} width={50} height={50} className="rounded-full" alt={user?.name} />
                 </td>
@@ -64,7 +93,7 @@ const Friends = ({ currentUser }) => {
                       e.stopPropagation();
                       handleFriend(user?.id);
                     }}
-                  >
+                    >
                     <IoMdPersonAdd className="text-xl" />
                   </span>
                 </td>
@@ -73,15 +102,27 @@ const Friends = ({ currentUser }) => {
           </tbody>
         </table>
       </div>
-      <div className="w-1/2 ms-4">
+      </div>
+
+      <div className=" w-full mb-3">
+      <div className=" flex items-center justify-between ms-4 px-6">
         <h2 className="text-lg font-semibold mb-4">Existing Friends</h2>
-        <table className="w-full">
+        <div className=" flex justify-end items-center">
+          <input type="text" id='ofsearch' placeholder="Search by name" value={ofsearchQuery} onChange={handleOFSearchInputChange}
+            className="p-1 ps-2 border rounded-md " />
+          <label htmlFor="ofsearch">  
+            <IoMdSearch className=" w-7 h-7 text-gray-600" />
+          </label>
+        </div>
+      </div>
+      <div className="mx-4  px-6 max-h-screen overflow-y-auto overflow-x-hidden  ">
+        <table className="w-full  ">
           <tbody>
-            {existingFriends.map((user) => (
+            {filteredOldFriends.map((user) => (
               <tr
-                key={user?.id}
-                className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 cursor-pointer"
-                onClick={() => router.push(`/profile/${user?.id}`)}
+              key={user?.id}
+              className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 cursor-pointer"
+              onClick={() => router.push(`/profile/${user?.id}`)}
               >
                 <td className="p-2 border-b">
                   <img src={user?.image} width={50} height={50} className="rounded-full" alt={user?.name} />
@@ -94,6 +135,7 @@ const Friends = ({ currentUser }) => {
             ))}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );
