@@ -12,7 +12,6 @@ const Message = ({ messageData }) => {
     const res = await axios.post("/api/send-message",{
       convId : messageData.id,
       message : message,
-      messages : messageData.messages
     })
 
     setMessage("")

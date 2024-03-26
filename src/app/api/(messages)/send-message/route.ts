@@ -9,30 +9,51 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  const { convId, message, messages } = await req.json();
+  const { convId, message } = await req.json();
 
-  const newMessage = {
-    message : message,
-    date : new Date()
-  }
-
-  const prevMessages = JSON.parse(messages)
-
-  try{
-    const messageData = await db.friend.update({
-      where: {
-        id : convId
-      },
+  try {
+    const newMessage = db.message.create({
       data: {
-        messages: {
-          push : message
-        }
+        friendId: convId,
+        message: message,
       },
     });
-    return NextResponse.json(messageData);
-  } catch(e){
-    return NextResponse.json(e.message)
+
+    const conversation = db.friend.findUnique({
+      where: {
+        id: convId,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            email: true,
+            image: true,
+            role: true,
+          },
+        },
+        friendUser: {
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            email: true,
+            image: true,
+            role: true,
+          },
+        },
+        messages: {
+          orderBy: {
+            createdAt: "asc",
+          },
+        },
+      },
+    });
+
+    return NextResponse.json(conversation);
+  } catch (e) {
+    return NextResponse.json(e.message);
   }
-
-
 }
