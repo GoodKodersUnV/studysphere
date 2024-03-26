@@ -53,7 +53,7 @@ function HomePage({ currentUser }) {
         </div>
         <table className="w-[80%] m-auto border mt-12">
           <thead>
-            <tr className="text-blue-500">
+            <tr className="text-cyan-600">  
               <th className="p-3 border text-start">Id</th>
               <th className="p-3 border text-start">Name</th>
               <th className="p-3 text-start flex items-center">Points <GiTargetArrows className="ml-3 h-5 w-5"/></th>
