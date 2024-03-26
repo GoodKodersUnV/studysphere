@@ -65,7 +65,7 @@ export default function Profile({ params, currentUser }) {
               alt="profile"
             />
           </div>
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between font-semibold">
             <h1>{user.email}</h1>
             <h1>{user.id}</h1>
             <h1>{user.name}</h1>
