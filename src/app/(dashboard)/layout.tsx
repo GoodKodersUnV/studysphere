@@ -5,7 +5,7 @@ interface AuthLayoutProps {
 }
 
 const ProtectedLayout: FC<AuthLayoutProps> = ({ children }) => {
-  return <div>
+  return <div className=' overflow-x-hidden'>
     {children}
   </div>
 };
