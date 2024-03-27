@@ -27,7 +27,7 @@ const GenerateQuiz = () => {
         return response.json();
       })
       .then((data) => {
-        window.location.href(`/quiz/${data.quizId}`)
+          router.push('/manage-quiz');
       })
       .catch((error) => {
         console.error("Error generating quiz:", error.message);
