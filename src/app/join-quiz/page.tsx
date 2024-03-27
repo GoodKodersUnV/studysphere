@@ -64,7 +64,7 @@ const Page = () => {
                                     <td className='p-2 border text-center '>{quiz.name}</td>
                                     <td className='p-2 border text-center cursor-pointer text-green-700'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg} /></td>
                                     <td className='p-2 border text-center text-blue-500 cursor-pointer hover:font-semibold'><p onClick={() => router.push(`/quiz/${quiz.id}`)}>Enter</p></td>
-                                    <td className='p-2 border text-center cursor-pointer text-red-600'><p onClick={() => router.push(`/manage-quiz/${quiz.id}`)}><MdOutlineLeaderboard className="h-5 w-5 m-auto"/></p></td>
+                                    <td className='p-2 border text-center cursor-pointer text-red-600'><p onClick={() => router.push(`/leaderboard/${quiz.id}`)}><MdOutlineLeaderboard className="h-5 w-5 m-auto"/></p></td>
                                 </tr>
                             )
                         })
