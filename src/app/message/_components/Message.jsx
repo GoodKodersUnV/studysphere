@@ -33,10 +33,11 @@ const Message = ({ convId, setConversation }) => {
           value={message}
           className=" bg-slate-200 px-2 w-[90%]"
           onChange={(e) => setMessage(e.target.value)}
+          disabled={loading}
         />
         <button
-          className="flex justify-around items-center bg-blue-500 hover:bg-blue-400 text-white rounded p-2 w-[10%]"
-          onClick={handleSubmit}
+          className="flex justify-around items-center bg-blue-500 hover:bg-blue-400 text-white rounded p-2 w-[10%] disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={!loading && handleSubmit}
         >
           {loading ? (
             <div className={`${loading ? "animate-spin" : ""}`}>
