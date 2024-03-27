@@ -10,7 +10,6 @@ import { GiTargetArrows } from "react-icons/gi";
 
 function HomePage({ currentUser }) {
   const [profile, setProfile] = useState([]);
-  const [user, setUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   useEffect(() => {
     const getProfile = async () => {
@@ -25,7 +24,6 @@ function HomePage({ currentUser }) {
         const res = await axios.post("/api/all-users", {
           profileId: currentUser.id,
         });
-        setUser(res.data.profileUser);
         setAllUsers(res.data.users);
       } catch (error) {
         console.log(error.message);
