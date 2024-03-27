@@ -151,7 +151,7 @@ const StudentTable = ({ params }) => {
                                 <input type="text" id='search' placeholder="Search by name" value={searchQuery} onChange={handleSearchInputChange}
                                     className="p-1 ps-3 border rounded-md " />
                                 <label htmlFor="search">  
-                                    <IoMdSearch className=" w-7 h-7 text-gray-600" />
+                                    <IoMdSearch className=" w-7 h-7 ms-1 cursor-pointer text-gray-600" />
                                 </label>
                             </div>
                         </div>

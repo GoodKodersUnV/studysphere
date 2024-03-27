@@ -9,16 +9,9 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  const { convId, message } = await req.json();
+  const { convId } = await req.json();
 
   try {
-    const newMessage = await db.message.create({
-      data: {
-        senderId: currentUser.id,
-        receiverId: convId,
-        message: message,
-      },
-    });
 
     const conversation = await db.message.findMany({
       where: {
@@ -66,7 +59,7 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({ sender, receiver, newMessage, conversation });
+    return NextResponse.json({ sender, receiver, conversation });
   } catch (e) {
     return NextResponse.json(e.message);
   }
