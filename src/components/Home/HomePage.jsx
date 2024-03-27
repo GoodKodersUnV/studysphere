@@ -61,7 +61,7 @@ function HomePage({ currentUser }) {
             {profile.map((quiz) => {
               return (
                 <tr
-                  onClick={() => router.push(`/manage-quiz/${quiz.id}`)}
+                  onClick={() => router.push(`/leaderboard/${quiz.id}`)}
                   className="hover:bg-gray-100 cursor-pointer text-gray-600"
                   key={quiz.id}
                 >
