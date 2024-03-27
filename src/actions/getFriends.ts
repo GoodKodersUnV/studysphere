@@ -23,12 +23,18 @@ export default async function getFirends() {
       },
     },
   });
-  
-  return friends?.friends.map((friend) => {
+
+  const friendsList = friends?.friends.map((friend) => {
     return {
       id: friend.friendUser.id,
       name: friend.friendUser.name,
       image: friend.friendUser.image,
-      };
-  });
+    };
+  }
+  );
+  
+  return {
+    friendsList ,
+    currentUser
+  }
 }
