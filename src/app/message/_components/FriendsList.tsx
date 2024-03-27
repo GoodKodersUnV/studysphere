@@ -1,16 +1,31 @@
 "use client"
 
+import axios from "axios";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { IoBookmarks } from "react-icons/io5";
 
 
-const FriendsList = ({ friends, currentUser }) => {
+const FriendsList = () => {
 
   const pathname = usePathname()
   const friendId = pathname.split("/")[2];
 
   const router = useRouter();
+
+  const [friends, setFriends] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      const res = await axios.get("/api/get-friends")
+      setFriends(res.data.friendsList);
+      setCurrentUser(res.data.currentUser);
+    }
+    getFriends();
+  }, []
+  )
 
   return (
     <div className="w-full">
