@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Quiz from "../Quiz.jsx";
+import Loader from './loading.jsx'
 
-const Page = ({ params }) => {
 
+const Page =async ({ params }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
 
@@ -24,6 +25,8 @@ const Page = ({ params }) => {
         const responseData = await response.json();
         setData(responseData.questions)
         localStorage.setItem("temp", responseData)
+        
+        
       } catch (error) {
         console.error("Error generating quiz:", error.message);
       } finally {
@@ -33,11 +36,13 @@ const Page = ({ params }) => {
 
     fetchData();
   }, [params.id]);
+  
+
 
   return (
     <div className="h-screen">
       {
-        isLoading ? "loading .. " : <Quiz questions={data} quizId={params.id} />
+        isLoading ? <Loader/> : <Quiz questions={data} quizId={params.id} /> 
       }
     </div>
   );

@@ -10,13 +10,14 @@ export async function POST(req: Request, res: Response) {
 
  try {
     const body = await req.json();
-    const { quizId ,points} = body;
+    const { quizId ,points,stratedAt} = body;
 
 
     const leaderboard = await db.points.create({
       data : {
         points : points,
         quizId : quizId,
+        stratedAt:stratedAt,
         userId : currentUser.id
       }
     })
