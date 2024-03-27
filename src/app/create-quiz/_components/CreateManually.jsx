@@ -81,6 +81,7 @@ const CreateManually = () => {
 
     const onSubmit = (data) => {
         console.log(data); 
+
     };
 
     const clearForm = () => {
