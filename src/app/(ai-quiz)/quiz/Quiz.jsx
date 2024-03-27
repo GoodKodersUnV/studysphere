@@ -74,7 +74,7 @@ const Quiz = ({questions,quizId}) => {
   const router = useRouter();
   const handleQuizSubmit = async () =>{
     const res = await axios.post("/api/submit-quiz",{quizId ,points: +((score/questions.length)*100)})
-    router.push(`/manage-quiz/${quizId}`);
+    router.push(`/leaderboard/${quizId}`);
     setVideoAllowed(false);
   }
 

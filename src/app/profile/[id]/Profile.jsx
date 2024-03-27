@@ -84,7 +84,7 @@ export default function Profile({ params, currentUser }) {
             {profile.map((quiz) => {
               return (
                 <tr
-                  onClick={() => router.push(`/manage-quiz/${quiz.id}`)}
+                  onClick={() => router.push(`/leaderboard/${quiz.id}`)}
                   className="hover:bg-gray-100 cursor-pointer"
                   key={quiz.id}
                 >
