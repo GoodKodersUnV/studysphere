@@ -79,7 +79,7 @@ model Quiz {
   createdAt DateTime @default(now())
 
   startTime DateTime? @default(now())
-  endTime   DateTime?
+  endTime   DateTime? 
 
   usersPoints Points[]
 }
