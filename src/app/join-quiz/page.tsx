@@ -9,19 +9,6 @@ const Page = () => {
     const [id, setId] = useState("");
     const router = useRouter();
     const [quizzes, setQuizzes] = useState([]);
-    const handleClick = () => {
-        if ('serviceWorker' in navigator && 'PushManager' in window) {
-            setTimeout(() => {
-                navigator.serviceWorker.ready.then(function (registration) {
-                    registration.showNotification('StudySphere', {
-                        body: 'You hava a quiz scheduled !!',
-                        icon: 'https://i.postimg.cc/SQfrbS65/webathon-logo-removebg-preview.png',
-                    });
-                });
-            }, 1000);
-        }
-      };
-      
 
 
 
@@ -41,7 +28,6 @@ const Page = () => {
                 <input onChange={(e) => setId(e.target.value)} type="text" className="w-[400px] block  m-auto border border-slate-300  bg-slate-100 outline-none p-3 pl-6  rounded-full" />
                 <div className="flex flex-center w-[30vw]">
                     <button onClick={() => router.push(`/quiz/${id}`)} className="block m-auto border rounded p-2 bg-blue-500 hover:bg-blue-600 text-white">Join Quiz</button>
-                    <button onClick={() => handleClick()} className="block m-auto border rounded p-2 bg-green-500 hover:bg-green-600 text-white">Notify me</button>
                 </div>
             </div>
 

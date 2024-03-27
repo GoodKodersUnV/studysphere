@@ -27,7 +27,7 @@ const Quizzes = ({ currentUser }) => {
         const end=new Date(quiz.endTime);
         const timeLeft=end-start;
         console.log(timeLeft)
-        if ('serviceWorker' in navigator && 'PushManager' in window) {
+        if ('serviceWorker' in navigator && 'PushManager' in window && timeLeft>=0) {
             setTimeout(() => {
               navigator.serviceWorker.ready.then(function(registration) {
                 registration.showNotification('StudySphere', {
@@ -56,13 +56,7 @@ const Quizzes = ({ currentUser }) => {
                             <tr className='cursor-pointer' key={quiz.id}>
                                 <td className='p-2 border text-center'>{quiz.name}</td>
                                 <td className='p-2 border text-center text-green-600'><WhatsappButton url={`https://studysphere-ai.vercel.app/quiz/${quiz.id}`} msg={msg}/></td>
-                                {/* {
-                                    timeLeft<=0?<td className='p-2 border text-center text-gray-500 hover:font-semibold'><p onClick={() => router.push(`/quiz/${quiz.id}`)}>Enter</p></td>
-                                    :
-                                    <div></div>
-                                }
-     */}
-     <td className='p-2 border text-center text-gray-500 hover:font-semibold'><p onClick={() => router.push(`/quiz/${quiz.id}`)}>Enter</p></td>
+                                <td className='p-2 border text-center text-gray-500 hover:font-semibold'><p onClick={() => router.push(`/quiz/${quiz.id}`)}>Enter</p></td>
                                 <td className='p-2 border text-center text-red-600'><p onClick={() => router.push(`/manage-quiz/${quiz.id}`)}><MdOutlineLeaderboard className="h-5 w-5 m-auto"/></p></td>
                                 <td className='p-2 border text-center'><input type="datetime-local" id={`${quiz.id}`} className="cursor-pointer outline-0 border-none"/></td>
                                 <td className='p-2 border text-center'><button onClick={()=>ScheduleTime(quiz)}>Schedule</button></td>
