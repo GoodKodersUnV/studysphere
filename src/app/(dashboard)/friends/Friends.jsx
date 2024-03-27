@@ -73,7 +73,7 @@ const Friends = ({ currentUser }) => {
           </label>
         </div>
       </div>
-      <div className=" mx-4 px-4 max-h-screen overflow-y-auto overflow-x-hidden ">
+      <div className=" mx-4 px-4 max-h-[80vh] overflow-y-auto overflow-x-hidden ">
         <table className="w-full">
           <tbody>
             {filteredNewFriends.map((user) => (
@@ -115,7 +115,7 @@ const Friends = ({ currentUser }) => {
           </label>
         </div>
       </div>
-      <div className="mx-4  px-6 max-h-screen overflow-y-auto overflow-x-hidden  ">
+      <div className="mx-4  px-6 max-h-[80vh] overflow-y-auto overflow-x-hidden  ">
         <table className="w-full  ">
           <tbody>
             {filteredOldFriends.map((user) => (
