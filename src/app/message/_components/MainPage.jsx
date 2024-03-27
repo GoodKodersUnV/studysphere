@@ -1,13 +1,13 @@
 "use client"
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Message from './Message';
 import Messages from './Messages';
 import axios from 'axios';
 import { LuRefreshCcw } from 'react-icons/lu';
 import { IoChatbubblesOutline } from 'react-icons/io5';
 
-const Page = ({ params }) => {
+const MainPage = ({ params }) => {
   const [conversation, setConversation] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -45,7 +45,7 @@ const Page = ({ params }) => {
               <p className='text-gray-600'>Name: {conversation?.receiver.name}</p>
             </div>
             <div className="flex items-center justify-center">
-              <h1 className="text-2xl font-semibold mb-4 text-center flex">Messaging Page <IoChatbubblesOutline className='w-7 h-7 ml-2' /></h1>
+              <h1 className="text-2xl font-semibold mb-4 text-center flex">Messaging MainPage <IoChatbubblesOutline className='w-7 h-7 ml-2' /></h1>
             </div>
             <div className={`${loading ? 'animate-spin' : ''} cursor-pointer bg-slate-200 p-2 rounded-full`} onClick={handleRefresh}>
               <LuRefreshCcw />
@@ -59,4 +59,4 @@ const Page = ({ params }) => {
   );
 };
 
-export default Page;
+export default MainPage;
