@@ -31,8 +31,6 @@ export default async function RootLayout({
 }) {
   const currentUser = await getCurrentUser();
 
-  // const checkOpen = localStorage.getItem("checkOpen");
-
   return (
     <AuthProvider>
       <html lang="en">
