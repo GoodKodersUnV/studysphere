@@ -69,11 +69,11 @@ const Friends = ({ currentUser }) => {
           <input type="text" id='nfsearch' placeholder="Search by name" value={nfsearchQuery} onChange={handleNFSearchInputChange}
             className="p-1 ps-2 border rounded-md " />
           <label htmlFor="nfsearch">  
-            <IoMdSearch className=" w-7 h-7 text-gray-600" />
+            <IoMdSearch className=" w-7 h-7 ms-1 cursor-pointer text-gray-600" />
           </label>
         </div>
       </div>
-      <div className=" mx-4 px-4 max-h-screen overflow-y-auto overflow-x-hidden ">
+      <div className=" mx-4 px-4 max-h-[80vh] overflow-y-auto overflow-x-hidden ">
         <table className="w-full">
           <tbody>
             {filteredNewFriends.map((user) => (
@@ -111,11 +111,11 @@ const Friends = ({ currentUser }) => {
           <input type="text" id='ofsearch' placeholder="Search by name" value={ofsearchQuery} onChange={handleOFSearchInputChange}
             className="p-1 ps-2 border rounded-md " />
           <label htmlFor="ofsearch">  
-            <IoMdSearch className=" w-7 h-7 text-gray-600" />
+            <IoMdSearch className=" w-7 h-7 ms-1 cursor-pointer text-gray-600" />
           </label>
         </div>
       </div>
-      <div className="mx-4  px-6 max-h-screen overflow-y-auto overflow-x-hidden  ">
+      <div className="mx-4  px-6 max-h-[80vh] overflow-y-auto overflow-x-hidden  ">
         <table className="w-full  ">
           <tbody>
             {filteredOldFriends.map((user) => (

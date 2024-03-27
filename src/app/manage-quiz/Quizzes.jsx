@@ -44,7 +44,6 @@ const Quizzes = ({ currentUser }) => {
                 <tr className="border">
                     <th className='p-2 border text-center'>Quiz name</th>
                     <th className='p-2 border text-center'>Share</th>
-                    <th className='p-2 border text-center'>Participate</th>
                     <th className='p-2 border text-center'>Standings</th>
                     <th className='p-2 border text-center'>Schedule Quiz</th>
                 </tr>
