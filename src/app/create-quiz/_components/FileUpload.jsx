@@ -64,7 +64,7 @@ const FileUpload = () => {
     try {
       setIsLoading(true);
       const res = await axios.post("/api/pdf-questions", { pdfText, amount });
-      router.push(`/quiz/${res.data.quizId}`);
+      router.push(`/manage-quiz`);
     } catch (e) {
       console.error("Error generating quiz:", e.message);
     } finally {
