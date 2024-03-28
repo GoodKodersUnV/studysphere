@@ -73,7 +73,6 @@ const formattedDateTime = (timestamp) => {
   const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
 
   const formattedDay = day < 10 ? "0" + day : day;
-  // const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
 
   return `${formattedDay}-${month}-${year} ${formattedHours}:${formattedMinutes} ${period}`;
 };
