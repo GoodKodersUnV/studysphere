@@ -4,19 +4,24 @@ import { useState, useEffect } from "react";
 import { Clock10 } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import useTimeStore from "@/hooks/useTimeStore";
 
 
 
 
 const Quiz =  ({questions,quizId}) => {
 
+  const {startTime,endTime,duration,setStartTime,setEndTime,clear}=useTimeStore()
+  
   const router = useRouter();
   const [index, setIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(questions[index]);
   const [score, setScore] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [timer, setTimer] = useState(parseInt(localStorage.getItem('time')));
+
+  const [timer, setTimer] = useState(parseInt(duration));
+  const [totalTime, setTotalTime] = useState(0);
   
   
   useEffect(() => {
@@ -30,6 +35,12 @@ const Quiz =  ({questions,quizId}) => {
     }
     return () => clearInterval(interval);
   }, [timer]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTotalTime((prevTimer) => prevTimer + 1);
+    }, 1000);
+  }, []);
 
 
   const [videoAllowed, setVideoAllowed] = useState(false);
@@ -47,14 +58,15 @@ const Quiz =  ({questions,quizId}) => {
   useEffect(()=>{
   handleVideoPermission();
   },[])
+
   const handleNextQuestion = () => {
     if (index < questions.length - 1) {
       setIndex(index + 1);
       setCurrentQuestion(questions[index + 1]);
       setSelectedOption(null);
-      setTimer(parseInt(localStorage.getItem('time')));
+      setTimer(parseInt(duration));
     } else {
-      storeEndTime();
+      setEndTime(endTime)
       setShowSummary(true);
     }
   };
@@ -74,27 +86,28 @@ const Quiz =  ({questions,quizId}) => {
     setScore(0);
     setShowSummary(false);
     setSelectedOption(null);
-    setTimer(parseInt(localStorage.getItem('time')));
+    setTimer(parseInt(duration));
+    clear();
+    setTotalTime(0);
+    setStartTime(new Date().toISOString())
   };
 
 
 
   const handleQuizSubmit = async () =>{
-    const res = await axios.post("/api/submit-quiz",{quizId, stratedAt:(localStorage.getItem("stratedAt")) ,points: +((score/questions.length)*100)})
+    const res = await axios.post("/api/submit-quiz",{quizId, stratedAt:(startTime) ,points: +((score/questions.length)*100)})
     router.push(`/leaderboard/${quizId}`);
     setVideoAllowed(false);
-    console.log(res);
+    clear();
+    // console.log(res);
   }
 
-  const storeEndTime = () => {
-    const endTime = new Date().toISOString();
-    localStorage.setItem("endTime", endTime);
-  };
 
 
-  const calculateTime= (endtime)=>{
-        const time1 = new Date(localStorage.getItem("stratedAt"));
-        const time2 = new Date(localStorage.getItem("endTime"))
+
+  const calculateTime= ()=>{
+        const time1 = new Date(startTime);
+        const time2 = new Date(endTime)
 
         const differenceInMs = Math.abs(time2 - time1);
 
@@ -109,10 +122,14 @@ const Quiz =  ({questions,quizId}) => {
   }
 
   return (
-    <div className="border h-full flex justify-center items-center">
-      <div className="bg-white p-8 rounded-xl shadow-2xl w-[500px] ">
+    <div className="border h-full flex justify-center items-center ">
+      <div className="bg-white p-8 rounded-xl shadow-2xl w-[500px] relative  ">
         {!showSummary ? (
           <>
+            <div className=" flex text-emerald-700 font-semibold items-center gap-3 px-3 py-2 absolute -top-6 -right-4 bg-gray-300 rounded-xl">
+              <p className="">Time Taken: </p>
+              <p className="">{totalTime}s</p>
+            </div>
             <h1 className="font-bold text-2xl mb-6 text-indigo-900">
               {currentQuestion.question}
             </h1>
@@ -158,7 +175,7 @@ const Quiz =  ({questions,quizId}) => {
               Quiz Summary
             </h1>
             <p className="text-lg text-indigo-900 flex-center gap-2 mb-1">
-              {calculateTime(new Date().toISOString())}<Clock10 className="w-4 h-4"/>
+              {calculateTime()}<Clock10 className="w-4 h-4"/>
             </p>
             <p className="text-lg text-indigo-900">
               Your score is {score}/{questions.length}
