@@ -6,14 +6,20 @@ import useTimeStore from '@/hooks/useTimeStore'
 
 const QuizStartPage = ({ quiz }) => {
     const [timeLimit, setTimeLimit] = useState(10);
-    const [mode, setMode] = useState('no-limit');
 
-    const { setDuration } = useTimeStore();
+    const { setDuration,Mode,setMode,duration } = useTimeStore();
 
     const handleTimeLimitChange = (e) => {
         setTimeLimit(e.target.value);
         setDuration(e.target.value);
     };
+
+    const handleMode = (e) =>{
+        setMode(e.target.value)
+        if(e.target.value==='no-limit')
+            setDuration(null);
+        else setDuration(timeLimit)
+    }
 
     return (
         <div className="container ms-6 overflow-x-hidden mt-10">
@@ -27,16 +33,17 @@ const QuizStartPage = ({ quiz }) => {
                         <label htmlFor="mode" className="mr-2 text-gray-700">Mode: </label>
                         <select
                             id="mode"
-                            value={mode}
-                            onChange={(e) => setMode(e.target.value)}
+                            value={Mode}
+                            onChange={(e) =>handleMode(e)}
                             className="border-gray-500 border rounded-md ps-2 py-1"
                         >
+                            <option value="" disabled selected >Please select a mode</option>
                             <option value="quiz-mode">Quiz Mode</option>
                             <option value="timer-mode">Timer Mode</option>
                             <option value="no-limit">No Limit</option>
                         </select>
                     </div>
-                    {mode === 'quiz-mode' && (
+                    {Mode === 'quiz-mode' && (
                         <div className="flex items-center mb-4">
                             <label htmlFor="timeLimit" className="mr-2 text-gray-700">Time Limit (seconds): </label>
                             <input
@@ -48,7 +55,7 @@ const QuizStartPage = ({ quiz }) => {
                             />
                         </div>
                     )}
-                    {mode === 'timer-mode' && (
+                    {Mode === 'timer-mode' && (
                         <div className="flex items-center mb-4">
                             <label htmlFor="timer" className="mr-2 text-gray-700">Timer (seconds): </label>
                             <input
@@ -60,9 +67,7 @@ const QuizStartPage = ({ quiz }) => {
                             />
                         </div>
                     )}
-                    {
-                        mode ==='no-limit' && setDuration(null)
-                    }
+
                 </div>
             </div>
         </div>

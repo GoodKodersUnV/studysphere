@@ -11,7 +11,7 @@ import useTimeStore from "@/hooks/useTimeStore";
 
 const Quiz =  ({questions,quizId}) => {
 
-  const {startTime,endTime,duration,setStartTime,setEndTime,clear}=useTimeStore()
+  const {startTime,endTime,duration,Mode,setMode,setStartTime,setEndTime,clear}=useTimeStore()
   
   const router = useRouter();
   const [index, setIndex] = useState(0);
@@ -67,6 +67,7 @@ const Quiz =  ({questions,quizId}) => {
       setTimer(parseInt(duration));
     } else {
       setEndTime(endTime)
+      setMode('')
       setShowSummary(true);
     }
   };
@@ -124,9 +125,15 @@ const Quiz =  ({questions,quizId}) => {
   return (
     <div className="border h-full flex justify-center items-center ">
       <div className="bg-white p-8 rounded-xl shadow-2xl w-[500px] relative  ">
+        <h1 className=" text-left text-2xl font-bold text-gray-900">Mode:  
+          <span className=" text-cyan-700 ms-1">
+            {Mode}
+          </span>
+        </h1>
+        <hr  className="mb-1 bg-gray-950" />
         {!showSummary ? (
           <>
-            <div className=" flex text-emerald-700 font-semibold items-center gap-3 px-3 py-2 absolute -top-6 -right-4 bg-gray-300 rounded-xl">
+            <div className=" flex text-emerald-700 font-semibold items-center gap-3 px-3 py-2 absolute -top-9 -right-0 bg-gray-300 rounded-xl">
               <p className="">Time Taken: </p>
               <p className="">{totalTime}s</p>
             </div>
@@ -152,10 +159,13 @@ const Quiz =  ({questions,quizId}) => {
               ))}
             </div>
             <div className="flex justify-between items-center mt-4">
-              <div className="flex items-center">
-                <Clock10 className="text-slate-800 mr-2" />
-                <p className="text-red-700">{timer} seconds left</p>
-              </div>
+              {
+                duration  &&
+                  <div className="flex items-center">
+                    <Clock10 className="text-slate-800 mr-2" />
+                    <p className="text-red-700">{timer} seconds left</p>
+                  </div>
+              }
               <button
                 className={`${
                   selectedOption === null
