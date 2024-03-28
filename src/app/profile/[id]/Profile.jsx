@@ -65,11 +65,11 @@ export default function Profile({ params, currentUser }) {
               alt="profile"
             />
           </div>
-          <div className="flex flex-col justify-between font-semibold">
-            <h1>{user.email}</h1>
-            <h1>{user.id}</h1>
-            <h1>{user.name}</h1>
-            <h1>{user.createdAt}</h1>
+          <div className="flex flex-col justify-between">
+            <h1><span className="font-semibold">Name :</span> <span className="text-gray-500 ml-2">{user.name}</span></h1>
+            <h1><span className="font-semibold">Email :</span> <span className="text-gray-500 ml-2">{user.email}</span></h1>
+            <h1><span className="font-semibold">Id :</span> <span className="text-gray-500 ml-2">{user.id}</span></h1>
+            <h1><span className="font-semibold">CreatedAt :</span> <span className="text-gray-500 ml-2">{user.createdAt?.toString()}</span></h1>
           </div>
         </div>
         <table className="w-1/2 m-auto mt-12">
@@ -100,7 +100,7 @@ export default function Profile({ params, currentUser }) {
       <div className="border p-5 w-[25%]">
         Friends
         {allUsers
-          .filter((user) => user.isFriend && user.id !== currentUser.id)
+          .filter((user) => user.isFriend && user.id!== params.id && user.id !== currentUser.id)
           .map((user) => {
             return (
               <div
