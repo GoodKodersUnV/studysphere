@@ -34,7 +34,7 @@ const MyQuiz = ({params})=>{
 
 
     return (
-        
+        <h1>Yet to implement</h1>
     )
 
 }
