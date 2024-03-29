@@ -87,10 +87,12 @@ const Row = ({ id, rank, img, name, username, points, badge }) => {
 const StudentTable = ({ params, currentUser }) => {
   const [sortedStudents, setSortedStudents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
-  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [leaderboardType, setLeaderboardType] = useState("global");
+  
+  const router = useRouter();
+
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -136,11 +138,11 @@ const StudentTable = ({ params, currentUser }) => {
     const getfriends = async () => {
       try {
         const res = await axios.post("/api/all-users", {
-          profileId: "6605c892f77d465676ea488f",
+          profileId: currentUser.id,
         });
         setAllUsers(
           res.data.users.filter(
-            (user) => user.isFriend && user.id !== "6605c892f77d465676ea488f"
+            (user) => user.isFriend && user.id !== currentUser.id
           )
         );
       } catch (error) {
