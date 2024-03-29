@@ -66,14 +66,14 @@ export async function POST(req: Request) {
       },
     });
 
-    const sendNotification = await db.notification.create({
+    const notification = await db.notification.create({
       data:{
         userId: receiver.id,
         message: `${sender?.name} sent you a message`,
       }
     });
 
-    return NextResponse.json({ sender, receiver, newMessage, conversation });
+    return NextResponse.json({ sender, receiver, newMessage, conversation ,notification});
   } catch (e) {
     return NextResponse.json(e.message);
   }

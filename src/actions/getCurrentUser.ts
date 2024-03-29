@@ -25,11 +25,7 @@ export default async function getCurrentUser() {
           }
         },
         friendsof :true,
-        notifications:{
-          where:{
-            readAt:null
-          }
-        }
+        notifications:true,
       },
     });
 
