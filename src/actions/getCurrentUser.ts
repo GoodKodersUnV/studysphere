@@ -21,10 +21,11 @@ export default async function getCurrentUser() {
       include: {
         friends:{
           include:{
-            friendUser:true
+            friendUser:true,
           }
         },
         friendsof :true,
+        notifications:true,
       },
     });
 
