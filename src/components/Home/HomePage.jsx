@@ -12,26 +12,31 @@ import { BiMessageRoundedDots } from "react-icons/bi";
 function HomePage({ currentUser }) {
   const [profile, setProfile] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+
+  
   useEffect(() => {
     const getProfile = async () => {
       const res = await axios.post("/api/get-quizzes-taken", {
         userId: currentUser.id,
       });
       setProfile(res.data);
+      console.log(res);
     };
     getProfile();
+
+    
     const getUser = async () => {
       try {
         const res = await axios.post("/api/all-users", {
           profileId: currentUser.id,
         });
         setAllUsers(res.data.users);
-        console.log(res.data);
       } catch (error) {
         console.log(error.message);
       }
     };
     getUser();
+
   }, []);
 
 
@@ -82,9 +87,8 @@ const formatDate = (e) => {
             <tr className="text-cyan-600 text-center">  
               <th className="p-3 border text-center">Id</th>
               <th className="p-3 border text-center">Name</th>
-              <th className="p-3 text-center  ">Points <GiArrowScope className="ml-3 h-5 w-5"/></th>
+              <th className="p-3 text-center flex justify-center items-center ">Points <GiArrowScope className="ml-3 h-5 w-5"/></th>
               <th className="p-3 border text-center">Submission Time</th>
-              <th className="p-3 border text-center">Rank</th>
               <th className="p-3 border text-center">Participants</th>
             </tr>
           </thead>
@@ -92,7 +96,7 @@ const formatDate = (e) => {
             {profile.map((quiz) => {
               return (
                 <tr
-                  onClick={() => router.push(`/leaderboard/${quiz.id}`)}
+                  onClick={() => router.push(`/leaderboard/${quiz.quizId}`)}
                   className="hover:bg-gray-100 cursor-pointer text-gray-600"
                   key={quiz.id}
                 >
@@ -100,7 +104,6 @@ const formatDate = (e) => {
                   <td className="p-3 border text-center">{quiz.Quiz.name}</td>
                   <td className="p-3 border text-center">{quiz.points}</td>
                   <td className="p-3 border text-center text-sm">{formatDate(quiz.endedAt)}</td>
-                  <td className="p-3 border text-center">Rank</td>
                   <td className="p-3 border text-center">{profile.length}</td>
                 </tr>
               );

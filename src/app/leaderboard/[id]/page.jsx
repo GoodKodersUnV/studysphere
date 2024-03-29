@@ -11,6 +11,9 @@ import { useRouter } from "next/navigation";
 import Loader from "../../manage-quiz/loading";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
+import { AiOutlineGlobal } from "react-icons/ai";
+import { HiUserGroup } from "react-icons/hi";
+
 
 const Row = ({ id, rank, img, name, username, points, badge }) => {
   const router = useRouter();
@@ -82,14 +85,46 @@ const Row = ({ id, rank, img, name, username, points, badge }) => {
   );
 };
 
+
+
+
+
+
 const StudentTable = ({ params }) => {
   const [sortedStudents, setSortedStudents] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [leaderboardType, setLeaderboardType] = useState('global'); 
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
+
+  };
+
+  const handleLeaderboardTypeChange = async(e) => {
+    setLeaderboardType(e.target.value);
+    console.log(e.target.value);
+
+    if(e.target.value==='friends'){
+      let data = sortedStudents.filter((sortedStudent) => allUsers.some((user) => user.id === sortedStudent.User.id || sortedStudent.User.id==="6605c892f77d465676ea488f" ))
+      setSortedStudents(data);
+      console.log(data);
+    }
+    else{
+      const getUsers = async () => {
+        const res = await axios.post("/api/get-leaderboard", {
+          quizId: params.id,
+        });
+    
+        setSortedStudents(res.data);
+        console.log(res.data);
+        setLoading(false);
+      };
+    
+      getUsers();
+    }
   };
 
   useEffect(() => {
@@ -97,12 +132,29 @@ const StudentTable = ({ params }) => {
       const res = await axios.post("/api/get-leaderboard", {
         quizId: params.id,
       });
-
+  
       setSortedStudents(res.data);
+      console.log(res.data);
       setLoading(false);
     };
-
+  
     getUsers();
+
+
+    const getfriends = async () => {
+      try {
+        const res = await axios.post("/api/all-users", {
+          profileId: "6605c892f77d465676ea488f",
+        });
+        setAllUsers(
+          res.data.users.filter((user) => user.isFriend && user.id !== "6605c892f77d465676ea488f")
+        )
+        console.log(res.data.users.filter((user) => user.isFriend && user.id !== "6605c892f77d465676ea488f"));
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getfriends();
   }, []);
 
   const rankMap = new Map();
@@ -169,18 +221,40 @@ const StudentTable = ({ params }) => {
           <>
             <div className="flex items-center justify-between   ">
               <h1 className=" text-3xl font-bold mb-4 ">Leaderboard :</h1>
-              <div className=" flex justify-end items-center">
-                <input
-                  type="text"
-                  id="search"
-                  placeholder="Search by name"
-                  value={searchQuery}
-                  onChange={handleSearchInputChange}
-                  className="p-1 ps-3 border rounded-md "
-                />
-                <label htmlFor="search">
-                  <IoMdSearch className=" w-7 h-7 ms-1 cursor-pointer text-gray-600" />
-                </label>
+              <div className=" ">
+                <div className=" flex justify-end items-center">
+                  <input
+                    type="text"
+                    id="search"
+                    placeholder="Search by name"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                    className="p-1 ps-3 border rounded-md "
+                    />
+                  <label htmlFor="search">
+                    <IoMdSearch className=" w-7 h-7 ms-1 cursor-pointer text-gray-600" />
+                  </label>
+                </div>
+                <div className="my-3 flex justify-end me-5">
+                  <label htmlFor="friends" className="flex items-center mr-2">Friends <HiUserGroup className="w-5 h-5" /></label>
+                  <input
+                    type="radio"
+                    name="leaderboardType"
+                    value="friends"
+                    id="friends"
+                    checked={leaderboardType === 'friends'}
+                    onChange={handleLeaderboardTypeChange}
+                  />
+                  <label htmlFor="global" className=" ml-4 mr-2 flex items-center justify-center">Global <AiOutlineGlobal className="w-5 h-5"  /></label>
+                  <input
+                    type="radio"
+                    name="leaderboardType"
+                    value="global"
+                    id="global"
+                    checked={leaderboardType === 'global'}
+                    onChange={handleLeaderboardTypeChange}
+                  />
+                </div>
               </div>
             </div>
             {filteredStudents.map((student) => (
