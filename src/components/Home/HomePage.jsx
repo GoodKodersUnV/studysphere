@@ -17,7 +17,6 @@ function HomePage({ currentUser }) {
       const res = await axios.post("/api/get-quizzes-taken", {
         userId: currentUser.id,
       });
-      console.log(res.data);
       setProfile(res.data);
     };
     getProfile();
@@ -27,6 +26,7 @@ function HomePage({ currentUser }) {
           profileId: currentUser.id,
         });
         setAllUsers(res.data.users);
+        console.log(res.data);
       } catch (error) {
         console.log(error.message);
       }
@@ -62,7 +62,7 @@ const formatDate = (e) => {
         <div className="flex gap-4">
           <div>
             <Image
-              src={currentUser.image} width={100} height={100} className="rounded"
+              src={currentUser.image} width={120} height={120} className="rounded"
               alt="profile"
             />
           </div>
@@ -71,6 +71,10 @@ const formatDate = (e) => {
             <h1><span className="font-semibold">Email :</span> <span className="text-gray-500 ml-2">{currentUser.email}</span></h1>
             <h1><span className="font-semibold">Id :</span> <span className="text-gray-500 ml-2">{currentUser.id}</span></h1>
             <h1><span className="font-semibold">CreatedAt :</span> <span className="text-gray-500 ml-2">{currentUser.createdAt.toString()}</span></h1>
+            <div className=" flex items-center justify-start gap-4">
+              <h1><span className="font-semibold">Following :</span> <span className="text-gray-500 ml-2">{currentUser.friends.length}</span></h1>
+              <h1><span className="font-semibold">Followers :</span> <span className="text-gray-500 ml-2">{currentUser.friendsof.length - 1}</span></h1>
+            </div>
           </div>
         </div>
         <table className="w-[80%] m-auto border mt-12">
@@ -111,17 +115,17 @@ const formatDate = (e) => {
           .map((user) => {
             return (
               <div
-                className="flex items-center gap-2 mt-3 p-2 border border-cyan-200 rounded-md justify-between hover:bg-gray-100"
+                className="flex items-center gap-2 mt-3 p-2 border rounded-md justify-between hover:bg-gray-100"
                 key={user.id}
                 
               >
-                <div className="flex gap-5 items-center">
+                <div className="flex gap-2 items-center">
                   <Image
                     src={user.image}
                     width={40}
                     height={40}
                     onClick={()=>router.push(`/profile/${user.id}`)}
-                    className="rounded cursor-pointer"
+                    className="rounded-full cursor-pointer"
                     alt="profile"
                   />
                   <h1>{user.name}</h1>
