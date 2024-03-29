@@ -17,9 +17,10 @@ export async function POST(req: Request) {
     },
     include: {
       Quiz: {
-        select:{
-          name:true
-        }
+        select: {
+          name: true,
+          usersPoints: true,
+        },
       },
     }
   })
