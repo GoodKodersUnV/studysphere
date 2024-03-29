@@ -11,8 +11,8 @@ export async function POST(req: Request) {
 
   const notification = await db.notification.updateMany({
     where: {
-      userId: currentUser.id,
-      readAt: null  || undefined || '',
+      userId: currentUser.id ,
+      readAt: null,
     },
     data: {
       readAt : new Date(),
