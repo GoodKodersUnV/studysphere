@@ -104,7 +104,7 @@ export default function Profile({ params, currentUser }) {
             <h1><span className="font-semibold">CreatedAt :</span> <span className="text-gray-500 ml-2">{user.createdAt?.toString()}</span></h1>
             <div className=" flex items-center justify-start gap-4">
               <h1><span className="font-semibold">Following :</span> <span className="text-gray-500 ml-2">{user.friends?.length}</span></h1>
-              <h1><span className="font-semibold">Followers :</span> <span className="text-gray-500 ml-2">{user.friendsof?.length - 1}</span></h1>
+              <h1><span className="font-semibold">Followers :</span> <span className="text-gray-500 ml-2">{user.friendsof?.length}</span></h1>
             </div>
           </div>
         </div>
