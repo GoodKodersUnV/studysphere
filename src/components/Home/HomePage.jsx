@@ -12,6 +12,7 @@ import { BiMessageRoundedDots } from "react-icons/bi";
 function HomePage({ currentUser }) {
   const [profile, setProfile] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const [Participants, setParticipants] = useState(0)
 
   
   useEffect(() => {
@@ -103,7 +104,7 @@ const formatDate = (e) => {
                   <td className="p-3 border text-center">{quiz.Quiz.name}</td>
                   <td className="p-3 border text-center">{quiz.points}</td>
                   <td className="p-3 border text-center text-sm">{formatDate(quiz.endedAt)}</td>
-                  <td className="p-3 border text-center">{profile.length}</td>
+                  <td className="p-3 border text-center">{quiz.Quiz.usersPoints.length}</td>
                 </tr>
               );
             })}
