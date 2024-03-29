@@ -67,7 +67,6 @@ const Quiz =  ({questions,quizId}) => {
       setTimer(parseInt(duration));
     } else {
       setEndTime(endTime)
-      setMode('')
       setShowSummary(true);
     }
   };

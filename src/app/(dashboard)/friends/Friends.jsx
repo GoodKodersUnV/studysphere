@@ -6,7 +6,7 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { IoMdSearch } from "react-icons/io";
-
+import { BiMessageRoundedDots } from "react-icons/bi";
 
 
 const Friends = ({ currentUser }) => {
@@ -79,11 +79,10 @@ const Friends = ({ currentUser }) => {
             {filteredNewFriends.map((user) => (
               <tr
               key={user?.id}
-                className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 cursor-pointer"
-                onClick={() => router.push(`/profile/${user?.id}`)}
+                className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 "
                 >
-                <td className="p-2 border-b">
-                  <img src={user?.image} width={50} height={50} className="rounded-full" alt={user?.name} />
+                <td className="p-2 border-b ">
+                  <img src={user?.image} onClick={() => router.push(`/profile/${user?.id}`)} width={50} height={50} className="rounded-full cursor-pointer" alt={user?.name} />
                 </td>
                 <td className="p-2 border-b">{user?.name}</td>
                 <td className="p-2 border-b">
@@ -94,7 +93,7 @@ const Friends = ({ currentUser }) => {
                       handleFriend(user?.id);
                     }}
                     >
-                    <IoMdPersonAdd className="text-xl" />
+                    <IoMdPersonAdd className="text-xl hover:text-cyan-600" />
                   </span>
                 </td>
               </tr>
@@ -121,15 +120,17 @@ const Friends = ({ currentUser }) => {
             {filteredOldFriends.map((user) => (
               <tr
               key={user?.id}
-              className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 cursor-pointer"
-              onClick={() => router.push(`/profile/${user?.id}`)}
+              className="transition-transform hover:scale-105 hover:shadow-lg duration-500 ease-in-out hover:bg-gray-100 "
               >
-                <td className="p-2 border-b">
-                  <img src={user?.image} width={50} height={50} className="rounded-full" alt={user?.name} />
+                <td className="p-2 border-b ">
+                  <img src={user?.image} width={50} height={50}  onClick={() => router.push(`/profile/${user?.id}`)} className="rounded-full cursor-pointer"  alt={user?.name} />
                 </td>
                 <td className="p-2 border-b">{user?.name}</td>
-                <td className="p-2 border-b">
-                  <FaCheckCircle className="text-cyan-500 text-xl" />
+                <td className="p-2 border-b ">
+                  <div className="flex items-center gap-4 me-4 justify-end">
+                    <BiMessageRoundedDots onClick={()=>router.push(`/message/${user.id}`)} className="text-cyan-500 cursor-pointer hover:text-cyan-600 text-xl w-7 h-7" />
+                    <FaCheckCircle className="text-cyan-500 text-xl" />
+                  </div>
                 </td>
               </tr>
             ))}
