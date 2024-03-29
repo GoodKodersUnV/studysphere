@@ -21,7 +21,6 @@ function HomePage({ currentUser }) {
         userId: currentUser.id,
       });
       setProfile(res.data);
-  
     };
     getProfile();
 
