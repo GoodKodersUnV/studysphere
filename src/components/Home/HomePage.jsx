@@ -78,7 +78,7 @@ const formatDate = (e) => {
             <h1><span className="font-semibold">CreatedAt :</span> <span className="text-gray-500 ml-2">{currentUser.createdAt.toString()}</span></h1>
             <div className=" flex items-center justify-start gap-4">
               <h1><span className="font-semibold">Following :</span> <span className="text-gray-500 ml-2">{currentUser.friends.length}</span></h1>
-              <h1><span className="font-semibold">Followers :</span> <span className="text-gray-500 ml-2">{currentUser.friendsof.length - 1}</span></h1>
+              <h1><span className="font-semibold">Followers :</span> <span className="text-gray-500 ml-2">{currentUser.friendsof.length }</span></h1>
             </div>
           </div>
         </div>
