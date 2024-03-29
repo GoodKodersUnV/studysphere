@@ -116,9 +116,8 @@ export default function Profile({ params, currentUser }) {
             <tr className=" text-center text-cyan-600">
               <th className="p-3 border text-center">id</th>
               <th className="p-3 border text-center">Name</th>
-              <th className="p-3 border text-center">Points<GiArrowScope className="ml-3 h-5 w-5"/></th>
+              <th className="p-3 border text-center flex items-center justify-center">Points<GiArrowScope className="ml-3 h-5 w-5"/></th>
               <th className="p-3 border text-center">Submission Time</th>
-              <th className="p-3 border text-center">Rank</th>
               <th className="p-3 border text-center">Participants</th>
             </tr>
           </thead>
@@ -134,7 +133,6 @@ export default function Profile({ params, currentUser }) {
                   <td className="p-3 border-b text-center">{quiz.Quiz.name}</td>
                   <td className="p-3 border-b text-center">{quiz.points}</td>
                   <td className="p-3 border text-center text-sm">{formatDate(quiz.endedAt)}</td>
-                  <td className="p-3 border text-center">Rank</td>
                   <td className="p-3 border text-center">{profile.length}</td>
                 </tr>
               );
