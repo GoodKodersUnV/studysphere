@@ -5,11 +5,22 @@ import axios from "axios";
 import Image from "next/image";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
+import { useRouter } from "next/navigation";
+import { GiArrowScope } from "react-icons/gi";
+
+
 
 export default function Profile({ params, currentUser }) {
   const [profile, setProfile] = useState([]);
   const [user, setUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+
+  const router = useRouter()
+
+  if(params.id===currentUser.id){
+    router.push('/')
+  }
+  
   useEffect(() => {
     const getProfile = async () => {
       const res = await axios.post("/api/get-quizzes-taken", {
@@ -32,6 +43,7 @@ export default function Profile({ params, currentUser }) {
     getUser();
   }, []);
 
+
   const handleFriend = async (friendUserId) => {
     try {
       const res = await axios.post("/api/friend-request", {
@@ -52,6 +64,26 @@ export default function Profile({ params, currentUser }) {
     }
   };
 
+  const formatDate = (e) => {
+    const date = new Date(e);
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; 
+    const day = date.getDate();
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours %= 12;
+    hours = hours || 12; 
+
+    const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
+
+    return `${formattedDate} ${formattedTime}`;
+}
+
   return (
     <div className="m-5 border flex h-full">
       <div className="w-[75%] p-5">
@@ -59,8 +91,8 @@ export default function Profile({ params, currentUser }) {
           <div>
             <Image
               src={user.image}
-              width={100}
-              height={100}
+              width={120}
+              height={120}
               className="rounded"
               alt="profile"
             />
@@ -70,41 +102,55 @@ export default function Profile({ params, currentUser }) {
             <h1><span className="font-semibold">Email :</span> <span className="text-gray-500 ml-2">{user.email}</span></h1>
             <h1><span className="font-semibold">Id :</span> <span className="text-gray-500 ml-2">{user.id}</span></h1>
             <h1><span className="font-semibold">CreatedAt :</span> <span className="text-gray-500 ml-2">{user.createdAt?.toString()}</span></h1>
+            <div className=" flex items-center justify-start gap-4">
+              <h1><span className="font-semibold">Following :</span> <span className="text-gray-500 ml-2">{user.friends?.length}</span></h1>
+              <h1><span className="font-semibold">Followers :</span> <span className="text-gray-500 ml-2">{user.friendsof?.length - 1}</span></h1>
+            </div>
           </div>
         </div>
-        <table className="w-1/2 m-auto mt-12">
+        {
+          profile?.length!==0 &&
+
+          <table className="w-[80%] m-auto border mt-12">
           <thead>
-            <tr>
-              <th className="p-2 border-b">id</th>
-              <th className="p-2 border-b">Name</th>
-              <th className="p-2 border-b">Points</th>
+            <tr className=" text-center text-cyan-600">
+              <th className="p-3 border text-center">id</th>
+              <th className="p-3 border text-center">Name</th>
+              <th className="p-3 border text-center">Points<GiArrowScope className="ml-3 h-5 w-5"/></th>
+              <th className="p-3 border text-center">Submission Time</th>
+              <th className="p-3 border text-center">Rank</th>
+              <th className="p-3 border text-center">Participants</th>
             </tr>
           </thead>
           <tbody>
             {profile.map((quiz) => {
               return (
                 <tr
-                  onClick={() => router.push(`/leaderboard/${quiz.id}`)}
-                  className="hover:bg-gray-100 cursor-pointer"
+                onClick={() => router.push(`/leaderboard/${quiz.id}`)}
+                  className="hover:bg-gray-100 cursor-pointer text-gray-600"
                   key={quiz.id}
-                >
-                  <td className="p-2 border-b">{quiz.id}</td>
-                  <td className="p-2 border-b">{quiz.Quiz.name}</td>
-                  <td className="p-2 border-b">{quiz.points}</td>
+                  >
+                  <td className="p-3 border-b text-center">{quiz.id}</td>
+                  <td className="p-3 border-b text-center">{quiz.Quiz.name}</td>
+                  <td className="p-3 border-b text-center">{quiz.points}</td>
+                  <td className="p-3 border text-center text-sm">{formatDate(quiz.endedAt)}</td>
+                  <td className="p-3 border text-center">Rank</td>
+                  <td className="p-3 border text-center">{profile.length}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+      }
       </div>
       <div className="border p-5 w-[25%]">
         Friends
         {allUsers
-          .filter((user) => user.isFriend && user.id!== params.id && user.id !== currentUser.id)
+          .filter((user) => user.isFriend && user.id!== params.id )
           .map((user) => {
             return (
               <div
-                className="flex items-center gap-2 cursor-pointer p-2 border border-b rounded-md justify-between hover:bg-gray-100"
+              className="flex items-center gap-2  p-2 border border-b rounded-md justify-between hover:bg-gray-100"
                 key={user.id}
               >
                 <div className="flex gap-2 items-center">
@@ -112,19 +158,20 @@ export default function Profile({ params, currentUser }) {
                     src={user.image}
                     width={40}
                     height={40}
-                    className="rounded-full"
+                    className="rounded-full cursor-pointer"
                     alt="profile"
+                    onClick={()=>router.push(`/profile/${user.id}`)}
                   />
                   <h1>{user.name}</h1>
                 </div>
 
                 {user.isFriend ? (
-                  <span className="text-cyan-500 flex items-center gap-2 cursor-pointer">
+                  <span className="text-cyan-500 flex items-center gap-2 ">
                     <FaCheckCircle />
                   </span>
                 ) : (
                   <span
-                    className="text-cyan-500 flex items-center gap-2 cursor-pointer"
+                    className="text-cyan-500 flex items-center gap-2 "
                     onClick={(e) => {
                       e.stopPropagation();
                       handleFriend(user.id);
