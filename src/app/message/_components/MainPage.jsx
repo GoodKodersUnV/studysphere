@@ -53,7 +53,7 @@ const MainPage = ({ params }) => {
           </div>
           <Messages user={conversation?.sender} friend={conversation?.receiver} messages={conversation?.conversation} />
         </div>
-        <Message convId={params.id} setConversation={setConversation} />
+        <Message convId={params.id} setConversation={setConversation} conversation={conversation} />
       </div>
     </div>
   );
