@@ -104,7 +104,7 @@ const formatDate = (e) => {
                   <td className="p-3 border text-center">{quiz.Quiz.name}</td>
                   <td className="p-3 border text-center">{quiz.points}</td>
                   <td className="p-3 border text-center text-sm">{formatDate(quiz.endedAt)}</td>
-                  <td className="p-3 border text-center">{totalParticipants(quiz.id)}</td>
+                  <td className="p-3 border text-center">{quiz.Quiz.usersPoints.length}</td>
                 </tr>
               );
             })}
