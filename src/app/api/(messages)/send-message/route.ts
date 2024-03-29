@@ -70,6 +70,7 @@ export async function POST(req: Request) {
       data:{
         userId: receiver.id,
         message: `${sender?.name} sent you a message`,
+        readAt: null ,
       }
     });
 
