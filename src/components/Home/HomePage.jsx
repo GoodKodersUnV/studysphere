@@ -20,7 +20,6 @@ function HomePage({ currentUser }) {
         userId: currentUser.id,
       });
       setProfile(res.data);
-      console.log(res);
     };
     getProfile();
 
