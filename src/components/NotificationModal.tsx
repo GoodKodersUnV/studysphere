@@ -43,7 +43,7 @@ const NotificationModal = ({ notifications, setNotifications }) => {
           {notifications.map((notification) => (
             <div key={notification.id} className='w-full flex flex-col bg-gray-100 p-2 rounded-lg'>
               <div className="flex">
-                <p className="w-[500px] " onClick={()=>notification.link && router.push(notification.link)}>
+                <p className="w-[500px] cursor-pointer" onClick={()=>notification.link && router.push(notification.link)}>
                   {notification.message}
                 </p>
                 <button className='bg-green-200 font-semibold text-gray-800 rounded-lg p-2 w-[33px]' onClick={()=>handleMarkAsRead(notification.id)}>
