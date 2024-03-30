@@ -58,6 +58,8 @@ model Notification {
   readAt      DateTime?
   deletedAt   DateTime?
 
+  link        String?
+
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }

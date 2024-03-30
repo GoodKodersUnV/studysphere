@@ -1,14 +1,12 @@
 "use client"
 
 import axios from "axios"
+import { useRouter } from "next/navigation"
 import { FaRegCheckCircle } from "react-icons/fa"
 
 const NotificationModal = ({ notifications, setNotifications }) => {
 
-  /**
-   * [{"id":"6606e9e5de9c0f52f94e0326","message":"production -test notification","userId":"65fe6222ddcb5a32295af03e","readAt":null,"deletedAt":null,"createdAt":"2024-03-29T16:18:45.496Z","updatedAt":"2024-03-29T16:18:20.122Z"}]
-   */
-
+  const router = useRouter()
   const handleMarkAsRead = async (notificationId) => {
     try {
       const res = await axios.post('/api/update-notification', { notificationId })
@@ -45,7 +43,7 @@ const NotificationModal = ({ notifications, setNotifications }) => {
           {notifications.map((notification) => (
             <div key={notification.id} className='w-full flex flex-col bg-gray-100 p-2 rounded-lg'>
               <div className="flex">
-                <p className="w-[500px] ">
+                <p className="w-[500px] " onClick={()=>notification.link && router.push(notification.link)}>
                   {notification.message}
                 </p>
                 <button className='bg-green-200 font-semibold text-gray-800 rounded-lg p-2 w-[33px]' onClick={()=>handleMarkAsRead(notification.id)}>
