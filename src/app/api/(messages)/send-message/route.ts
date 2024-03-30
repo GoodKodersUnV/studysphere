@@ -25,6 +25,7 @@ export async function POST(req: Request) {
         userId: receiver.id,
         message: `${sender?.name} sent you a message`,
         readAt: null,
+        link: `/message/${convId}`,
       },
     });
 
