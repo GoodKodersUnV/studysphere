@@ -8,8 +8,6 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { GiArrowScope } from "react-icons/gi";
 
-
-
 export default function Profile({ params, currentUser }) {
   const [profile, setProfile] = useState([]);
   const [user, setUser] = useState([]);
@@ -20,7 +18,7 @@ export default function Profile({ params, currentUser }) {
   if(params.id===currentUser.id){
     router.push('/')
   }
-  
+ 
   useEffect(() => {
     const getProfile = async () => {
       const res = await axios.post("/api/get-quizzes-taken", {

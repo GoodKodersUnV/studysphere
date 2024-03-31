@@ -1,6 +1,7 @@
 "use client";
+import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const GenerateQuiz = () => {
   const [amount, setSelectedOption] = useState("");
@@ -10,31 +11,58 @@ const GenerateQuiz = () => {
 
   const router = useRouter();
 
-  const handleGenerateQuiz = () => {
-    setIsLoading(true);
+  const [token, setToken] = useState('');
+  useEffect(() => {
+    const getToken = async () => {
+      const res = await axios.get(`/api/get-tokens`);
+      const { token } = await res.data;
+      setToken(token);
+    };
+    getToken();
+  }, []);
 
-    fetch("/api/questions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ amount, topic }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error generating quiz: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-          router.push('/manage-quiz');
-      })
-      .catch((error) => {
-        console.error("Error generating quiz:", error.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const [useToken, setUseToken] = useState(false);
+  useEffect(() => {
+    if (useToken) {
+      const setToken = async () => {
+        await axios.post("/api/set-tokens", "1");
+      };
+      setToken();
+      setUseToken(!useToken);
+    }
+
+  }, [useToken]);
+
+  const handleGenerateQuiz = () => {
+    if (token > 0) {
+      // setUseToken(!useToken);
+      setIsLoading(true);
+      axios.post("/api/set-tokens", "1").then(
+        fetch("/api/questions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ amount, topic }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Error generating quiz: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            router.push('/manage-quiz');
+          }))
+        .catch((error) => {
+          console.error("Error generating quiz:", error.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      router.push('/premium');
+    }
   };
 
   const isFormValid = () => {
@@ -69,54 +97,53 @@ const GenerateQuiz = () => {
         </div>
         <div className="mb-4 ">
           <div>
-          <label className="block text-gray-700 mb-2">
-            Type :
-          </label>
-          <div className=" grid grid-cols-4 gap-6">
-            <div className="flex items-center justify-start">
-              <input
-                type="radio"
-                id="trueFalse"
-                name="questionType"
-                value="tf"
-                checked={type === "tf"}
-                onChange={(e) => setType(e.target.value)}
-                className="  accent-violet-500 w-4 h-4 "
+            <label className="block text-gray-700 mb-2">
+              Type :
+            </label>
+            <div className=" grid grid-cols-4 gap-6">
+              <div className="flex items-center justify-start">
+                <input
+                  type="radio"
+                  id="trueFalse"
+                  name="questionType"
+                  value="tf"
+                  checked={type === "tf"}
+                  onChange={(e) => setType(e.target.value)}
+                  className="  accent-violet-500 w-4 h-4 "
                 />
-              <label htmlFor="trueFalse" className="ml-2"> True/False</label>
-            </div>
-            <div className="flex items-center justify-center col-span-2">
-              <input
-                type="radio"
-                id="shortAnswer"
-                name="questionType"
-                value="sq"
-                checked={type === "sq"}
-                onChange={(e) => setType(e.target.value)}
-                className="mr-2 accent-violet-500 w-4 h-4"
+                <label htmlFor="trueFalse" className="ml-2"> True/False</label>
+              </div>
+              <div className="flex items-center justify-center col-span-2">
+                <input
+                  type="radio"
+                  id="shortAnswer"
+                  name="questionType"
+                  value="sq"
+                  checked={type === "sq"}
+                  onChange={(e) => setType(e.target.value)}
+                  className="mr-2 accent-violet-500 w-4 h-4"
                 />
-              <label htmlFor="shortAnswer" className="">Short Answer</label>
-            </div>
-            <div className="flex items-center justify-start">
-              <input
-                type="radio"
-                id="mcq"
-                name="questionType"
-                value="mcq"
-                checked={type === "mcq"}
-                onChange={(e) => setType(e.target.value)}
-                className="mr-2 accent-violet-500 w-4 h-4"
+                <label htmlFor="shortAnswer" className="">Short Answer</label>
+              </div>
+              <div className="flex items-center justify-start">
+                <input
+                  type="radio"
+                  id="mcq"
+                  name="questionType"
+                  value="mcq"
+                  checked={type === "mcq"}
+                  onChange={(e) => setType(e.target.value)}
+                  className="mr-2 accent-violet-500 w-4 h-4"
                 />
-              <label htmlFor="mcq">MCQ</label>
+                <label htmlFor="mcq">MCQ</label>
+              </div>
             </div>
-          </div>
           </div>
         </div>
 
         <button
-          className={`bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-            isLoading || !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className={`bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${isLoading || !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           onClick={handleGenerateQuiz}
           disabled={isLoading || !isFormValid()}
         >
