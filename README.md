@@ -1,7 +1,8 @@
 ## Study Sphere
 
 ## Login Screen
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/67dbb339-51e6-48a0-871f-50b14e66a252)
+![image](https://github.com/WebWizards-Git/studysphere/assets/156537424/8ab48d1c-ad06-42ac-b086-759942d5eece)
+
 
 ## User Dashboard
 ![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/791d437b-e845-4583-8026-4a580965b5a3)
