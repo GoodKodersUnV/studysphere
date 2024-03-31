@@ -33,7 +33,7 @@ const Page = () => {
 
             <table className='w-2/3 m-auto mt-12 mb-10'>
                 <thead className="border">
-                    <tr>
+                    <tr className="bg-orange-300 text-gray-600">
                         <th className='p-2 border text-center'>Id</th>
                         <th className='p-2 border text-center'>Name</th>
                         <th className='p-2 border text-center'>Share</th>
