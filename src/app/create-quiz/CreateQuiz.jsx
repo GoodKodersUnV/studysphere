@@ -9,12 +9,10 @@ import { FaRegFilePdf } from "react-icons/fa6";
 import { SiOpenai } from "react-icons/si";
 import { GiTwoCoins } from "react-icons/gi";
 import { TfiWrite } from "react-icons/tfi";
-import axios from 'axios'
 
-const CreateQuiz = ({currentUser}) => {
+const CreateQuiz = ({token}) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [token, setToken] = useState('fetching...');
   const page = {
     "0": <CreateRoomFooter />,
     "1": <FileUpload  token={token} />,
@@ -25,15 +23,6 @@ const CreateQuiz = ({currentUser}) => {
   let isActive1 = currentIndex === 1 ? ' text-blue-500' : ''
   let isActive2 = currentIndex === 2 ? ' text-blue-500' : ''
   let isActive3 = currentIndex === 3 ? ' text-blue-500' : ''
-
-  useEffect(() => {
-    const getToken = async () => {
-      const res = await axios.get(`/api/get-tokens`);
-      const { token } = await res.data;
-      setToken(token);
-    };
-    getToken();
-  }, []);
 
   return (
     <div className='border'>
