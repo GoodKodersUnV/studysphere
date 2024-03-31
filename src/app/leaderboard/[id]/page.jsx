@@ -101,7 +101,6 @@ const StudentTable = ({ params }) => {
       setSortedStudents(res.data);
       setLoading(false);
     };
-
     getUsers();
   }, []);
 

@@ -61,7 +61,7 @@ model Friend {
   @@unique([friendUserId, userId])
 }
 
-model Message {  
+model Message {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   message      String
 

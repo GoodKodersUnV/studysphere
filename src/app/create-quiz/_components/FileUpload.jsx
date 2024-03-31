@@ -22,6 +22,16 @@ const FileUpload = () => {
     }
   }, [selectedFile]);
 
+  const [token, setToken] = useState('');
+  useEffect(() => {
+    const getToken = async () => {
+      const res = await axios.get(`/api/get-tokens`);
+      const { token } = await res.data;
+      setToken(token);
+    };
+    getToken();
+  }, []);
+
   const handleUpload = async () => {
     if (selectedFile) {
       try {
@@ -59,16 +69,33 @@ const FileUpload = () => {
       window.alert("Please select a PDF file.");
     }
   };
+  const [useToken, setUseToken] = useState(false);
+  useEffect(() => {
+    if (useToken) {
+      const setToken = async () => {
+        await axios.post("/api/set-tokens", "1");
+      };
+      setToken();
+      setUseToken(!useToken);
+    }
+
+  }, [useToken]);
 
   const handleGenerate = async () => {
-    try {
-      setIsLoading(true);
-      const res = await axios.post("/api/pdf-questions", { pdfText, amount });
-      router.push(`/manage-quiz`);
-    } catch (e) {
-      console.error("Error generating quiz:", e.message);
-    } finally {
-      setIsLoading(false);
+    if (token > 0) {
+      try {
+        setUseToken(!useToken);
+        setIsLoading(true);
+        const res = await axios.post("/api/pdf-questions", { pdfText, amount });
+        router.push(`/manage-quiz`);
+
+      } catch (e) {
+        console.error("Error generating quiz:", e.message);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      router.push('/premium');
     }
   };
 
@@ -141,7 +168,7 @@ const FileUpload = () => {
             <div className="bg-slate-200  px-5 py-2 rounded-lg items-center">
               <h1 className="font-bold text-2xl mt-2">Extracted Text</h1>
               <p className="shadow-md rounded-lg max-h-[500px] w-[50vw] overflow-y-auto -mt-8 mb-2">
-                <TextToSpeech text={pdfText}/>
+                <TextToSpeech text={pdfText} />
               </p>
             </div>
           </div>
