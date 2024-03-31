@@ -8,6 +8,6 @@ export async function GET() {
     if (currentUser?.plan && (new Date(currentUser?.plan?.endTime).getTime() > currentTime)) {
         return NextResponse.json({ token: "pro", endTime: new Date(currentUser?.plan?.endTime).toLocaleString() });
     } else {
-        return NextResponse.json({ token: currentUser?.tokens ?? "0"});
+        return NextResponse.json({ token: currentUser?.tokens.toString()});
     }
 }
