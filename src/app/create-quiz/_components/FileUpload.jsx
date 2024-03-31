@@ -145,8 +145,8 @@ const FileUpload = ({token}) => {
           <div>
             <div className="bg-slate-200  px-5 py-2 rounded-lg items-center">
               <h1 className="font-bold text-2xl mt-2">Extracted Text</h1>
-              <p className="shadow-md rounded-lg max-h-[500px] w-[50vw] overflow-y-auto -mt-8 mb-2">
-                <TextToSpeech text={pdfText} />
+              <p className="shadow-md rounded-lg w-[50vw] overflow-y-auto -mt-8 mb-2">
+                <TextToSpeech text={pdfText} setPdfText={setPdfText} />
               </p>
             </div>
           </div>
