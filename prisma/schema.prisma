@@ -32,86 +32,86 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  tokens Int   @default(3)
+  tokens Int @default(3)
 
   quizes Quiz[]
   points Points[]
 
   account Account[]
 
-  friends        Friend[]    @relation(name: "friends")
-  friendsof      Friend[]    @relation(name: "friendsof")
+  friends   Friend[] @relation(name: "friends")
+  friendsof Friend[] @relation(name: "friendsof")
 
-  sentMessages   Message[]  @relation(name: "SentMessages")
+  sentMessages     Message[] @relation(name: "SentMessages")
   receivedMessages Message[] @relation(name: "ReceivedMessages")
 
-  notifications  Notification[]
+  notifications Notification[]
 
-  plan            Plan?         @relation(fields: [planId], references: [id])
-  planId          String        @db.ObjectId
+  plan   Plan?   @relation(fields: [planId], references: [id])
+  planId String? @db.ObjectId
 }
 
 enum Plans {
   weekly
   monthly
   yearly
+  none
 }
 
 model Plan {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  duration    Plans     @default(monthly)
-  startTime   DateTime  @default(now())
-  endTime     DateTime   
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  duration  Plans    @default(none)
+  startTime DateTime @default(now())
+  endTime   DateTime
 
-  users       User[] 
-  
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User[]
 }
 
 model Notification {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  message     String
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  message String
 
-  userId      String    @db.ObjectId
-  user        User      @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
 
-  readAt      DateTime?
-  deletedAt   DateTime?
+  readAt    DateTime?
+  deletedAt DateTime?
 
-  link        String?
+  link String?
 
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Friend {
-  id             String      @id @default(auto()) @map("_id") @db.ObjectId
-  userId         String      @db.ObjectId
-  friendUserId   String      @db.ObjectId
-  user           User        @relation(name: "friends", fields: [userId], references: [id])
-  friendUser     User        @relation(name: "friendsof", fields: [friendUserId], references: [id])
-  status         Boolean     @default(true)
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String  @db.ObjectId
+  friendUserId String  @db.ObjectId
+  user         User    @relation(name: "friends", fields: [userId], references: [id])
+  friendUser   User    @relation(name: "friendsof", fields: [friendUserId], references: [id])
+  status       Boolean @default(true)
 
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([userId, friendUserId])
   @@unique([friendUserId, userId])
 }
 
 model Message {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
-  message      String
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  message String
 
-  sender         User      @relation(name: "SentMessages", fields: [senderId], references: [id])
-  senderId       String    @db.ObjectId
+  sender   User   @relation(name: "SentMessages", fields: [senderId], references: [id])
+  senderId String @db.ObjectId
 
-  receiver       User      @relation(name: "ReceivedMessages", fields: [receiverId], references: [id])
-  receiverId     String    @db.ObjectId
-  
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  receiver   User   @relation(name: "ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Quiz {
@@ -124,7 +124,7 @@ model Quiz {
   createdAt DateTime @default(now())
 
   startTime DateTime? @default(now())
-  endTime   DateTime? 
+  endTime   DateTime?
 
   usersPoints Points[]
 }
