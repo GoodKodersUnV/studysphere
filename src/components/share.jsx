@@ -1,10 +1,10 @@
 
 import { WhatsappShareButton } from "react-share"
-import { IoShareSocialSharp } from "react-icons/io5";
+import { FaShare } from "react-icons/fa6";
 function WhatsappButton({url,msg}) {
   return (
      <WhatsappShareButton url={url} title={msg}>
-            <IoShareSocialSharp/>
+            <FaShare />
      </WhatsappShareButton>
   )
 }
