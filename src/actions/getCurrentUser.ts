@@ -26,6 +26,7 @@ export default async function getCurrentUser() {
         },
         friendsof: true,
         notifications: true,
+        plan : true
       },
     });
 

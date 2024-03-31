@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
+import updateTokens from '@/actions/updateTokens';
 
 const generatedSignature = (
  razorpayOrderId: string,
@@ -20,7 +21,7 @@ const generatedSignature = (
 
 
 export async function POST(request: NextRequest) {
- const { orderCreationId, razorpayPaymentId, razorpaySignature } =
+ const { orderCreationId, razorpayPaymentId, razorpaySignature ,tokens, amount } =
   await request.json();
 
  const signature = generatedSignature(orderCreationId, razorpayPaymentId);
@@ -29,9 +30,12 @@ export async function POST(request: NextRequest) {
    { message: 'payment verification failed', isOk: false },
    { status: 400 }
   );
+ } else{
+     const updatedUser = await updateTokens(tokens)
+     return NextResponse.json(
+      { message: 'payment verified successfully', isOk: true, tokens : updatedUser.tokens},
+      { status: 200 }
+     );
  }
- return NextResponse.json(
-  { message: 'payment verified successfully', isOk: true },
-  { status: 200 }
- );
+
 }

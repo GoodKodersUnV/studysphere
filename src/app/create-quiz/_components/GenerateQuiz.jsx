@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
-const GenerateQuiz = () => {
+const GenerateQuiz = ({token,setToken}) => {
   const [amount, setSelectedOption] = useState("");
   const [topic, setTopicInput] = useState("");
   const [type, setType] = useState("");
@@ -11,7 +11,6 @@ const GenerateQuiz = () => {
 
   const router = useRouter();
 
-  const [token, setToken] = useState('');
   useEffect(() => {
     const getToken = async () => {
       const res = await axios.get(`/api/get-tokens`);
@@ -21,23 +20,9 @@ const GenerateQuiz = () => {
     getToken();
   }, []);
 
-  const [useToken, setUseToken] = useState(false);
-  useEffect(() => {
-    if (useToken) {
-      const setToken = async () => {
-        await axios.post("/api/set-tokens", "1");
-      };
-      setToken();
-      setUseToken(!useToken);
-    }
-
-  }, [useToken]);
-
   const handleGenerateQuiz = () => {
-    if (token > 0) {
-      // setUseToken(!useToken);
+    if (token="pro" || token > 0 ) {
       setIsLoading(true);
-      axios.post("/api/set-tokens", "1").then(
         fetch("/api/questions", {
           method: "POST",
           headers: {
@@ -53,7 +38,7 @@ const GenerateQuiz = () => {
           })
           .then((data) => {
             router.push('/manage-quiz');
-          }))
+          })
         .catch((error) => {
           console.error("Error generating quiz:", error.message);
         })

@@ -6,17 +6,14 @@ import { FaRupeeSign } from "react-icons/fa";
 import Script from 'next/script';
 
 const Premium = () => {
-    const [mtokens, setMTokens] = useState(0);
     const [tokens, setTokens] = useState(5);
     let totalAmt = tokens * 5;
     let amtWithDis = totalAmt - (tokens - 1) * 2;
-
-    // payment-gateway
     const name = "kalyan";
     const email = "kalyantingani@gmail.com";
     const [currency, setCurrency] = useState('INR');
-    const [amount, setAmount] = useState('5');
-    const createOrderId = async () => {
+
+    const createOrderId = async (amount : number) => {
         try {
             const response = await fetch('/api/razorpay', {
                 method: 'POST',
@@ -24,7 +21,7 @@ const Premium = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    amount: parseFloat(amount) * 100,
+                    amount: amount * 100,
                 }),
             });
 
@@ -38,13 +35,13 @@ const Premium = () => {
             console.error('There was a problem with your fetch operation:', error);
         }
     };
-    const processPayment = async (e: React.FormEvent<HTMLFormElement>) => {
+    const processPayment = async (e: React.FormEvent<HTMLFormElement> ,tokens:number , amount : number) => {
         e.preventDefault();
         try {
-            const orderId: string = await createOrderId();
+            const orderId: string = await createOrderId(amount);
             const options = {
                 key: process.env.key_id,
-                amount: parseFloat(amount) * 100,
+                amount: amount * 100,
                 currency: currency,
                 name: 'name',
                 description: 'description',
@@ -55,6 +52,8 @@ const Premium = () => {
                         razorpayPaymentId: response.razorpay_payment_id,
                         razorpayOrderId: response.razorpay_order_id,
                         razorpaySignature: response.razorpay_signature,
+                        tokens ,
+                        amount
                     };
 
                     const result = await fetch('/api/verify', {
@@ -86,20 +85,27 @@ const Premium = () => {
         }
     };
     const handleBasic = (e) => {
-        setMTokens(tokens);
-        setAmount((mtokens * 5 - (mtokens - 1) * 2).toString());
-        processPayment(e);
+        processPayment(e,tokens,(tokens * 5 - (tokens - 1) * 2) );
     }
     const handleBulk = (e) => {
-        setMTokens(20);
-        setAmount('50');
-        processPayment(e);
+        processPayment(e ,20, 50);
     }
     const handlePremium = (e) => {
-        setMTokens(-1);
-        setAmount('200');
-        processPayment(e);
+        processPayment(e, parseInt(process.env.PRO_SECRET!), 200 );
     }
+
+    const handleTokenChange = (e) => {
+        const value = parseInt(e.target.value);
+        if (value < 1) {
+            setTokens(1);
+        } else if (value >=10000) {
+            setTokens(10000);
+        } else {
+            setTokens(value);
+        }
+    }
+    
+
     return (
         <>
             <Script
@@ -125,16 +131,16 @@ const Premium = () => {
                         <h1>.</h1>
                     </div>
                     <div>
-                        <input type="number" defaultValue={5} className="outline-none block m-auto rounded-xl w-20 text-center text-md px-4 py-2" onChange={(e) => setTokens(Number(e.target.value))} />
+                        <input type="number" value={tokens} min={1} max={1000} className="outline-none block m-auto rounded-xl w-20 text-center text-md px-4 py-2" onChange={handleTokenChange} />
                     </div>
                     <div className="flex justify-center items-end gap-4">
-                        {tokens &&
+                        {tokens>0 &&
                             <div className="flex line-through items-center text-md">
                                 <FaRupeeSign />
                                 <h1>{totalAmt}</h1>
                             </div>
                         }
-                        {tokens &&
+                        {tokens>0 &&
                             <div className="flex items-center text-4xl text-blue-600 font-bold">
                                 <FaRupeeSign />
                                 <h1>{amtWithDis}</h1>
@@ -142,7 +148,7 @@ const Premium = () => {
                         }
                     </div>
                     <div>
-                        <button onClick={(e) => handleBasic(e)} className="w-full hover:font-semibold hover:bg-gradient-to-r from-yellow-200 to-orange-300 border border-black rounded text-center p-4">Proceed to Buy</button>
+                        <button onClick={handleBasic} className="w-full hover:font-semibold hover:bg-gradient-to-r from-yellow-200 to-orange-300 border border-black rounded text-center p-4">Proceed to Buy</button>
                     </div>
                 </div>
                 <div className="w-[40%] rounded-lg border border-blue-600 flex flex-col justify-between h-[600px] bg-orange-50 p-5">
@@ -179,7 +185,7 @@ const Premium = () => {
                         </div>
                     </div>
                     <div>
-                        <button onClick={(e) => handleBulk(e)} className="hover:font-semibold hover:bg-gradient-to-r from-yellow-200 to-orange-300 w-full border border-black rounded text-center p-4">Proceed to Buy</button>
+                        <button onClick={handleBulk} className="hover:font-semibold hover:bg-gradient-to-r from-yellow-200 to-orange-300 w-full border border-black rounded text-center p-4">Proceed to Buy</button>
                     </div>
                 </div>
                 <div className="w-1/3 rounded-lg border flex flex-col border-blue-600 justify-between h-[550px] bg-orange-50 p-5">
@@ -202,7 +208,7 @@ const Premium = () => {
                         <h1 className="font-semibold text-xl">/monthly</h1>
                     </div>
                     <div>
-                        <button onClick={(e) => handlePremium(e)} className="hover:font-semibold hover:bg-gradient-to-r from-yellow-200 to-orange-300 w-full border border-black rounded text-center p-4">Proceed to Buy</button>
+                        <button onClick={handlePremium} className="hover:font-semibold hover:bg-gradient-to-r from-yellow-200 to-orange-300 w-full border border-black rounded text-center p-4">Proceed to Buy</button>
                     </div>
                 </div>
             </div>
