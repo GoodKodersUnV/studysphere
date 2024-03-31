@@ -82,9 +82,9 @@ const formatDate = (e) => {
             </div>
           </div>
         </div>
-        <table className="w-[80%] m-auto border mt-12">
+        <table className="m-auto border mt-12">
           <thead>
-            <tr className="text-cyan-600 text-center">  
+            <tr className="text-center bg-orange-300 text-gray-600">  
               <th className="p-3 border text-center">Id</th>
               <th className="p-3 border text-center">Name</th>
               <th className="p-3 text-center flex justify-center items-center ">Points <GiArrowScope className="ml-3 h-5 w-5"/></th>
@@ -100,11 +100,11 @@ const formatDate = (e) => {
                   className="hover:bg-gray-100 cursor-pointer text-gray-600"
                   key={quiz.id}
                 >
-                  <td className="p-3 border text-center">{quiz.id}</td>
-                  <td className="p-3 border text-center">{quiz.Quiz.name}</td>
-                  <td className="p-3 border text-center">{quiz.points}</td>
-                  <td className="p-3 border text-center text-sm">{formatDate(quiz.endedAt)}</td>
-                  <td className="p-3 border text-center">{quiz.Quiz.usersPoints.length}</td>
+                  <td className="p-2 border text-center">{quiz.id}</td>
+                  <td className="p-2 border text-center">{quiz.Quiz.name}</td>
+                  <td className="p-2 border text-center">{quiz.points}</td>
+                  <td className="p-2 border text-center text-sm">{formatDate(quiz.endedAt)}</td>
+                  <td className="p-2 border text-center">{quiz.Quiz.usersPoints.length}</td>
                 </tr>
               );
             })}
