@@ -1,14 +1,13 @@
 "use client"
 import { useState, useEffect } from 'react';
-export default function TextToSpeech({text}) {
-    const [textToSpeak, setTextToSpeak] = useState(text || '');
+export default function TextToSpeech({text,setPdfText}) {
     const [voices, setVoices] = useState([]);
     const [selectedVoice, setSelectedVoice] = useState(null);
     const [speaking, setSpeaking] = useState(false);
     const [paused, setPaused] = useState(false);
 
   const speakText = () => {
-    const speech = new SpeechSynthesisUtterance(textToSpeak);
+    const speech = new SpeechSynthesisUtterance(text);
     speech.voice = selectedVoice;
     window.speechSynthesis.speak(speech);
     setSpeaking(true);
@@ -61,11 +60,12 @@ export default function TextToSpeech({text}) {
   }, []);
 
   return (
-    <div className="container mx-auto mt-10 p-4 bg-orange-100 rounded shadow-lg">
-      <textarea className="w-full h-40 mb-4 p-2 border border-gray-300 rounded resize-y outline-none"
-        placeholder="Enter text to convert" value={textToSpeak} onChange={() => setTextToSpeak(text)}
-      />
-      <div className="flex justify-between">
+    <div className=" mx-auto mt-10 p-4 bg-orange-100 rounded shadow-lg h-[70vh] ">
+      <textarea className="w-full mb-4 p-2 border border-gray-300 h-[75%] rounded outline-none"
+        placeholder="Enter text to convert"  value={text} onChange={(e)=>setPdfText(e.target.value)}
+        />
+  
+      <div className="flex justify-between ">
         <button className="w-1/4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2"
           onClick={speakText} disabled={speaking}>
           Speak
