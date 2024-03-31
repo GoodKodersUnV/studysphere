@@ -12,7 +12,8 @@ export async function POST(req: Request, res: Response) {
   
   try {
     const currentUser = await getCurrentUser()
-    if (currentUser?.plan && (currentUser?.plan?.endTime < new Date())){
+    const currentTime = new Date().getTime();
+    if (!(currentUser?.plan && (new Date(currentUser?.plan?.endTime).getTime() > currentTime))) {
       await updateTokens(-1);
     }
 
