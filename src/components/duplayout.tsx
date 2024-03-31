@@ -13,6 +13,8 @@ import { FaAngleDoubleLeft } from "react-icons/fa";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { TiMessages } from "react-icons/ti";
 import useSidebarToggle from '@/hooks/useSidebarToggle';
+import { RiCoinsLine } from "react-icons/ri";
+import Footer from './Footer';
 
 export default function Layout({ children, currentUser }) {
 
@@ -71,6 +73,12 @@ export default function Layout({ children, currentUser }) {
       path: '/message',
       active: pathname.includes(`/message`)
     },
+    {
+      name: 'Get Tokens',
+      icon: <RiCoinsLine/>,
+      path: '/buy-tokens',
+      active:pathname.includes('/buy-tokens')
+    }
   ];
 
   const status = () => {
@@ -78,12 +86,12 @@ export default function Layout({ children, currentUser }) {
   }
 
   return (
-    <div>
+    <div className='min-h-[100vh] relative z-5'>
       {currentUser && <Header currentUser={currentUser} />}
       {currentUser ? (
-        <div className="flex min-h-[90vh]">
+        <div className="flex h-screen">
           {/* side bar */}
-          <div className={`${isOpen ? 'w-[18vw]' : ''} flex bg-orange-50 flex-col justify-between `}>
+          <div className={`${isOpen ? 'w-[18vw]' : ''} flex bg-orange-50 flex-col h-full border justify-between bg-orange-200`}>
             <div>
               {links.map((link) => {
                 return (
@@ -93,7 +101,7 @@ export default function Layout({ children, currentUser }) {
                   </div>
                 );
               })}
-              <div onClick={status}>
+              <div className='cursor-pointer' onClick={status}>
                 {
                   isOpen ? <FaAngleDoubleLeft className="h-6 w-6 mt-3 ml-[80%] text-orange-300" /> :
                     <FaAngleDoubleRight className="h-6 w-6 m-auto mt-3 text-orange-300" />
@@ -103,7 +111,7 @@ export default function Layout({ children, currentUser }) {
           </div>
           <AnimatePresence key={pathname}>
             <motion.div
-              className={`w-full`}
+              className={`w-full h-full`}
               initial={{ y: '-100vw', opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
@@ -115,6 +123,7 @@ export default function Layout({ children, currentUser }) {
       ) : (
         <div className="w-full">{children}</div>
       )}
+      <Footer />
     </div>
   );
 }
