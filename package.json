@@ -23,6 +23,7 @@
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "openai": "^4.29.2",
+    "razorpay": "^2.9.2",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
@@ -31,6 +32,7 @@
     "react-loading-skeleton": "^3.4.0",
     "react-pdf": "^7.7.1",
     "react-share": "^5.1.0",
+    "shortid": "^2.2.16",
     "tailwind-scrollbar-hide": "^1.1.7",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"

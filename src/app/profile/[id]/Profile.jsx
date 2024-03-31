@@ -5,11 +5,13 @@ import axios from "axios";
 import Image from "next/image";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 export default function Profile({ params, currentUser }) {
   const [profile, setProfile] = useState([]);
   const [user, setUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const router = useRouter();
   useEffect(() => {
     const getProfile = async () => {
       const res = await axios.post("/api/get-quizzes-taken", {

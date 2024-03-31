@@ -6,7 +6,6 @@ import ToasterProvider from '@/components/ToasterProvider'
 import AuthProvider from '@/providers/AuthProvider'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Duplayout from '@/components/duplayout'
-import Footer from '@/components/Footer'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -40,7 +39,6 @@ export default async function RootLayout({
           </div>
           <Duplayout children={children} currentUser={currentUser}/>
           <SpeedInsights />
-          <Footer/>
         </body>
       </html>
     </AuthProvider>

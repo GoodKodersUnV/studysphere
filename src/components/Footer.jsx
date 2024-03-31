@@ -4,7 +4,7 @@
     const Footer = () => {
 
     return (
-        <footer  className='relative w-full' >
+        <footer  className='absolute bottom-0 w-full' >
             <div className="bottom-details w-full py-2 px-4 bg-blue-100">
                 <div className="bottom_text m-auto flex-between text-neutral-700">
                     <span className="copyright_text opacity-80  hover:opacity-100 ">Copyright © 2024 by WebWizards
