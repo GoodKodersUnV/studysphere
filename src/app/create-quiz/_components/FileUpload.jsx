@@ -9,7 +9,7 @@ import TextToSpeech from "@/components/TextToSpeech"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const FileUpload = ({token,setToken}) => {
+const FileUpload = ({token}) => {
   const [pdfText, setPdfText] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,15 +21,6 @@ const FileUpload = ({token,setToken}) => {
       handleUpload();
     }
   }, [selectedFile]);
-
-  useEffect(() => {
-    const getToken = async () => {
-      const res = await axios.get(`/api/get-tokens`);
-      const { token } = await res.data;
-      setToken(token);
-    };
-    getToken();
-  }, []);
 
   const handleUpload = async () => {
     if (selectedFile) {

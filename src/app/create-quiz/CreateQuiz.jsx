@@ -14,11 +14,11 @@ import axios from 'axios'
 const CreateQuiz = ({currentUser}) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState('fetching...');
   const page = {
     "0": <CreateRoomFooter />,
-    "1": <FileUpload  token={token} setToken={setToken} />,
-    "2": <GenerateQuiz  token={token} setToken={setToken} />,
+    "1": <FileUpload  token={token} />,
+    "2": <GenerateQuiz  token={token} />,
     "3": <CreateManually />,
   }
 
@@ -34,7 +34,6 @@ const CreateQuiz = ({currentUser}) => {
     };
     getToken();
   }, []);
-
 
   return (
     <div className='border'>

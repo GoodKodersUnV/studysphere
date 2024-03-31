@@ -1,24 +1,14 @@
 "use client";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const GenerateQuiz = ({token,setToken}) => {
+const GenerateQuiz = ({token}) => {
   const [amount, setSelectedOption] = useState("");
   const [topic, setTopicInput] = useState("");
   const [type, setType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
-
-  useEffect(() => {
-    const getToken = async () => {
-      const res = await axios.get(`/api/get-tokens`);
-      const { token } = await res.data;
-      setToken(token);
-    };
-    getToken();
-  }, []);
 
   const handleGenerateQuiz = () => {
     if (token="pro" || token > 0 ) {
