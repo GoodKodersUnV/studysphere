@@ -1,18 +1,25 @@
-import getCurrentUser from "@/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { db } from "@/libs/db";
+import updateTokens from "@/actions/updateTokens";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 export async function POST(req: Request, res: Response) {
-  const currentUser = await getCurrentUser();
-
+  
   try {
+    const currentUser = await getCurrentUser()
+    if (currentUser?.plan && (currentUser?.plan?.endTime < new Date())){
+      await updateTokens(-1);
+    }
+
     const body = await req.json();
     const { pdfText, amount } = body;
+
+
 
     const promt = `You are a helpful assistant designed to output JSON.You are to generate a random hard mcq ${amount} question about topic user going to input and output format of each object is  {
       question: "question",

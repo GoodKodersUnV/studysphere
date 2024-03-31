@@ -9,7 +9,7 @@ import TextToSpeech from "@/components/TextToSpeech"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const FileUpload = () => {
+const FileUpload = ({token,setToken}) => {
   const [pdfText, setPdfText] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,6 @@ const FileUpload = () => {
     }
   }, [selectedFile]);
 
-  const [token, setToken] = useState('');
   useEffect(() => {
     const getToken = async () => {
       const res = await axios.get(`/api/get-tokens`);
@@ -69,22 +68,10 @@ const FileUpload = () => {
       window.alert("Please select a PDF file.");
     }
   };
-  const [useToken, setUseToken] = useState(false);
-  useEffect(() => {
-    if (useToken) {
-      const setToken = async () => {
-        await axios.post("/api/set-tokens", "1");
-      };
-      setToken();
-      setUseToken(!useToken);
-    }
-
-  }, [useToken]);
 
   const handleGenerate = async () => {
-    if (token > 0) {
+    if (token="pro" || token > 0 ) {
       try {
-        setUseToken(!useToken);
         setIsLoading(true);
         const res = await axios.post("/api/pdf-questions", { pdfText, amount });
         router.push(`/manage-quiz`);
