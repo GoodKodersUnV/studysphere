@@ -46,6 +46,27 @@ model User {
   receivedMessages Message[] @relation(name: "ReceivedMessages")
 
   notifications  Notification[]
+
+  plan            Plan?         @relation(fields: [planId], references: [id])
+  planId          String        @db.ObjectId
+}
+
+enum Plans {
+  weekly
+  monthly
+  yearly
+}
+
+model Plan {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  duration    Plans     @default(monthly)
+  startTime   DateTime  @default(now())
+  endTime     DateTime   
+
+  users       User[] 
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Notification {
