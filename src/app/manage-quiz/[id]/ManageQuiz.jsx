@@ -21,10 +21,7 @@ const ManageQuiz = ({ quiz }) => {
   );
 
 const ScheduleTime = () => {
-    // const now = new Date();
-    // const start= new Date(quiz.startTime);
-    // const timeLeft = start-now;
-    // console.log(timeLeft)
+
     if ("serviceWorker" in navigator && "PushManager" in window) {
       setTimeout(() => {
         navigator.serviceWorker.ready.then(function (registration) {
@@ -57,7 +54,8 @@ const ScheduleTime = () => {
 
   return (
     <div className="max-w-md mx-auto mb-10 bg-white rounded-lg shadow-lg p-8 mt-10">
-      <h1 className="text-2xl font-bold mb-4">Manage Quiz</h1>
+      <h1 className="text-2xl font-bold ">Manage Quiz</h1>
+      <hr className="mb-4" />
       <h2 className="text-lg mb-2">Quiz id : {quiz.id}</h2>
       <h2 className="text-lg mb-2">Quiz createdBy : {quiz.createdBy.name}</h2>
       <h2 className="text-lg mb-2">
@@ -89,25 +87,25 @@ const ScheduleTime = () => {
       </div>
       <button
         onClick={() => router.push(`/leaderboard/${quiz.id}`)}
-        className="bg-blue-500 text-white font-bold py-2 px-2 ml-6 rounded mr-2"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-2 ml-6 rounded mr-2"
       >
         Leaderboard
       </button>
       <button
         onClick={() => router.push(`/quiz/${quiz.id}`)}
-        className="bg-blue-500 text-white font-bold py-2 px-2 rounded mr-2"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-2 rounded mr-2"
       >
         Enter
       </button>
       <button
         onClick={handleUpdate}
-        className="bg-green-500 text-white font-bold py-2 px-2 mr-2 rounded"
+        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-2 mr-2 rounded"
       >
         Update
       </button>
       <button
         onClick={()=>ScheduleTime()}
-        className="bg-green-500 text-white font-bold py-2 px-2 rounded"
+        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-2 rounded"
       >
         Notify
       </button>

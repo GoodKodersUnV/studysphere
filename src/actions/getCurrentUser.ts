@@ -19,21 +19,24 @@ export default async function getCurrentUser() {
         email: session.user.email as string,
       },
       include: {
-        friends:{
-          include:{
-            friendUser:true
-          }
+        friends: {
+          include: {
+            friendUser: true,
+          },
         },
-        friendsof :true,
+        friendsof: true,
+        notifications: true,
       },
     });
 
     if (!currentUser) {
       throw new Error("Not signed in");
     }
+    currentUser.notifications = currentUser.notifications.filter(
+      (notification) => !notification.readAt
+    );
 
     return currentUser;
-    
   } catch (error: any) {
     return null;
   }

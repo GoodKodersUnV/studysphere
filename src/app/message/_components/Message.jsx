@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { LuRefreshCcw } from "react-icons/lu";
 
-const Message = ({ convId, setConversation }) => {
+const Message = ({ convId, setConversation, conversation }) => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -16,8 +16,10 @@ const Message = ({ convId, setConversation }) => {
       const res = await axios.post("/api/send-message", {
         convId: convId,
         message: message,
+        sender: conversation.sender,
+        receiver: conversation.receiver,
       });
-      setConversation(res.data);
+      setConversation({...conversation, conversation: [...conversation.conversation, res.data]});
       setMessage("");
     } catch (err) {
       console.log(err);

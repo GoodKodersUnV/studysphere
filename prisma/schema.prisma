@@ -44,6 +44,24 @@ model User {
 
   sentMessages   Message[]  @relation(name: "SentMessages")
   receivedMessages Message[] @relation(name: "ReceivedMessages")
+
+  notifications  Notification[]
+}
+
+model Notification {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  message     String
+
+  userId      String    @db.ObjectId
+  user        User      @relation(fields: [userId], references: [id])
+
+  readAt      DateTime?
+  deletedAt   DateTime?
+
+  link        String?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Friend {
