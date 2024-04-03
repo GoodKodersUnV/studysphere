@@ -1,46 +1,60 @@
-## Study Sphere
+# **Study Sphere**
 
 ## Login Screen
 ![image](https://github.com/WebWizards-Git/studysphere/assets/156537424/8ab48d1c-ad06-42ac-b086-759942d5eece)
 
 
 ## User Dashboard
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/791d437b-e845-4583-8026-4a580965b5a3)
+<img width="1470" alt="Screenshot 2024-11-28 at 2 08 15 AM" src="https://github.com/user-attachments/assets/862170f9-48cf-4da4-8b8e-ae5113b082e7">
+
 
 ## Join a quiz room
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/ba88e60b-9843-4f61-ad73-b43aef79206b)
+<img width="1467" alt="image" src="https://github.com/user-attachments/assets/033fb27f-19bc-4ac9-88bc-4eebddecbc8e">
+
 
 ## Quiz 
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/e7206884-23e8-4233-9a56-f2be2b929d88)
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/e407c0be-5b7a-4696-bd69-e57317abab11">
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/0de50a15-1fac-4a36-b7da-5314b390fef7">
+<img width="1469" alt="image" src="https://github.com/user-attachments/assets/fecbca71-b8b3-48cf-aef2-51237780af62">
+
 
 ## Leaderboaord
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/7c79e906-9183-41e3-8568-4609ae83f046)
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/1de364bd-9e26-4887-a72d-699fb4a28400">
+
 
 ## Creation of Room 
 # 1. Generate Quiz from a file using ai
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/c25d994d-24b0-4ce4-82eb-77364941829a)
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/0cdeaf7d-ec65-4824-9e43-0aa4ef9ba736">
+
 
 # 2. Generate Quiz based on a topic using ai
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/cb95e2a8-77d6-460f-8729-208304a836ca)
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/57713481-a321-4c39-93d0-74f9b9fe3927">
+
+
 
 # 3. Manual Quiz creation
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/5b4e0e76-7586-4240-8305-78f4559d1849)
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/e9b9ac2e-2bde-4829-aa69-e58520b4a28f">
+
+
 
 ## Manage Rooms 
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/6c91b292-c9cf-4b59-9eb0-8794e1ddbb98)
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/282d01cd-e1a8-4a22-a4e6-e9115cbba15b">
 
-## Share directly to whatsapp 
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/8674e9ed-b7ec-493e-822f-874ed8f538ed)
 
 ## Edit profile page
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/9d52979d-a049-4f4a-ae6e-df0680328791)
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/4ac12116-aa0f-4fb2-b07f-3b3c79b36817">
+
 
 ## Add friends
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/88ad1d91-0d2d-417b-928e-76b0a04e69dc)
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/2e3e43da-f6dc-4fcf-bca0-b7a80f4e2918">
+
 
 ## Others profile
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/e64fda73-7d37-44cf-8482-821c2b788eaf)
+<img width="1469" alt="image" src="https://github.com/user-attachments/assets/a36c85ae-ed43-4ed3-951e-beb1bcf3e527">
 
-## Accesability features
-![image](https://github.com/UdaySagar-Git/studysphere/assets/111575806/198ff76b-25ab-4414-afea-3c19419eb7da)
+
+## Buy Coins
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/5d1ab2bd-0620-4910-ac79-fa303ffb5131">
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/ed1f2572-3389-4f00-a16b-2fd386f5495c">
+
 
